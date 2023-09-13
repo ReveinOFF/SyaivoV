@@ -1,0 +1,225 @@
+@mixin fonts($ff, $fs, $fw, $lh, $ls, $ta, $td, $tt, $c) {
+  font-family: $ff;
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: $lh;
+  letter-spacing: $ls;
+  text-decoration: $td;
+  text-transform: $tt;
+  text-align: $ta;
+  color: $c;
+}
+
+$a-hover: rgb(255, 191, 71);
+
+footer {
+  background-color: gray;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  .f-top {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    padding: 20px 0;
+
+    & > div {
+      &:nth-child(2) {
+        border-right: 1px solid white;
+        border-left: 1px solid white;
+      }
+    }
+
+    .f-info {
+    }
+
+    .f-pages {
+      display: grid;
+      grid-template-columns: 1fr;
+
+      a {
+        transition: color 0.2s;
+
+        @include fonts(
+          TTHoves,
+          20px,
+          400,
+          35px,
+          0,
+          center,
+          none,
+          uppercase,
+          white
+        );
+
+        &:hover {
+          color: $a-hover;
+        }
+      }
+    }
+
+    .f-contact {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .phone,
+      .mail,
+      .geo_point {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 20px;
+        margin: 5px 0;
+
+        img {
+          height: 40px;
+        }
+
+        div,
+        a {
+          @include fonts(TTHoves, 20px, 400, 35px, 0, none, none, none, white);
+        }
+
+        a {
+          transition: color 0.2s;
+
+          &:hover {
+            color: $a-hover;
+          }
+        }
+      }
+
+      .mail {
+        a {
+          margin-right: auto;
+        }
+      }
+
+      .phone {
+        & > div {
+          position: relative;
+
+          & > div {
+            &:first-child {
+              display: flex;
+
+              &::after {
+                content: "\25BC";
+                font-size: 15px;
+                margin-left: 10px;
+              }
+            }
+
+            &:nth-child(2) {
+              display: grid;
+              position: absolute;
+              top: -10px;
+              left: -10px;
+              background-color: rgb(59, 53, 53);
+              padding: 10px;
+              border-radius: 20px;
+              height: 55px;
+              opacity: 0;
+              overflow: hidden;
+              transition: all 0.3s 0.3s;
+
+              &:hover {
+                height: 225px;
+                opacity: 1;
+              }
+
+              a {
+                &:first-child {
+                  display: flex;
+
+                  &::after {
+                    content: "\25BC";
+                    font-size: 15px;
+                    margin-left: 10px;
+                    color: white;
+                  }
+                }
+              }
+
+              hr {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+
+      button {
+        margin-top: 20px;
+        border: 0;
+        background-color: orange;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+
+        & > div {
+          color: transparent;
+          text-shadow: 0 0 0 white;
+          display: inline-block;
+          transform: scale(2);
+        }
+
+        a {
+          transition: all 0.4s;
+          width: 100%;
+          @include fonts(
+            TTHoves,
+            15px,
+            600,
+            12px,
+            0.2em,
+            center,
+            none,
+            uppercase,
+            white
+          );
+
+          &::after {
+            content: "\27A0";
+            margin-left: 0px;
+            transform: scale(2);
+            display: inline-block;
+            opacity: 0;
+            transition: all 0.4s;
+          }
+        }
+
+        &:hover {
+          a {
+            &::after {
+              margin-left: 20px;
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .f-bottom {
+    text-align: center;
+    padding: 20px 0;
+    padding-top: calc(20px - 8px);
+    @include fonts(
+      TTHoves,
+      14px,
+      600,
+      20px,
+      0,
+      center,
+      none,
+      uppercase,
+      orange
+    );
+
+    span {
+      @include fonts(TTHoves, 14px, 400, 20px, 0, center, none, none, white);
+    }
+  }
+}

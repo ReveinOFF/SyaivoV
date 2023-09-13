@@ -1,0 +1,43 @@
+@import "./assets/fonts/fonts.scss";
+
+%arrow-animation {
+  animation-name: arrow;
+  animation-duration: 0.5s;
+  animation-direction: alternate-reverse;
+  animation-iteration-count: 2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  //overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(224, 224, 224);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgb(255, 191, 71);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: orange;
+}
+
+.container {
+  margin: 0 auto;
+  width: 1160px;
+}

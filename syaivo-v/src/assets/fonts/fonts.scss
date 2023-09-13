@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "TTHoves";
+  src: url("TTHoves/TTHoves-Regular.eot");
+  src: local("TT Hoves Regular"), local("TTHoves-Regular"),
+    url("TTHoves/TTHoves-Regular.eot?#iefix") format("embedded-opentype"),
+    url("TTHoves/TTHoves-Regular.woff2") format("woff2"),
+    url("TTHoves/TTHoves-Regular.woff") format("woff"),
+    url("TTHoves/TTHoves-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("OpenSans/OpenSans-Regular.woff2") format("woff2"),
+    url("OpenSans/OpenSans-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SFProDisplay";
+  src: url("SFProDisplay/SFProDisplay-Regular.woff2") format("woff2"),
+    url("SFProDisplay/SFProDisplay-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "GothicA1";
+  src: url("GothicA1/GothicA1-Regular.woff2") format("woff2"),
+    url("GothicA1/GothicA1-Regular.woff") format("woff");
+}

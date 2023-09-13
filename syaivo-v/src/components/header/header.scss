@@ -1,0 +1,271 @@
+@mixin fonts($ff, $fs, $fw, $lh, $ls, $ta, $td, $tt, $c) {
+  font-family: $ff;
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: $lh;
+  letter-spacing: $ls;
+  text-decoration: $td;
+  text-transform: $tt;
+  text-align: $ta;
+  color: $c;
+}
+
+$a-hover: rgb(255, 191, 71);
+
+header {
+  .h-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+
+    .h-t-left {
+      display: flex;
+      align-items: center;
+
+      a {
+        position: relative;
+
+        @include fonts(
+          TTHoves,
+          15px,
+          600,
+          12px,
+          0.2em,
+          center,
+          none,
+          uppercase,
+          #333333
+        );
+
+        margin: 0 10px;
+
+        &:first-child {
+          img {
+            width: 3em;
+          }
+        }
+
+        &:not(:first-child) {
+          transition: color 0.2s;
+          &:hover {
+            color: $a-hover;
+          }
+
+          &::after,
+          &::before {
+            content: "";
+            position: absolute;
+            left: -2px;
+            height: 2px;
+            width: 100%;
+            background: $a-hover;
+            transform: scaleX(0);
+            transition: transform 0.2s ease-in-out;
+          }
+
+          &::before {
+            bottom: -5px;
+            transform-origin: right;
+          }
+
+          &::after {
+            transform-origin: left;
+            top: -5px;
+          }
+
+          &:not(.active) {
+            &:hover {
+              &::after,
+              &::before {
+                transform: scaleX(1);
+              }
+
+              &::before {
+                transform-origin: left;
+              }
+
+              &::after {
+                transform-origin: right;
+              }
+            }
+          }
+
+          &:is(.active) {
+            color: orange;
+          }
+        }
+      }
+    }
+
+    .h-t-right {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 3em;
+        height: 3em;
+      }
+
+      .h-contact {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+
+        a {
+          margin: 5px 0;
+          transition: color 0.2s;
+
+          @include fonts(
+            TTHoves,
+            15px,
+            600,
+            12px,
+            0.2em,
+            center,
+            outline,
+            uppercase,
+            #333333
+          );
+
+          &:hover {
+            color: $a-hover;
+          }
+        }
+      }
+    }
+  }
+
+  .h-bottom {
+    background-color: #f3f3f3;
+    padding: 10px;
+    margin-top: 15px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .h-catalog {
+        position: relative;
+        width: 30%;
+
+        button {
+          border: 0;
+          background-color: orange;
+          padding: 20px;
+          display: grid;
+          grid-template-columns: auto 1fr;
+          width: 100%;
+          @include fonts(
+            TTHoves,
+            15px,
+            600,
+            12px,
+            0.2em,
+            center,
+            none,
+            uppercase,
+            white
+          );
+
+          & > div {
+            &:first-child {
+              transform: scale(1.5);
+            }
+
+            &:last-child {
+              &::after {
+                content: "\25BC";
+                margin-left: 0px;
+                opacity: 0;
+                display: inline-block;
+                transition: all 0.5s;
+              }
+            }
+          }
+        }
+
+        .h-catalog-modal {
+          position: absolute;
+          left: 0;
+          right: 0;
+          height: 0;
+          background-color: #c5c5c5;
+          opacity: 0;
+          transform: translateY(20px);
+          transition: all 0.5s 0.3s;
+        }
+
+        &:hover {
+          button {
+            & > div {
+              &:last-child {
+                &::after {
+                  margin-left: 20px;
+                  opacity: 1;
+                }
+              }
+            }
+          }
+
+          .h-catalog-modal {
+            opacity: 1;
+            transform: translateY(0px);
+            height: 500px;
+          }
+        }
+      }
+
+      .h-search {
+        display: flex;
+
+        input {
+          border: 2px solid rgba(128, 128, 128, 0.438);
+          border-right: 0;
+          padding: 15px 10px;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+          width: 30em;
+          height: 100%;
+          @include fonts(
+            TTHoves,
+            13px,
+            400,
+            12px,
+            0.1em,
+            none,
+            none,
+            none,
+            #333333
+          );
+
+          &:focus {
+            outline: 0;
+            box-shadow: 0px 0px 5px 0px rgb(255, 184, 51);
+          }
+        }
+
+        button {
+          border: 0;
+          background-color: orange;
+          padding: 0 20px;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+
+          svg {
+            transform: scale(1);
+            transition: transform 0.2s ease-in-out;
+          }
+
+          &:hover {
+            svg {
+              transform: scale(1.5);
+            }
+          }
+        }
+      }
+    }
+  }
+}
