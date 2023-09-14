@@ -1,14 +1,36 @@
 import "./footer.scss";
 import { Link } from "react-router-dom";
-import mailIcon from "../../assets/img/mail_footer.png";
-import callIconFooter from "../../assets/img/phone_footer.png";
-import geo_point from "../../assets/img/gps_point.png";
+import mailIcon from "../../assets/img/footer/mail_footer.png";
+import callIconFooter from "../../assets/img/footer/phone_footer.png";
+import geo_point from "../../assets/img/footer/gps_point.png";
+import avatar from "../../assets/img/avatar.png";
+import { useMemo } from "react";
 
 const Footer = () => {
+  const year = useMemo(() => new Date().getFullYear(), []);
+
   return (
     <footer>
       <div className="container f-top">
-        <div className="f-info"></div>
+        <div className="f-info">
+          <div className="company-info">
+            <div>
+              <img src={avatar} alt="avatar" />
+              <div>Сяйво-В</div>
+            </div>
+            <div>
+              Спецодяг, господарчі товари, логотипи, взуття, засоби захисту від
+              вітчизняного та зарубіжного виробника та супутніх товарів
+              господарської групи.
+            </div>
+          </div>
+          <div className="creator">
+            Створив сайт:
+            <Link to="https://github.com/RonniePlay" target="_blank">
+              RonniePlay
+            </Link>
+          </div>
+        </div>
         <div className="f-pages">
           <Link to="/">Головна</Link>
           <Link to="/catalog">Каталог</Link>
@@ -50,7 +72,7 @@ const Footer = () => {
       </div>
       <hr />
       <div className="container f-bottom">
-        Сяйво-В {new Date().getFullYear()} © <span>Всі права захищені</span>
+        Сяйво-В {year} © <span>Всі права захищені</span>
       </div>
     </footer>
   );

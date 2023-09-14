@@ -1,6 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import "./header.scss";
-import callIcon from "../../assets/img/phone.png";
+import callIcon from "../../assets/img/header/phone.png";
+import maskIcon from "../../assets/img/header/473477.png";
+import bootsIcon from "../../assets/img/header/11311695.png";
+import meansIcon from "../../assets/img/header/hoztovari.png";
+import glovesIcon from "../../assets/img/header/2209715.png";
+import jacketIcon from "../../assets/img/header/l_4405a1a75be769531c64c7c5e66c7735.png";
 import avatarIcon from "../../assets/img/avatar.png";
 
 const Header = () => {
@@ -21,7 +26,7 @@ const Header = () => {
           <img src={callIcon} alt="phone" />
           <div className="h-contact">
             <Link to="tel:+380963282889">(096) 328-28-89</Link>
-            <Link to="tel:+380362629808">(036) 262-98-08</Link>
+            <Link to="tel:+380677336594">(067) 733-65-94</Link>
           </div>
         </div>
       </div>
@@ -32,7 +37,32 @@ const Header = () => {
               <div>&#9776;</div>
               <div>Каталог товарів</div>
             </button>
-            <div className="h-catalog-modal"></div>
+            <div className="h-catalog-modal">
+              <Link>
+                <img src={jacketIcon} alt="jacket" />
+                <div>Спецодяг</div>
+              </Link>
+              <hr />
+              <Link>
+                <img src={bootsIcon} alt="boots" />
+                <div>Спецвзуття</div>
+              </Link>
+              <hr />
+              <Link>
+                <img src={glovesIcon} alt="gloves" />
+                <div>Рукавиці</div>
+              </Link>
+              <hr />
+              <Link>
+                <img src={meansIcon} alt="means" />
+                <div>Господарчі товари</div>
+              </Link>
+              <hr />
+              <Link>
+                <img src={maskIcon} alt="mask" />
+                <div>Засоби індивідуального захисту</div>
+              </Link>
+            </div>
           </div>
           <div className="h-search">
             <input type="text" placeholder="Пошук товара" />

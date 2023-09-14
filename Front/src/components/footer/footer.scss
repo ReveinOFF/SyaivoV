@@ -31,6 +31,77 @@ footer {
     }
 
     .f-info {
+      display: grid;
+      grid-template-rows: auto 1fr;
+
+      .company-info {
+        & > div {
+          &:first-child {
+            display: flex;
+            align-items: center;
+            cursor: default;
+
+            img {
+              width: 100px;
+            }
+
+            div {
+              @include fonts(
+                TTHoves,
+                40px,
+                400,
+                20px,
+                0,
+                center,
+                none,
+                uppercase,
+                white
+              );
+            }
+          }
+
+          &:last-child {
+            margin-top: 20px;
+            @include fonts(
+              OpenSans,
+              15px,
+              400,
+              15px,
+              0.05em,
+              start,
+              none,
+              none,
+              white
+            );
+          }
+        }
+      }
+
+      .creator {
+        align-self: flex-end;
+        justify-self: center;
+        @include fonts(
+          OpenSans,
+          15px,
+          400,
+          15px,
+          0,
+          center,
+          none,
+          none,
+          rgb(87, 87, 87)
+        );
+
+        a {
+          margin-left: 5px;
+          color: rgb(214, 139, 0);
+          transition: color 0.3s;
+
+          &:hover {
+            color: rgb(245, 159, 0);
+          }
+        }
+      }
     }
 
     .f-pages {
@@ -157,6 +228,7 @@ footer {
         display: grid;
         grid-template-columns: auto 1fr;
         align-items: center;
+        border-radius: 10px;
 
         & > div {
           color: transparent;
@@ -219,7 +291,7 @@ footer {
     );
 
     span {
-      @include fonts(TTHoves, 14px, 400, 20px, 0, center, none, none, white);
+      @include fonts(OpenSans, 14px, 400, 20px, 0, center, none, none, white);
     }
   }
 }

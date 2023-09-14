@@ -158,6 +158,8 @@ header {
           display: grid;
           grid-template-columns: auto 1fr;
           width: 100%;
+          border-radius: 10px;
+          transition: border-radius 0.3s 0.3s;
           @include fonts(
             TTHoves,
             15px,
@@ -189,17 +191,66 @@ header {
 
         .h-catalog-modal {
           position: absolute;
+          padding: 0 15px;
           left: 0;
           right: 0;
-          height: 0;
           background-color: #c5c5c5;
           opacity: 0;
+          height: 0;
+          overflow: hidden;
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
           transform: translateY(20px);
           transition: all 0.5s 0.3s;
+
+          & > a {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            cursor: pointer;
+            text-decoration: underline orange;
+            transition: text-decoration 0.3s;
+
+            img {
+              width: 50px;
+              margin-right: 10px;
+              transition: transform 0.3s;
+            }
+
+            div {
+              transition: color 0.3s;
+
+              @include fonts(
+                TTHoves,
+                20px,
+                600,
+                20px,
+                0.1em,
+                none,
+                none,
+                none,
+                #333333
+              );
+            }
+
+            &:hover {
+              text-decoration: underline #333333;
+
+              img {
+                transform: scale(1.2);
+              }
+
+              div {
+                color: orange;
+              }
+            }
+          }
         }
 
         &:hover {
           button {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
             & > div {
               &:last-child {
                 &::after {
@@ -213,7 +264,7 @@ header {
           .h-catalog-modal {
             opacity: 1;
             transform: translateY(0px);
-            height: 500px;
+            height: 468px;
           }
         }
       }
@@ -230,7 +281,7 @@ header {
           width: 30em;
           height: 100%;
           @include fonts(
-            TTHoves,
+            OpenSans,
             13px,
             400,
             12px,
