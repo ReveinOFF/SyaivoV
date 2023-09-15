@@ -15,8 +15,8 @@ const Footer = () => {
         <div className="f-info">
           <div className="company-info">
             <div>
-              <img src={avatar} alt="avatar" />
               <div>Сяйво-В</div>
+              <img src={avatar} alt="avatar" />
             </div>
             <div>
               Спецодяг, господарчі товари, логотипи, взуття, засоби захисту від

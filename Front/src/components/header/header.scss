@@ -194,7 +194,7 @@ header {
           padding: 0 15px;
           left: 0;
           right: 0;
-          background-color: #c5c5c5;
+          background-color: #f7dcad;
           opacity: 0;
           height: 0;
           overflow: hidden;
@@ -208,8 +208,8 @@ header {
             align-items: center;
             margin: 20px 0;
             cursor: pointer;
-            text-decoration: underline orange;
             transition: text-decoration 0.3s;
+            text-decoration: none;
 
             img {
               width: 50px;
@@ -234,14 +234,8 @@ header {
             }
 
             &:hover {
-              text-decoration: underline #333333;
-
               img {
                 transform: scale(1.2);
-              }
-
-              div {
-                color: orange;
               }
             }
           }

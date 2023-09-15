@@ -13,14 +13,12 @@
 $a-hover: rgb(255, 191, 71);
 
 footer {
-  background-color: #232f3e;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  background-color: #414852;
 
   .f-top {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 10px;
+    grid-column-gap: 20px;
     padding: 20px 0;
 
     & > div {
@@ -64,7 +62,7 @@ footer {
             margin-top: 20px;
             @include fonts(
               OpenSans,
-              15px,
+              11px,
               400,
               15px,
               0.05em,
@@ -89,12 +87,12 @@ footer {
           center,
           none,
           none,
-          rgb(87, 87, 87)
+          rgb(124, 124, 124)
         );
 
         a {
           margin-left: 5px;
-          color: rgb(214, 139, 0);
+          color: rgb(175, 114, 0);
           transition: color 0.3s;
 
           &:hover {
