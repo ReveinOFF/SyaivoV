@@ -86,6 +86,7 @@ const Contact = () => {
 
       <iframe
         className="map"
+        title="geolocation"
         src="https://maps.google.com/maps?q=Сяйво-В&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
         frameBorder="0"
         width="100%"
