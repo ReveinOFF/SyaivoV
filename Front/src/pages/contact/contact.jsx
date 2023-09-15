@@ -62,8 +62,8 @@ const Contact = () => {
         <form className="snd-msg" onSubmit={(e) => handleSubmite(e)}>
           <div>Ви також можете відправити лист з вашим зверненням.</div>
           <div>
-            <input type="text" name="name" placeholder="Ваше ім'я" />
-            <input type="email" name="email" placeholder="E-mail адреса" />
+            <input type="text" name="name" placeholder="Ім'я" />
+            <input type="email" name="email" placeholder="E-mail" />
           </div>
           <input type="text" name="subject" placeholder="Тема повідомлення" />
           <textarea
