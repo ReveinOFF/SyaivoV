@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./contactStyle.scss";
 import officeIcon from "../../assets/img/contact/521658.png";
 import timeIcon from "../../assets/img/contact/time-icon-968-thumb.png";
@@ -13,6 +13,12 @@ const Contact = () => {
 
   return (
     <>
+      <div className="pages">
+        <Link to="/">Головна</Link>
+        <div>/</div>
+        <NavLink to="/contact">Контакти</NavLink>
+      </div>
+
       <div className="contact">
         <div className="info">
           <div>

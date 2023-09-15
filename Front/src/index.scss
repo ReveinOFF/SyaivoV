@@ -1,10 +1,15 @@
 @import "./assets/fonts/fonts.scss";
 
-%arrow-animation {
-  animation-name: arrow;
-  animation-duration: 0.5s;
-  animation-direction: alternate-reverse;
-  animation-iteration-count: 2;
+@mixin fonts($ff, $fs, $fw, $lh, $ls, $ta, $td, $tt, $c) {
+  font-family: $ff;
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: $lh;
+  letter-spacing: $ls;
+  text-decoration: $td;
+  text-transform: $tt;
+  text-align: $ta;
+  color: $c;
 }
 
 * {
@@ -40,4 +45,30 @@ button {
 .container {
   margin: 0 auto;
   width: 1160px;
+}
+
+.pages {
+  margin-top: 20px;
+  margin-left: 15px;
+  display: flex;
+
+  div {
+    cursor: default;
+  }
+
+  div,
+  a {
+    margin: 0 5px;
+    @include fonts(TTHoves, 15px, 400, 20px, 0, none, none, none, #333333);
+  }
+
+  a {
+    &:not(:last-child) {
+      transition: color 0.3s;
+
+      &:hover {
+        color: orange;
+      }
+    }
+  }
 }
