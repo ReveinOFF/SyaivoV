@@ -1,4 +1,4 @@
-import "./footer.scss";
+import "./footerStyles.scss";
 import { Link } from "react-router-dom";
 import mailIcon from "../../assets/img/footer/mail_footer.png";
 import callIconFooter from "../../assets/img/footer/phone_footer.png";

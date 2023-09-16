@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import "./header.scss";
+import "./headerStyles.scss";
 import callIcon from "../../assets/img/header/phone.png";
 import maskIcon from "../../assets/img/header/473477.png";
 import bootsIcon from "../../assets/img/header/11311695.png";

@@ -1,5 +1,10 @@
 const Size = () => {
-  return <></>;
+  return (
+    <>
+      <div></div>
+      <div></div>
+    </>
+  );
 };
 
 export default Size;
