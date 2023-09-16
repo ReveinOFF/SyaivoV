@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./errorStyle.scss";
 import warningIcon from "../../assets/img/error/symbole-d-avertissement-jaune.png";
 import crossIcon from "../../assets/img/error/1544641784.png";
+import waveIcon from "../../assets/img/error/14-145581_orange-wave-orange-wave-png.png";
 
 const Error = () => {
   return (
@@ -32,6 +33,8 @@ const Error = () => {
       <img src={crossIcon} alt="cross" className="cross cross-4" />
       <img src={crossIcon} alt="cross" className="cross cross-5" />
       <img src={crossIcon} alt="cross" className="cross cross-6" />
+
+      <img src={waveIcon} alt="wave" className="wave" />
     </>
   );
 };

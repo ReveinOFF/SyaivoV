@@ -158,6 +158,14 @@
   }
 }
 
+.wave {
+  position: fixed;
+  bottom: -100px;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+
 @keyframes button-blick-b {
   from {
     transform: translateX(0) rotate(29deg);
