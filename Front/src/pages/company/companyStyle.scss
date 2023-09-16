@@ -1,0 +1,17 @@
+@mixin fonts($ff, $fs, $fw, $lh, $ls, $ta, $td, $tt, $c) {
+  font-family: $ff;
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: $lh;
+  letter-spacing: $ls;
+  text-decoration: $td;
+  text-transform: $tt;
+  text-align: $ta;
+  color: $c;
+}
+
+.company {
+  h1 {
+    text-align: center;
+  }
+}

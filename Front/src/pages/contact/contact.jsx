@@ -89,6 +89,7 @@ const Contact = () => {
         title="geolocation"
         src="https://maps.google.com/maps?q=Сяйво-В&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
         frameBorder="0"
+        loading="lazy"
         width="100%"
         height={350}
         allowFullScreen
