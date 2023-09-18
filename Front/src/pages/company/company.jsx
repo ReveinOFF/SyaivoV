@@ -1,7 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import "./companyStyle.scss";
+import { useEffect } from "react";
 
 const Company = () => {
+  useEffect(() => {
+    document.title = "Компанія";
+  }, []);
+
   return (
     <>
       <div className="pages">

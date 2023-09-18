@@ -5,6 +5,10 @@ import crossIcon from "../../assets/img/error/1544641784.svg";
 import waveIcon from "../../assets/img/error/14-145581_orange-wave-orange-wave-png.png";
 
 const Error = () => {
+  useEffect(() => {
+    document.title = "Помилка";
+  }, []);
+
   return (
     <>
       <Link to="/" className="error-back">

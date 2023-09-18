@@ -5,6 +5,10 @@ import boots from "../../../assets/img/size/56а.jpg";
 import wave from "../../../assets/img/size/Orange-Wave-Transparent-Images-PNG.png";
 
 const Size = () => {
+  useEffect(() => {
+    document.title = "Вибір розмірів";
+  }, []);
+
   return (
     <>
       <div className="pages">

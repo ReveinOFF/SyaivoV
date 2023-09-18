@@ -8,6 +8,10 @@ import mailIcon from "../../assets/img/contact/546394.png";
 import instagram from "../../assets/img/contact/instagram-logo-icon-512x512-155lpz3w.png";
 
 const Contact = () => {
+  useEffect(() => {
+    document.title = "Контакти";
+  }, []);
+
   const handleSubmite = (e) => {
     e.preventDefault();
   };

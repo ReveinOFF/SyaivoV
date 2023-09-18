@@ -1,6 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 
 const SizeBoots = () => {
+  useEffect(() => {
+    document.title = "Розміри взуття";
+  }, []);
+
   return (
     <>
       <div className="pages">
