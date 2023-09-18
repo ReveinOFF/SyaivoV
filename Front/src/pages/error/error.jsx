@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./errorStyle.scss";
 import warningIcon from "../../assets/img/error/symbole-d-avertissement-jaune.png";
-import crossIcon from "../../assets/img/error/1544641784.png";
+import crossIcon from "../../assets/img/error/1544641784.svg";
 import waveIcon from "../../assets/img/error/14-145581_orange-wave-orange-wave-png.png";
 
 const Error = () => {

@@ -4,7 +4,8 @@ import officeIcon from "../../assets/img/contact/521658.png";
 import timeIcon from "../../assets/img/contact/time-icon-968-thumb.png";
 import homePhoneIcon from "../../assets/img/contact/home-phone-icon-17.jpg";
 import mobilePhoneIcon from "../../assets/img/contact/mobile-phone-icon-2636-thumb.png";
-import mailIcon from "../../assets/img/contact/mail-227.png";
+import mailIcon from "../../assets/img/contact/546394.png";
+import instagram from "../../assets/img/contact/instagram-logo-icon-512x512-155lpz3w.png";
 
 const Contact = () => {
   const handleSubmite = (e) => {
@@ -50,6 +51,12 @@ const Contact = () => {
             <div>
               <img src={mailIcon} alt="mail" />
               <Link to="mailto:ppsyaivo-v@ukr.net">ppsyaivo-v@ukr.net</Link>
+            </div>
+            <div>
+              <img src={instagram} alt="mail" />
+              <Link to="https://www.instagram.com/syaivo_v/" target="_blank">
+                syaivo_v
+              </Link>
             </div>
           </div>
 

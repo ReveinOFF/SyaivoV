@@ -28,7 +28,7 @@ const Size = () => {
               підбір спецодягу.
             </div>
           </div>
-          <img src={wave} alt="wave" className="wave" />
+          <img src={wave} alt="wave" className="wave" style={{ scale: "-1" }} />
         </Link>
         <Link to="boots" className="boots-block">
           <div className="bs-inf-block">
