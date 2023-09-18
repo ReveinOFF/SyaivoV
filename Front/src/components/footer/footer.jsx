@@ -1,9 +1,10 @@
 import "./footerStyles.scss";
 import { Link } from "react-router-dom";
-import mailIcon from "../../assets/img/footer/mail_footer.png";
-import callIconFooter from "../../assets/img/footer/phone_footer.png";
-import geo_point from "../../assets/img/footer/gps_point.png";
-import avatar from "../../assets/img/avatar.png";
+import mailIcon from "../../assets/img/footer/email.png";
+import callIconFooter from "../../assets/img/footer/phone.png";
+import geo_point from "../../assets/img/footer/point.png";
+import instagram from "../../assets/img/footer/instagram.png";
+import avatar from "../../assets/img/avatar1.svg";
 import { useMemo } from "react";
 
 const Footer = () => {
@@ -15,7 +16,6 @@ const Footer = () => {
         <div className="f-info">
           <div className="company-info">
             <div>
-              <div>Сяйво-В</div>
               <img src={avatar} alt="avatar" />
             </div>
             <div>
@@ -55,6 +55,12 @@ const Footer = () => {
           <div className="mail">
             <img src={mailIcon} alt="mail" />
             <Link to="mailto:ppsyaivo-v@ukr.net">ppsyaivo-v@ukr.net</Link>
+          </div>
+          <div className="insta">
+            <img src={instagram} alt="instagram" />
+            <Link to="https://www.instagram.com/syaivo_v/" target="_blank">
+              syaivo_v
+            </Link>
           </div>
           <div className="geo_point">
             <img src={geo_point} alt="geolocation" />

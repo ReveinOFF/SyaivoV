@@ -23,10 +23,9 @@ const App = () => {
         <Route path="catalog" element={<LazyCatalog />} />
         <Route path="contact" element={<LazyContact />} />
         <Route path="company" element={<LazyComapny />} />
-        <Route path="size" element={<LazySize />}>
-          <Route path="clothing" element={<LazySizeCloth />} />
-          <Route path="boots" element={<LazySizeBoots />} />
-        </Route>
+        <Route path="size" element={<LazySize />} />
+        <Route path="size/clothing" element={<LazySizeCloth />} />
+        <Route path="size/boots" element={<LazySizeBoots />} />
       </Route>
       <Route path="*" element={<LazyError />} />
     </Routes>
