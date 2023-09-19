@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { useEffect } from "react";
 import "./sizeStyles.scss";
 import clothing from "../../../assets/img/size/19.jpg";
 import boots from "../../../assets/img/size/56а.jpg";

@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { useEffect } from "react";
 import "./contactStyle.scss";
 import officeIcon from "../../assets/img/contact/521658.png";
 import timeIcon from "../../assets/img/contact/time-icon-968-thumb.png";

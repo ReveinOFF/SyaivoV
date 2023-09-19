@@ -23,6 +23,11 @@ body {
 
 button {
   cursor: pointer;
+  user-select: none;
+}
+
+img {
+  user-select: none;
 }
 
 ::-webkit-scrollbar {

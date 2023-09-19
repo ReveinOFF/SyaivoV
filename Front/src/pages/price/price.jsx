@@ -1,9 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
 import { useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 
-const SizeBoots = () => {
+const Price = () => {
   useEffect(() => {
-    document.title = "Розміри взуття";
+    document.title = "Прайс";
   }, []);
 
   return (
@@ -11,10 +11,10 @@ const SizeBoots = () => {
       <div className="pages">
         <Link to="/">Головна</Link>
         <div>/</div>
-        <NavLink to="/size">Розміри</NavLink>
+        <NavLink to="/price">Прайс</NavLink>
       </div>
     </>
   );
 };
 
-export default SizeBoots;
+export default Price;

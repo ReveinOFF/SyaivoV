@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import "./errorStyle.scss";
 import warningIcon from "../../assets/img/error/symbole-d-avertissement-jaune.png";
 import crossIcon from "../../assets/img/error/1544641784.svg";

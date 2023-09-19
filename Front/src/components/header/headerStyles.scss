@@ -13,11 +13,12 @@
 $a-hover: rgb(255, 191, 71);
 
 header {
+  padding-top: 15px;
+
   .h-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 15px;
 
     .h-t-left {
       display: flex;

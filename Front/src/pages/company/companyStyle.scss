@@ -12,6 +12,153 @@
 
 .company {
   h1 {
-    text-align: center;
+    @include fonts(
+      TTHoves,
+      25px,
+      600,
+      20px,
+      0.1em,
+      center,
+      none,
+      uppercase,
+      rgb(75, 75, 75)
+    );
+  }
+
+  div {
+    h4 {
+      @include fonts(
+        TTHoves,
+        15px,
+        600,
+        20px,
+        0.1em,
+        start,
+        none,
+        uppercase,
+        rgb(75, 75, 75)
+      );
+    }
+
+    & > * {
+      @include fonts(
+        OpenSans,
+        15px,
+        400,
+        20px,
+        0.05em,
+        start,
+        none,
+        none,
+        rgb(48, 48, 48)
+      );
+    }
+  }
+
+  .work {
+    & > div {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      & > div {
+        display: flex;
+
+        span {
+          &:first-child {
+            font-family: TTHoves;
+            font-size: 200px;
+            font-weight: 900;
+            line-height: 140px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: #adadad;
+            user-select: none;
+          }
+
+          &:last-child {
+            font-family: OpenSans;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 30px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: #4e4e4e;
+            max-width: 300px;
+          }
+        }
+
+        &:last-child {
+          justify-content: end;
+        }
+      }
+    }
+  }
+
+  .advantages {
+    ol {
+      border-left: 2px solid rgb(255, 189, 66);
+      padding-left: 60px;
+
+      li {
+        margin: 5px 0;
+        font-size: 16px;
+        list-style: "👉";
+        padding-inline-start: 5px;
+
+        span {
+          color: rgb(92, 92, 92);
+          font-size: 15px;
+        }
+
+        &::marker {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .site-info {
+    ol {
+      border-left: 2px solid rgb(255, 189, 66);
+      padding-left: 60px;
+
+      & > li {
+        margin: 5px 0;
+        font-size: 16px;
+        list-style: "👉";
+        padding-inline-start: 5px;
+
+        ul {
+          color: rgb(92, 92, 92);
+          font-size: 15px;
+          list-style-type: none;
+
+          li {
+            &::before {
+              content: "\2022";
+              color: rgb(255, 189, 66);
+              font-weight: bold;
+              display: inline-block;
+              width: 1em;
+              font-size: 20px;
+              margin-left: -1em;
+            }
+          }
+        }
+
+        &::marker {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .additional {
+    margin-bottom: 30px;
+  }
+
+  hr {
+    margin-top: 20px;
+    border: 1px solid orange;
   }
 }
