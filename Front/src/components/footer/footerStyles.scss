@@ -33,31 +33,46 @@ footer {
       grid-template-rows: auto 1fr;
 
       .company-info {
-        & > div {
-          &:first-child {
-            display: flex;
-            align-items: center;
-            cursor: default;
+        a {
+          display: flex;
+          align-items: center;
+          border: 2px solid #ffa500;
+          border-radius: 10px;
+          text-decoration: none;
+          user-select: none;
 
-            img {
-              width: 200px;
-            }
+          img {
+            width: 100px;
           }
 
-          &:last-child {
-            margin-top: 20px;
+          div {
             @include fonts(
-              OpenSans,
-              11px,
-              400,
-              15px,
-              0.05em,
+              DOCKERONE,
+              40px,
+              600,
+              12px,
+              0.2em,
               start,
               none,
-              none,
-              white
+              uppercase,
+              #ffa500
             );
           }
+        }
+
+        & > div {
+          margin-top: 20px;
+          @include fonts(
+            OpenSans,
+            11px,
+            400,
+            15px,
+            0.05em,
+            start,
+            none,
+            none,
+            white
+          );
         }
       }
 

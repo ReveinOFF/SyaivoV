@@ -14,7 +14,8 @@ const Header = () => {
       <div className="h-top container">
         <nav className="h-t-left">
           <NavLink to="/">
-            <img src={avatarIcon} alt="avatar" />
+            <img src={avatarIcon} alt="avatar" loading="lazy" />
+            <div>СЯЙВО-В</div>
           </NavLink>
           <NavLink to="/catalog">Каталог</NavLink>
           <NavLink to="/size">Розміри</NavLink>

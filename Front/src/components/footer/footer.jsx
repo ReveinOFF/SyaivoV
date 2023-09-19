@@ -1,10 +1,10 @@
 import "./footerStyles.scss";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import mailIcon from "../../assets/img/footer/email.png";
 import callIconFooter from "../../assets/img/footer/phone.png";
 import geo_point from "../../assets/img/footer/point.png";
 import instagram from "../../assets/img/footer/instagram.png";
-import avatar from "../../assets/img/avatar1.svg";
+import avatar from "../../assets/img/avatar.svg";
 import { useMemo } from "react";
 
 const Footer = () => {
@@ -15,9 +15,10 @@ const Footer = () => {
       <div className="container f-top">
         <div className="f-info">
           <div className="company-info">
-            <div>
+            <NavLink to="/">
               <img src={avatar} alt="avatar" />
-            </div>
+              <div>СЯЙВО-В</div>
+            </NavLink>
             <div>
               Спецодяг, господарчі товари, логотипи, взуття, засоби захисту від
               вітчизняного та зарубіжного виробника та супутніх товарів
