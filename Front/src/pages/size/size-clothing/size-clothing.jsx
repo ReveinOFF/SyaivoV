@@ -11,7 +11,9 @@ const SizeCloth = () => {
       <div className="pages">
         <Link to="/">Головна</Link>
         <div>/</div>
-        <NavLink to="/size">Розміри</NavLink>
+        <Link to="/size">Розміри</Link>
+        <div>/</div>
+        <NavLink to="/size/clothing">Одежа</NavLink>
       </div>
     </>
   );
