@@ -58,7 +58,7 @@ const SizeCloth = () => {
           </ol>
         </div>
 
-        <h3>Типові розміри для чоловіків:</h3>
+        <h3 id="table1">Типові розміри для чоловіків:</h3>
 
         <div>
           <table>
@@ -153,7 +153,7 @@ const SizeCloth = () => {
           </table>
         </div>
 
-        <h3>Типові розміри для жінок:</h3>
+        <h3 id="table2">Типові розміри для жінок:</h3>
 
         <div>
           <table>
@@ -248,7 +248,7 @@ const SizeCloth = () => {
           </table>
         </div>
 
-        <h3>Зріст:</h3>
+        <h3 id="table3">Зріст:</h3>
 
         <div className="growth">
           <table>
@@ -283,7 +283,7 @@ const SizeCloth = () => {
       </div>
 
       <div className="table-container">
-        <h3>Розміри Європи:</h3>
+        <h3 id="table4">Розміри Європи:</h3>
 
         <div>
           <table>
