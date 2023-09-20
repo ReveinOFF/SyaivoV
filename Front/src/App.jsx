@@ -14,7 +14,6 @@ const LazySizeBoots = React.lazy(() =>
 const LazyContact = React.lazy(() => import("./pages/contact/contact"));
 const LazyComapny = React.lazy(() => import("./pages/company/company"));
 const LazyError = React.lazy(() => import("./pages/error/error"));
-const LazyPrice = React.lazy(() => import("./pages/price/price"));
 
 const App = () => {
   return (
@@ -27,7 +26,6 @@ const App = () => {
         <Route path="size" element={<LazySize />} />
         <Route path="size/clothing" element={<LazySizeCloth />} />
         <Route path="size/boots" element={<LazySizeBoots />} />
-        <Route path="price" element={<LazyPrice />} />
       </Route>
       <Route path="*" element={<LazyError />} />
     </Routes>

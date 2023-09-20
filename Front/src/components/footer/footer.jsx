@@ -38,7 +38,6 @@ const Footer = () => {
           <Link to="/size">Розміри</Link>
           <Link to="/company">Компанія</Link>
           <Link to="/contact">Контакти</Link>
-          <Link to="/price">Прайс</Link>
         </div>
         <div className="f-contact">
           <div className="phone">
