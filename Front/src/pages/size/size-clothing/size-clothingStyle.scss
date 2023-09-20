@@ -1,0 +1,152 @@
+@mixin fonts($ff, $fs, $fw, $lh, $ls, $ta, $td, $tt, $c) {
+  font-family: $ff;
+  font-size: $fs;
+  font-weight: $fw;
+  line-height: $lh;
+  letter-spacing: $ls;
+  text-decoration: $td;
+  text-transform: $tt;
+  text-align: $ta;
+  color: $c;
+}
+
+.table-container-cl {
+  h3 {
+    margin-top: 3em;
+    @include fonts(
+      TTHoves,
+      15px,
+      600,
+      15px,
+      0.1em,
+      start,
+      none,
+      uppercase,
+      rgb(75, 75, 75)
+    );
+  }
+
+  & > div {
+    & > div {
+      margin-bottom: 10px;
+    }
+
+    &:nth-child(n + 4) {
+      border-left: 2px solid rgb(255, 189, 66);
+      padding-left: 10em;
+      margin-bottom: 5em;
+
+      table {
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+
+        thead {
+          border-bottom: 1px solid rgba(128, 128, 128, 0.082);
+
+          th {
+            width: 25%;
+            padding-bottom: 10px;
+            border-right: 1px solid rgba(128, 128, 128, 0.082);
+
+            @include fonts(
+              TTHoves,
+              20px,
+              600,
+              20px,
+              0.1em,
+              center,
+              none,
+              none,
+              rgb(56, 56, 56)
+            );
+
+            &:last-child {
+              border-left: 0;
+            }
+          }
+        }
+
+        tbody {
+          tr {
+            border-bottom: 1px solid rgba(128, 128, 128, 0.082);
+
+            td {
+              padding: 20px 0;
+              border-right: 1px solid rgba(128, 128, 128, 0.082);
+
+              @include fonts(
+                OpenSans,
+                15px,
+                600,
+                15px,
+                0.05em,
+                center,
+                none,
+                none,
+                rgb(92, 92, 92)
+              );
+
+              &:last-child {
+                border-right: 0;
+                color: rgb(36, 36, 36);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .category-price {
+    display: inline-block;
+
+    ol {
+      li {
+        padding: 5px 0;
+        @include fonts(
+          OpenSans,
+          15px,
+          600,
+          15px,
+          0.05em,
+          start,
+          none,
+          none,
+          rgb(92, 92, 92)
+        );
+
+        a {
+          color: rgb(92, 92, 92);
+          transition: color 0.3s;
+        }
+
+        &:hover {
+          a {
+            color: orange;
+          }
+        }
+      }
+    }
+  }
+
+  .growth {
+    td {
+      width: 50%;
+    }
+  }
+
+  div {
+    @include fonts(
+      OpenSans,
+      15px,
+      400,
+      15px,
+      0.05em,
+      start,
+      none,
+      none,
+      rgb(44, 44, 44)
+    );
+  }
+}
