@@ -33,11 +33,12 @@ const Footer = () => {
           </div>
         </div>
         <div className="f-pages">
-          <Link to="/">Головна</Link>
-          <Link to="/catalog">Каталог</Link>
-          <Link to="/size">Розміри</Link>
-          <Link to="/company">Компанія</Link>
-          <Link to="/contact">Контакти</Link>
+          <NavLink to="/">Головна</NavLink>
+          <NavLink to="/catalog">Каталог</NavLink>
+          <NavLink to="/size">Розміри</NavLink>
+          <NavLink to="/company">Компанія</NavLink>
+          <NavLink to="/contact">Контакти</NavLink>
+          <NavLink to="/admin/products">Адмін</NavLink>
         </div>
         <div className="f-contact">
           <div className="phone">

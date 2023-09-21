@@ -19,7 +19,8 @@ footer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 20px;
-    padding: 20px 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
     & > div {
       &:nth-child(2) {

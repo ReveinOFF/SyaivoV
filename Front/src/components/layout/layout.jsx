@@ -10,7 +10,7 @@ const Layout = () => {
 
   useEffect(() => {
     const handleScrollButtonVisiblity = () => {
-      window.pageYOffset > 300 ? setShowButton(true) : setShowButton(false);
+      window.pageYOffset > 150 ? setShowButton(true) : setShowButton(false);
     };
 
     window.addEventListener("scroll", handleScrollButtonVisiblity);

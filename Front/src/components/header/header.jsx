@@ -21,6 +21,7 @@ const Header = () => {
           <NavLink to="/size">Розміри</NavLink>
           <NavLink to="/company">Компанія</NavLink>
           <NavLink to="/contact">Контакти</NavLink>
+          <NavLink to="/admin/products">Адмін</NavLink>
         </nav>
         <div className="h-t-right">
           <img src={callIcon} alt="phone" />

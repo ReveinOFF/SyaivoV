@@ -11,9 +11,14 @@ const LazySizeCloth = React.lazy(() =>
 const LazySizeBoots = React.lazy(() =>
   import("./pages/size/size-boots/size-boots")
 );
+const LazyAdmin = React.lazy(() => import("./pages/admin/main/main"));
+const LazyAdminProducts = React.lazy(() =>
+  import("./pages/admin/products/products")
+);
 const LazyContact = React.lazy(() => import("./pages/contact/contact"));
 const LazyComapny = React.lazy(() => import("./pages/company/company"));
 const LazyError = React.lazy(() => import("./pages/error/error"));
+const LazyProducts = React.lazy(() => import("./pages/products/products"));
 
 const App = () => {
   return (
@@ -21,11 +26,14 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<LazyMain />} />
         <Route path="catalog" element={<LazyCatalog />} />
+        <Route path="products" element={<LazyProducts />} />
         <Route path="contact" element={<LazyContact />} />
         <Route path="company" element={<LazyComapny />} />
         <Route path="size" element={<LazySize />} />
         <Route path="size/clothing" element={<LazySizeCloth />} />
         <Route path="size/boots" element={<LazySizeBoots />} />
+        <Route path="admin" element={<LazyAdmin />} />
+        <Route path="admin/products" element={<LazyAdminProducts />} />
       </Route>
       <Route path="*" element={<LazyError />} />
     </Routes>
