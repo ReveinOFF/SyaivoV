@@ -1,6 +1,6 @@
-import "./main.scss";
-import arrowIcon from "../../../assets/img/admin/89829-200.png";
-import closeIcon from "../../../assets/img/admin/icon-close-512.png";
+import "./authStyle.scss";
+import arrowIcon from "../../assets/img/admin/89829-200.png";
+import closeIcon from "../../assets/img/admin/icon-close-512.png";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 

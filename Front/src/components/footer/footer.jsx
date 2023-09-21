@@ -38,7 +38,6 @@ const Footer = () => {
           <NavLink to="/size">Розміри</NavLink>
           <NavLink to="/company">Компанія</NavLink>
           <NavLink to="/contact">Контакти</NavLink>
-          <NavLink to="/admin/products">Адмін</NavLink>
         </div>
         <div className="f-contact">
           <div className="phone">

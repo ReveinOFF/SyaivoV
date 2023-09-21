@@ -1,7 +1,7 @@
 import "./main.style.scss";
 
 const Main = () => {
-  return <div className="test">main</div>;
+  return <div></div>;
 };
 
 export default Main;

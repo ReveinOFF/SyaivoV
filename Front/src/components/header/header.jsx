@@ -21,7 +21,6 @@ const Header = () => {
           <NavLink to="/size">Розміри</NavLink>
           <NavLink to="/company">Компанія</NavLink>
           <NavLink to="/contact">Контакти</NavLink>
-          <NavLink to="/admin/products">Адмін</NavLink>
         </nav>
         <div className="h-t-right">
           <img src={callIcon} alt="phone" />
@@ -40,6 +39,11 @@ const Header = () => {
             </button>
             <div className="h-catalog-modal">
               <Link>
+                <img src={glovesIcon} alt="gloves" />
+                <div>Рукавиці</div>
+              </Link>
+              <hr />
+              <Link>
                 <img src={jacketIcon} alt="jacket" />
                 <div>Спецодяг</div>
               </Link>
@@ -47,11 +51,6 @@ const Header = () => {
               <Link>
                 <img src={bootsIcon} alt="boots" />
                 <div>Спецвзуття</div>
-              </Link>
-              <hr />
-              <Link>
-                <img src={glovesIcon} alt="gloves" />
-                <div>Рукавиці</div>
               </Link>
               <hr />
               <Link>
