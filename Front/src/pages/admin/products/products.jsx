@@ -1,8 +1,13 @@
 import { Link, NavLink } from "react-router-dom";
 import "./productsStyle.scss";
 import img19 from "../../../assets/img/admin/19.jpg";
+import { useEffect } from "react";
 
 const Products = () => {
+  useEffect(() => {
+    document.title = "Список товарів";
+  }, []);
+
   return (
     <>
       <div className="pages">

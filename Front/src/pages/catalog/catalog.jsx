@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import "./catalogStyle.scss";
 
 const Catalog = () => {
   useEffect(() => {

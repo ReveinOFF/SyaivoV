@@ -1,11 +1,16 @@
 import "./main.scss";
 import arrowIcon from "../../../assets/img/admin/89829-200.png";
 import closeIcon from "../../../assets/img/admin/icon-close-512.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const Main = () => {
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    document.title = "Авторизація";
+  }, []);
+
   const handleClick = () => {
     setShowModal(!showModal);
   };
