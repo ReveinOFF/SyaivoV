@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import "./productsStyle.scss";
+import img19 from "../../../assets/img/admin/19.jpg";
 
 const Products = () => {
   return (
@@ -10,6 +11,34 @@ const Products = () => {
         <Link to="/admin">Адмін меню</Link>
         <div>/</div>
         <NavLink to="/admin/products">Список товарів</NavLink>
+      </div>
+
+      <button className="create">Добавити товар</button>
+
+      <div className="product-list">
+        <div>
+          <img src={img19} alt="" />
+          <div>Ыаавпвапра рапрап</div>
+          <div>
+            <button>Видалити</button>
+          </div>
+        </div>
+
+        <div>
+          <img src={img19} alt="" />
+          <div>Ыаавпвапра рапрап</div>
+          <div>
+            <button>Видалити</button>
+          </div>
+        </div>
+
+        <div>
+          <img src={img19} alt="" />
+          <div>Ыаавпвапра рапрап</div>
+          <div>
+            <button>Видалити</button>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -1,0 +1,148 @@
+.create {
+  margin-top: 30px;
+  border: 0;
+  border-radius: 10px;
+  padding: 20px 80px;
+  position: relative;
+  overflow: hidden;
+  background-color: orange;
+  font-family: TTHoves;
+  font-size: 20px;
+  line-height: 20px;
+  color: white;
+  text-transform: uppercase;
+  display: block;
+  margin-left: auto;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    top: -10px;
+    transform: rotate(29deg);
+    background-color: white;
+  }
+
+  &::before {
+    opacity: 0.3;
+    left: -40px;
+  }
+
+  &::after {
+    opacity: 0.5;
+    left: -70px;
+  }
+
+  &:hover {
+    &::before {
+      animation: button-blick-b 0.4s;
+    }
+
+    &::after {
+      animation: button-blick-a 0.4s;
+    }
+  }
+}
+
+.product-list {
+  margin-bottom: 30px;
+  & > div {
+    display: flex;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 30px;
+    transition: scale 0.3s;
+
+    &:hover {
+      scale: 1.05;
+    }
+
+    img {
+      width: 100px;
+      height: 150px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    div {
+      &:first-of-type {
+        margin-left: 50px;
+        font-family: TTHoves;
+        font-size: 20px;
+        line-height: 20px;
+        letter-spacing: 0.05em;
+      }
+
+      &:last-child {
+        margin-left: auto;
+      }
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 20px 80px;
+      position: relative;
+      overflow: hidden;
+      background-color: rgb(255, 126, 126);
+      font-family: TTHoves;
+      font-size: 20px;
+      line-height: 20px;
+      color: white;
+      text-transform: uppercase;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 100px;
+        top: -10px;
+        transform: rotate(29deg);
+        background-color: white;
+      }
+
+      &::before {
+        opacity: 0.3;
+        left: -40px;
+      }
+
+      &::after {
+        opacity: 0.5;
+        left: -70px;
+      }
+
+      &:hover {
+        &::before {
+          animation: button-blick-b 0.4s;
+        }
+
+        &::after {
+          animation: button-blick-a 0.4s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes button-blick-b {
+  from {
+    transform: translateX(0) rotate(29deg);
+  }
+  to {
+    transform: translateX(430px) rotate(29deg);
+  }
+}
+
+@keyframes button-blick-a {
+  from {
+    transform: translateX(0) rotate(29deg);
+  }
+  to {
+    transform: translateX(410px) rotate(29deg);
+  }
+}
