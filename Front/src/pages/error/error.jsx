@@ -23,7 +23,7 @@ const Error = () => {
         </div>
         <h1>
           <div>4</div>
-          <img src={warningIcon} alt="warning" />
+          <img draggable="false" src={warningIcon} alt="warning" />
           <div>4</div>
         </h1>
         <div>
@@ -32,14 +32,44 @@ const Error = () => {
         </div>
       </div>
 
-      <img src={crossIcon} alt="cross" className="cross cross-1" />
-      <img src={crossIcon} alt="cross" className="cross cross-2" />
-      <img src={crossIcon} alt="cross" className="cross cross-3" />
-      <img src={crossIcon} alt="cross" className="cross cross-4" />
-      <img src={crossIcon} alt="cross" className="cross cross-5" />
-      <img src={crossIcon} alt="cross" className="cross cross-6" />
+      <img
+        draggable="false"
+        src={crossIcon}
+        alt="cross"
+        className="cross cross-1"
+      />
+      <img
+        draggable="false"
+        src={crossIcon}
+        alt="cross"
+        className="cross cross-2"
+      />
+      <img
+        draggable="false"
+        src={crossIcon}
+        alt="cross"
+        className="cross cross-3"
+      />
+      <img
+        draggable="false"
+        src={crossIcon}
+        alt="cross"
+        className="cross cross-4"
+      />
+      <img
+        draggable="false"
+        src={crossIcon}
+        alt="cross"
+        className="cross cross-5"
+      />
+      <img
+        draggable="false"
+        src={crossIcon}
+        alt="cross"
+        className="cross cross-6"
+      />
 
-      <img src={waveIcon} alt="wave" className="wave" />
+      <img draggable="false" src={waveIcon} alt="wave" className="wave" />
     </>
   );
 };

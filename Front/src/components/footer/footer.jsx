@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="f-info">
           <div className="company-info">
             <NavLink to="/">
-              <img src={avatar} alt="avatar" />
+              <img draggable="false" src={avatar} alt="avatar" />
               <div>СЯЙВО-В</div>
             </NavLink>
             <div>
@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
         <div className="f-contact">
           <div className="phone">
-            <img src={callIconFooter} alt="call" />
+            <img draggable="false" src={callIconFooter} alt="call" />
             <div>
               <div>(096) 328-28-89</div>
               <div>
@@ -54,17 +54,17 @@ const Footer = () => {
             </div>
           </div>
           <div className="mail">
-            <img src={mailIcon} alt="mail" />
+            <img draggable="false" src={mailIcon} alt="mail" />
             <Link to="mailto:ppsyaivo-v@ukr.net">ppsyaivo-v@ukr.net</Link>
           </div>
           <div className="insta">
-            <img src={instagram} alt="instagram" />
+            <img draggable="false" src={instagram} alt="instagram" />
             <Link to="https://www.instagram.com/syaivo_v/" target="_blank">
               syaivo_v
             </Link>
           </div>
           <div className="geo_point">
-            <img src={geo_point} alt="geolocation" />
+            <img draggable="false" src={geo_point} alt="geolocation" />
             <div>м. Рівне, Рівненська обл., вул. Відінська, 39б.</div>
           </div>
           <button>

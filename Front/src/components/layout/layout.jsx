@@ -26,6 +26,7 @@ const Layout = () => {
       <main className="container">
         <Outlet />
         <img
+          draggable="false"
           src={scrollIcon}
           style={showButton ? { opacity: 1 } : { opacity: 0 }}
           alt="scroll top"

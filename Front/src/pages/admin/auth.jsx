@@ -27,6 +27,7 @@ const Main = () => {
         <div className="auth-modal">
           <div>
             <img
+              draggable="false"
               src={closeIcon}
               alt="close"
               onClick={() => setShowModal(!showModal)}
@@ -44,7 +45,7 @@ const Main = () => {
           Якщо ви бажаєте увійти на сайт як адміністратор, то вам потрібно
           натиснути кнопку "Увійти".
         </div>
-        <img src={arrowIcon} alt="arrow" />
+        <img draggable="false" src={arrowIcon} alt="arrow" />
         <button onClick={handleClick}>Увійти</button>
       </div>
     </>

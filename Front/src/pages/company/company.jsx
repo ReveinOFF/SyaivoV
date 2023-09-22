@@ -24,6 +24,7 @@ const Company = () => {
 
       <div className="company">
         <h1>Фірма “СЯЙВО-В”</h1>
+
         <div>
           <h4>Інформація про компанію:</h4>
           <div>
@@ -41,6 +42,7 @@ const Company = () => {
             кожного клієнта.
           </div>
         </div>
+
         <div className="work">
           <h4>Наша робота:</h4>
           <div>
@@ -60,7 +62,9 @@ const Company = () => {
             </div>
           </div>
         </div>
+
         <hr />
+
         <div className="advantages">
           <h4>Переваги нашої компанії:</h4>
           <ol>
@@ -120,6 +124,7 @@ const Company = () => {
             клієнтів.
           </div>
         </div>
+
         <div className="site-info">
           <h4>Переваги нашої компанії:</h4>
           <ol>
@@ -153,6 +158,7 @@ const Company = () => {
             выбору размеров и информацию о ценах.
           </div>
         </div>
+
         <div className="additional">
           <h4>Додаткова інформація:</h4>
           <div>

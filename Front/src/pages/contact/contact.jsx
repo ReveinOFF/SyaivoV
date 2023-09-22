@@ -30,7 +30,7 @@ const Contact = () => {
           <div>
             <h2>Наш офіс тут:</h2>
             <div>
-              <img src={officeIcon} alt="office" />
+              <img draggable="false" src={officeIcon} alt="office" />
               <div>
                 м. Рівне, Рівненська обл.,
                 <br />
@@ -42,11 +42,11 @@ const Contact = () => {
           <div>
             <h2>Контактна інформація:</h2>
             <div>
-              <img src={homePhoneIcon} alt="home phone" />
+              <img draggable="false" src={homePhoneIcon} alt="home phone" />
               <div>(0362) 62-98-08</div>
             </div>
             <div>
-              <img src={mobilePhoneIcon} alt="mobile phone" />
+              <img draggable="false" src={mobilePhoneIcon} alt="mobile phone" />
               <div>
                 <Link to="tel:+380677336594">(067) 733-65-94</Link>
                 <Link to="tel:+380963282889">(096) 328-28-89</Link>
@@ -54,11 +54,11 @@ const Contact = () => {
               </div>
             </div>
             <div>
-              <img src={mailIcon} alt="mail" />
+              <img draggable="false" src={mailIcon} alt="mail" />
               <Link to="mailto:ppsyaivo-v@ukr.net">ppsyaivo-v@ukr.net</Link>
             </div>
             <div>
-              <img src={instagram} alt="mail" />
+              <img draggable="false" src={instagram} alt="mail" />
               <Link to="https://www.instagram.com/syaivo_v/" target="_blank">
                 syaivo_v
               </Link>
@@ -68,7 +68,7 @@ const Contact = () => {
           <div>
             <h2>РЕЖИМ РОБОТИ:</h2>
             <div>
-              <img src={timeIcon} alt="time" />
+              <img draggable="false" src={timeIcon} alt="time" />
               <div>
                 <div>ПН-ПТ: 08:30-17:30</div>
                 <div>СБ-НД: Вихідний</div>

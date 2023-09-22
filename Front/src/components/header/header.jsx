@@ -14,7 +14,12 @@ const Header = () => {
       <div className="h-top container">
         <nav className="h-t-left">
           <NavLink to="/">
-            <img src={avatarIcon} alt="avatar" loading="lazy" />
+            <img
+              draggable="false"
+              src={avatarIcon}
+              alt="avatar"
+              loading="lazy"
+            />
             <div>СЯЙВО-В</div>
           </NavLink>
           <NavLink to="/catalog">Каталог</NavLink>
@@ -23,7 +28,7 @@ const Header = () => {
           <NavLink to="/contact">Контакти</NavLink>
         </nav>
         <div className="h-t-right">
-          <img src={callIcon} alt="phone" />
+          <img draggable="false" src={callIcon} alt="phone" />
           <div className="h-contact">
             <Link to="tel:+380963282889">(096) 328-28-89</Link>
             <Link to="tel:+380677336594">(067) 733-65-94</Link>
@@ -39,27 +44,27 @@ const Header = () => {
             </button>
             <div className="h-catalog-modal">
               <Link>
-                <img src={glovesIcon} alt="gloves" />
+                <img draggable="false" src={glovesIcon} alt="gloves" />
                 <div>Рукавиці</div>
               </Link>
               <hr />
               <Link>
-                <img src={jacketIcon} alt="jacket" />
+                <img draggable="false" src={jacketIcon} alt="jacket" />
                 <div>Спецодяг</div>
               </Link>
               <hr />
               <Link>
-                <img src={bootsIcon} alt="boots" />
+                <img draggable="false" src={bootsIcon} alt="boots" />
                 <div>Спецвзуття</div>
               </Link>
               <hr />
               <Link>
-                <img src={meansIcon} alt="means" />
+                <img draggable="false" src={meansIcon} alt="means" />
                 <div>Господарчі товари</div>
               </Link>
               <hr />
               <Link>
-                <img src={maskIcon} alt="mask" />
+                <img draggable="false" src={maskIcon} alt="mask" />
                 <div>Засоби індивідуального захисту</div>
               </Link>
             </div>

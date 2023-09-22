@@ -17,10 +17,16 @@ const Size = () => {
         <div>/</div>
         <NavLink to="/size">Розміри</NavLink>
       </div>
+
       <div className="sellect-size-b">
         <Link to="clothing" className="clothing-block">
           <div className="img">
-            <img src={clothing} loading="lazy" alt="clothing" />
+            <img
+              draggable="false"
+              src={clothing}
+              loading="lazy"
+              alt="clothing"
+            />
           </div>
           <div className="cl-inf-block">
             <div>
@@ -33,7 +39,13 @@ const Size = () => {
               підбір спецодягу.
             </div>
           </div>
-          <img src={wave} alt="wave" className="wave" style={{ scale: "-1" }} />
+          <img
+            draggable="false"
+            src={wave}
+            alt="wave"
+            className="wave"
+            style={{ scale: "-1" }}
+          />
         </Link>
 
         <Link to="boots" className="boots-block">
@@ -49,9 +61,9 @@ const Size = () => {
             </div>
           </div>
           <div className="img">
-            <img src={boots} loading="lazy" alt="boots" />
+            <img draggable="false" src={boots} loading="lazy" alt="boots" />
           </div>
-          <img src={wave} alt="wave" className="wave" />
+          <img draggable="false" src={wave} alt="wave" className="wave" />
         </Link>
       </div>
     </>
