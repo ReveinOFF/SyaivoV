@@ -44,6 +44,11 @@ const Header = () => {
             </button>
             <div className="h-catalog-modal">
               <Link>
+                <img draggable="false" src={bootsIcon} alt="boots" />
+                <div>Взуття</div>
+              </Link>
+              <hr />
+              <Link>
                 <img draggable="false" src={glovesIcon} alt="gloves" />
                 <div>Рукавиці</div>
               </Link>
@@ -51,11 +56,6 @@ const Header = () => {
               <Link>
                 <img draggable="false" src={jacketIcon} alt="jacket" />
                 <div>Спецодяг</div>
-              </Link>
-              <hr />
-              <Link>
-                <img draggable="false" src={bootsIcon} alt="boots" />
-                <div>Спецвзуття</div>
               </Link>
               <hr />
               <Link>
