@@ -7,8 +7,14 @@ import Slider from "react-slick";
 import img1 from "../../assets/img/main/1620288416_7-phonoteka_org-p-zavod-fon-7.jpg";
 import img2 from "../../assets/img/main/1672119667_3-46.jpg";
 import img3 from "../../assets/img/main/575de2eecd54915546be74f9.jpg";
-import img4 from "../../assets/img/main/1675548784_foni-club-p-fon-krasivii-doma-vnutri-1.jpg";
+import img4 from "../../assets/img/main/1672252521_kalix-club-p-dom-vnutri-fon-krasivo-2.jpg";
 import img5 from "../../assets/img/main/vknjojXiAHA4cCWtkf29BjUY8Vg8jQ16caysEP3K.png";
+
+import imgPng1 from "../../assets/img/main/pngwing.com.png";
+import imgPng2 from "../../assets/img/main/pngwin454g.com.png";
+import imgPng3 from "../../assets/img/main/pngwing.com (1).png";
+import imgPng4 from "../../assets/img/main/Без имени-1.png";
+import imgPng5 from "../../assets/img/main/3747759848_w600_h600_3747759848.png";
 
 import protectIcon from "../../assets/img/main/3712265.svg";
 import priceIcon from "../../assets/img/main/price-icon-6.svg";
@@ -27,7 +33,7 @@ const Main = () => {
     arrows: true,
     dots: true,
     focusOnSelect: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 7000,
   };
 
   return (
@@ -40,6 +46,24 @@ const Main = () => {
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
+          <img
+            src={imgPng1}
+            className="image-slider img-p1"
+            alt="image"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          />
+          <div
+            className="info-category"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          >
+            <h1>Засоби індивідуального захисту</h1>
+            <div>
+              Наша продукція забезпечить вас надійним захистом в різних
+              ситуаціях. Ми дбаємо про вашу безпеку та комфорт.
+            </div>
+          </div>
         </div>
         <div className="image-block">
           <img
@@ -48,6 +72,25 @@ const Main = () => {
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
+          <img
+            src={imgPng2}
+            className="image-slider img-p2"
+            alt="image"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          />
+          <div
+            className="info-category"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          >
+            <h1>Спецодяг</h1>
+            <div>
+              Вишуканий та практичний спецодяг для робочих та професіоналів
+              різних галузей. Ми пропонуємо моделі, які поєднують в собі
+              безпеку, стиль та функціональність.
+            </div>
+          </div>
         </div>
         <div className="image-block">
           <img
@@ -56,6 +99,25 @@ const Main = () => {
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
+          <img
+            src={imgPng3}
+            className="image-slider img-p3"
+            alt="image"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          />
+          <div
+            className="info-category"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          >
+            <h1>Взуття</h1>
+            <div>
+              Широкий вибір взуття для різних потреб – від робочого взуття до
+              стильних та комфортних моделей на кожен день. Оберіть взуття, яке
+              вам підходить.
+            </div>
+          </div>
         </div>
         <div className="image-block">
           <img
@@ -64,6 +126,25 @@ const Main = () => {
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
+          <img
+            src={imgPng4}
+            className="image-slider img-p4"
+            alt="image"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          />
+          <div
+            className="info-category"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          >
+            <h1>Господарчі товари</h1>
+            <div>
+              Наші господарчі товари допоможуть вам забезпечити ваше
+              господарство всім необхідним. Від побутової хімії до приладів для
+              кухні – ми маємо все для вашого комфорту вдома.
+            </div>
+          </div>
         </div>
         <div className="image-block">
           <img
@@ -72,6 +153,25 @@ const Main = () => {
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
+          <img
+            src={imgPng5}
+            className="image-slider img-p5"
+            alt="image"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          />
+          <div
+            className="info-category"
+            onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+            onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+          >
+            <h1>Рукавиці</h1>
+            <div>
+              Наш асортимент рукавиць включає в себе якісні та зносостійкі
+              моделі для різних видів робіт і активностей. Забезпечте свої руки
+              надійним захистом і комфортом.
+            </div>
+          </div>
         </div>
       </Slider>
 
