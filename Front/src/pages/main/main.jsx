@@ -2,6 +2,7 @@ import "./mainStyle.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { useMemo } from "react";
 import Slider from "react-slick";
 
 import img1 from "../../assets/img/main/1620288416_7-phonoteka_org-p-zavod-fon-7.jpg";
@@ -26,19 +27,55 @@ import bootsImg from "../../assets/img/main/57.jpg";
 import protectedImg from "../../assets/img/main/61а.jpg";
 import homeImg from "../../assets/img/main/1cca2dce10a16c5ced916f02ff49d6c7.jpg";
 import glovesImg from "../../assets/img/main/6288d02f2725bb2092dc2387e02fa163d2fe538e.jpg";
+import { useEffect } from "react";
 
 const Main = () => {
-  const settings = {
-    autoplay: true,
-    arrows: true,
-    dots: true,
-    focusOnSelect: true,
-    autoplaySpeed: 7000,
-  };
+  const settings = useMemo(
+    () => ({
+      autoplay: true,
+      arrows: true,
+      dots: true,
+      focusOnSelect: true,
+      autoplaySpeed: 7000,
+    }),
+    []
+  );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains("hiddenLeft")) {
+            entry.target.classList.add("showLeft");
+          } else if (entry.target.classList.contains("hiddenRight")) {
+            entry.target.classList.add("showRight");
+          } else if (entry.target.classList.contains("hiddenTop")) {
+            entry.target.classList.add("showTop");
+          } else if (entry.target.classList.contains("hiddenBottom")) {
+            entry.target.classList.add("showBottom");
+          } else if (entry.target.classList.contains("hiddenAnimation")) {
+            entry.target.classList.add("showAnimation");
+          } else if (entry.target.classList.contains("hidden")) {
+            entry.target.classList.add("show");
+          }
+        }
+      });
+    });
+
+    const hiddenElements = document.querySelectorAll(
+      ".hidden, .hiddenLeft, .hiddenRight, .hiddenTop, .hiddenBottom, .hiddenAnimation"
+    );
+
+    hiddenElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      hiddenElements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
 
   return (
     <>
-      <Slider {...settings} className="slider">
+      <Slider {...settings} className="slider hiddenTop">
         <div className="image-block">
           <img
             src={img1}
@@ -176,28 +213,28 @@ const Main = () => {
       </Slider>
 
       <div className="info-block">
-        <div className="card">
+        <div className="card hiddenLeft">
           <img src={profIcon} alt="professionals" />
           <div>
             <h4>Професіоналізм</h4>
             <div>Над товарами працюють люди з великим досвідом.</div>
           </div>
         </div>
-        <div className="card">
+        <div className="card hiddenLeft">
           <img src={protectIcon} alt="protect" />
           <div>
             <h4>100% Безпека</h4>
             <div>Ми гарантуємо повну безпеку товару.</div>
           </div>
         </div>
-        <div className="card">
+        <div className="card hiddenRight">
           <img src={priceIcon} alt="price" />
           <div>
             <h4>Доступні ціни</h4>
             <div>Ціни падають, щоб підвищити ваш настрій!</div>
           </div>
         </div>
-        <div className="card">
+        <div className="card hiddenRight">
           <img src={garanteIcon} alt="garante" />
           <div>
             <h4>Гарантія якості</h4>
@@ -207,7 +244,7 @@ const Main = () => {
       </div>
 
       <div className="catalog">
-        <div className="card">
+        <div className="card hiddenBottom">
           <div>
             <img src={glovesImg} alt="gloves" />
           </div>
@@ -220,7 +257,7 @@ const Main = () => {
           </div>
         </div>
 
-        <div className="card">
+        <div className="card hiddenBottom">
           <div>
             <img src={clothingImg} alt="clothing" />
           </div>
@@ -233,7 +270,7 @@ const Main = () => {
           </div>
         </div>
 
-        <div className="card">
+        <div className="card hiddenBottom">
           <div>
             <img src={bootsImg} alt="boots" />
           </div>
@@ -246,7 +283,7 @@ const Main = () => {
           </div>
         </div>
 
-        <div className="card">
+        <div className="card hiddenBottom">
           <div>
             <img src={homeImg} alt="home" />
           </div>
@@ -259,7 +296,7 @@ const Main = () => {
           </div>
         </div>
 
-        <div className="card">
+        <div className="card hiddenBottom">
           <div>
             <img src={protectedImg} alt="protect" />
           </div>
@@ -276,9 +313,9 @@ const Main = () => {
       <hr />
 
       <div className="several-products">
-        <h1>Новинки:</h1>
+        <h1 className="hidden">Новинки:</h1>
         <div>
-          <div className="card">
+          <div className="card hiddenAnimation">
             <img src={bootsImg} alt="boots" />
             <div>
               <h1>Sagff dfgd dd</h1>
@@ -286,7 +323,7 @@ const Main = () => {
               <button>Детальніше</button>
             </div>
           </div>
-          <div className="card">
+          <div className="card card2 hiddenAnimation">
             <img src={bootsImg} alt="boots" />
             <div>
               <h1>Sagff dfgd dd</h1>
@@ -294,7 +331,7 @@ const Main = () => {
               <button>Детальніше</button>
             </div>
           </div>
-          <div className="card">
+          <div className="card card3 hiddenAnimation">
             <img src={clothingImg} alt="clothing" />
             <div>
               <h1>Sagff dfgd dd</h1>
@@ -302,7 +339,7 @@ const Main = () => {
               <button>Детальніше</button>
             </div>
           </div>
-          <div className="card">
+          <div className="card card4 hiddenAnimation">
             <img src={bootsImg} alt="boots" />
             <div>
               <h1>Sagff dfgd dd</h1>
@@ -310,7 +347,7 @@ const Main = () => {
               <button>Детальніше</button>
             </div>
           </div>
-          <div className="card">
+          <div className="card card5 hiddenAnimation">
             <img src={bootsImg} alt="boots" />
             <div>
               <h1>Sagff dfgd dd</h1>
@@ -319,15 +356,15 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <button>Переглянути всі товари</button>
+        <button className="hiddenBottom">Переглянути всі товари</button>
       </div>
 
       <hr />
 
       <div className="info-text">
         <div>
-          <h2>Про компанію:</h2>
-          <div>
+          <h2 className="hidden">Про компанію:</h2>
+          <div className="hidden">
             Фірма “Сяйво-В” працює на ринку спецодягу з часу свого заснування в
             1998 році. Наша діяльність безпосередньо пов'язана з виробництвом
             великого асортименту спецодягу для працівників різних сфер
@@ -343,21 +380,21 @@ const Main = () => {
           </div>
         </div>
         <div>
-          <h2>Що ми робимо:</h2>
+          <h2 className="hidden">Що ми робимо:</h2>
           <ol>
-            <li>
+            <li className="hidden">
               Виробництво спецодягу під замовлення та реалізація зі складу
               готового. Вишивка логотипу.
             </li>
-            <li>
+            <li className="hidden">
               Реалізація взуття, засобів захисту від вітчизняного та зарубіжного
               виробника та супутніх товарів господарської групи.
             </li>
           </ol>
         </div>
         <div>
-          <h2>Додаткова інформація:</h2>
-          <div>
+          <h2 className="hidden">Додаткова інформація:</h2>
+          <div className="hidden">
             Разом з робочим одягом пропонуємо споживачам широкий асортимент
             робочого взуття та засобів індивідуального захисту різних цінових
             категорій. Запрошуємо до взаємовигідної співпраці вже існуючих та

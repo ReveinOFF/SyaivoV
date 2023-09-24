@@ -1,3 +1,74 @@
+.hidden {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.hiddenLeft {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100px);
+  transition: opacity 1s, filter 1s, transform 1s;
+}
+
+.hiddenTop {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(-100px);
+  transition: opacity 1s, filter 1s, transform 1s;
+}
+
+.hiddenBottom {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(100px);
+  transition: opacity 1s, filter 1s, transform 1s;
+}
+
+.hiddenRight {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(100px);
+  transition: opacity 1s, filter 1s, transform 1s;
+}
+
+.hiddenAnimation {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(100px);
+}
+
+.show {
+  opacity: 1;
+}
+
+.showLeft {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+
+.showTop {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.showBottom {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.showRight {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+
+.showAnimation {
+  animation: hidden-anim 1s forwards;
+}
+
 .slider {
   height: 30em;
   margin-top: 30px;
@@ -347,7 +418,6 @@ hr {
     margin-bottom: 30px;
 
     .card:hover ~ .card {
-      position: relative;
       left: 100px;
       transition: 0.4s ease-out;
     }
@@ -366,7 +436,8 @@ hr {
       }
 
       &:hover {
-        transform: translateY(-20px) rotate(-1deg);
+        rotate: -1deg;
+        translate: 0 -20px;
         transition: 0.4s ease-out;
       }
 
@@ -410,6 +481,22 @@ hr {
           }
         }
       }
+    }
+
+    .card2 + .showAnimation {
+      animation-delay: 0.3s;
+    }
+
+    .card3 + .showAnimation {
+      animation-delay: 0.6s;
+    }
+
+    .card4 + .showAnimation {
+      animation-delay: 0.9s;
+    }
+
+    .card5 + .showAnimation {
+      animation-delay: 0.12s;
     }
   }
 
@@ -523,5 +610,13 @@ hr {
   }
   to {
     transform: translateX(490px) rotate(29deg);
+  }
+}
+
+@keyframes hidden-anim {
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
   }
 }
