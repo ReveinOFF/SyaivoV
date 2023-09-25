@@ -46,14 +46,14 @@ const Main = () => {
         <div className="image-block">
           <img
             src={img1}
-            alt="image"
+            alt="factory"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
           <img
             src={imgPng1}
             className="image-slider img-p1"
-            alt="image"
+            alt="protected"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
@@ -72,14 +72,14 @@ const Main = () => {
         <div className="image-block">
           <img
             src={img2}
-            alt="image"
+            alt="factory in"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
           <img
             src={imgPng2}
             className="image-slider img-p2"
-            alt="image"
+            alt="clothing"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
@@ -99,14 +99,14 @@ const Main = () => {
         <div className="image-block">
           <img
             src={img3}
-            alt="image"
+            alt="city"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
           <img
             src={imgPng3}
             className="image-slider img-p3"
-            alt="image"
+            alt="boots"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
@@ -126,14 +126,14 @@ const Main = () => {
         <div className="image-block">
           <img
             src={img4}
-            alt="image"
+            alt="home"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
           <img
             src={imgPng4}
             className="image-slider img-p4"
-            alt="image"
+            alt="house product"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
@@ -153,14 +153,14 @@ const Main = () => {
         <div className="image-block">
           <img
             src={img5}
-            alt="image"
+            alt="working"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
           <img
             src={imgPng5}
             className="image-slider img-p5"
-            alt="image"
+            alt="gloves"
             onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
             onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
           />
