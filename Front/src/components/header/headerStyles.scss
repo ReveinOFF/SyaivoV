@@ -49,17 +49,23 @@ header {
           border-radius: 10px;
           margin-left: 0;
 
+          img {
+            margin: 0 5px;
+          }
+
           div {
             font-size: 25px;
-            font-family: DOCKERONE;
+            font-family: KaiseiDecol, sans-serif;
             color: #ffa500;
             margin-right: 10px;
+            letter-spacing: 0;
             line-height: 25px;
           }
         }
 
         &:not(:first-child) {
           transition: color 0.2s;
+
           &:hover {
             color: $a-hover;
           }

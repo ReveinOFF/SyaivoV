@@ -6,7 +6,7 @@ import bootsIcon from "../../assets/img/header/11311695.png";
 import meansIcon from "../../assets/img/header/hoztovari.png";
 import glovesIcon from "../../assets/img/header/2209715.png";
 import jacketIcon from "../../assets/img/header/l_4405a1a75be769531c64c7c5e66c7735.png";
-import avatarIcon from "../../assets/img/avatar.svg";
+import avatarIcon from "../../assets/img/avatar.png";
 
 const Header = () => {
   return (
@@ -14,12 +14,7 @@ const Header = () => {
       <div className="h-top container">
         <nav className="h-t-left">
           <NavLink to="/">
-            <img
-              draggable="false"
-              src={avatarIcon}
-              alt="avatar"
-              loading="lazy"
-            />
+            <img draggable="false" src={avatarIcon} alt="avatar" />
             <div>СЯЙВО-В</div>
           </NavLink>
           <NavLink to="/catalog">Каталог</NavLink>

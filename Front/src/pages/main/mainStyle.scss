@@ -150,7 +150,11 @@
       margin: auto;
     }
 
-    .img-p1,
+    .img-p1 {
+      width: 45%;
+      right: 100px;
+    }
+
     .img-p2 {
       width: 40%;
       right: 100px;
@@ -167,8 +171,8 @@
     }
 
     .img-p5 {
-      width: 22%;
-      right: 200px;
+      width: 35%;
+      right: 100px;
     }
 
     .info-category {
