@@ -7,8 +7,6 @@ import video from "../../assets/video/0-02-05-19af0407ca6548f9154e480ac8ff47ce98
 
 import pausedIcon from "../../assets/img/company/375.png";
 import playingIcon from "../../assets/img/company/16427.png";
-import notMutedIcon from "../../assets/img/company/109-1095591_no-audio-icon-free-download-png-and-vector.png";
-import mutedIcon from "../../assets/img/company/sound-off-music-mute-off-sound-speaker-volume-icon-16.png";
 
 const Company = () => {
   const [isPlaying, setIsPlaying] = useState(false);
