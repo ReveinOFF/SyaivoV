@@ -82,3 +82,74 @@ img {
     }
   }
 }
+
+.hidden {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.hiddenLeft {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(-100px);
+  transition: opacity 1s, filter 1s, transform 1s;
+}
+
+.hiddenTop {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(-100px);
+  transition: opacity 1s, filter 1s, transform 1s;
+}
+
+.hiddenBottom {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(100px);
+  transition: opacity 1s, filter 1s, transform 1s;
+}
+
+.hiddenRight {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(100px);
+  transition: opacity 1s, filter 1s, transform 1s;
+}
+
+.hiddenAnimation {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateX(100px);
+}
+
+.show {
+  opacity: 1;
+}
+
+.showLeft {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+
+.showTop {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.showBottom {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+.showRight {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+}
+
+.showAnimation {
+  animation: hidden-anim 1s forwards;
+}

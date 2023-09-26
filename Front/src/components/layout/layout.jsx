@@ -4,7 +4,6 @@ import Footer from "../footer/footer";
 import { useEffect, useState } from "react";
 import scrollIcon from "../../assets/img/layout/4146496-200.png";
 import "./layoutStyle.scss";
-import Intersection from "../../components/intersection/intersection";
 
 const Layout = () => {
   const [showButton, setShowButton] = useState(false);
@@ -25,9 +24,7 @@ const Layout = () => {
     <>
       <Header />
       <main className="container">
-        <Intersection>
-          <Outlet />
-        </Intersection>
+        <Outlet />
         <img
           draggable="false"
           src={scrollIcon}
