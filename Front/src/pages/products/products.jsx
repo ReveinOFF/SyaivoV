@@ -177,7 +177,17 @@ const Products = () => {
       <div className="pages">
         <Link to="/">Головна</Link>
         <div>/</div>
-        <NavLink to="/products">Список товарів</NavLink>
+        {name ? (
+          <>
+            <Link to="/products">Список товарів</Link>
+            <div>/</div>
+            <NavLink to={`/products/${name}`}>{getPageName()}</NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink to="/products">Список товарів</NavLink>
+          </>
+        )}
       </div>
 
       <div className="product-list">
