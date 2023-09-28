@@ -1,85 +1,98 @@
 import { Link, NavLink, useParams, useSearchParams } from "react-router-dom";
 import "./productsStyle.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
+import imageTemp from "../../assets/img/temp/_________________64d0e4243704d.jpg";
 
 const Products = () => {
   const { name } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [typeView, setTypeView] = useState(1);
+
+  const [typeView, setTypeView] = useState(
+    parseInt(searchParams.get("type")) || 1
+  );
   const [isOpen, setIsOpen] = useState(false);
   const selectFilterRef = useRef();
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-  const totalPages = 20;
-  const pagesToShow = 5;
-  const pagesToDisplay = calculatePagesToDisplay(
-    currentPage,
-    totalPages,
-    pagesToShow
+
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(searchParams.get("page")) || 1
   );
+  const itemsPerPage = 18;
+  const totalPages = 6;
+  const pagesToShow = 5;
   const data = [
     {
       image: "gdfgdfg",
-      name: "sdfdfg",
-      description: "",
+      name: "sdfdfg dfghdfh dfghdfgh dfghdf ghdfhdfh fdh",
+      description: "gyjfghfghdfghdhgfd",
+      price: "53",
+    },
+    {
+      image: "gdfgdfg",
+      name: "sdfdfg dfghdf ghdfghd tfhdtdh thd thth drththdfth dtfhdtfh thd fthdff dfgg dfh",
+      description:
+        "dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhf ",
       price: "53",
     },
     {
       image: "gdfgdfg",
       name: "sdfdfg",
-      description: "",
+      description: "dbvfgdh fhtdh fthdfthfd",
       price: "53",
     },
     {
       image: "gdfgdfg",
       name: "sdfdfg",
-      description: "",
+      description: "f dhfghdfg hdfghfdghdfgh dfghdfghdf",
       price: "53",
     },
     {
       image: "gdfgdfg",
       name: "sdfdfg",
-      description: "",
+      description: "fghdfhgdfgh fghdfgh fhfghdfghfdg",
       price: "53",
     },
     {
       image: "gdfgdfg",
       name: "sdfdfg",
-      description: "",
+      description: "dfh gfhdfgh dfghdfgh",
       price: "53",
     },
     {
       image: "gdfgdfg",
       name: "sdfdfg",
-      description: "",
-      price: "53",
-    },
-    {
-      image: "gdfgdfg",
-      name: "sdfdfg",
-      description: "",
+      description: "gfdh dfghgdfhdgh df",
       price: "53",
     },
   ];
-
-  function calculatePagesToDisplay(currentPage, totalPages, pagesToShow) {
-    const halfPagesToShow = Math.floor(pagesToShow / 2);
-    const startPage = Math.max(currentPage - halfPagesToShow, 1);
-    const endPage = Math.min(startPage + pagesToShow - 1, totalPages);
-    return Array.from(
-      { length: endPage - startPage + 1 },
-      (_, i) => startPage + i
-    );
-  }
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
+  const calculatePagesToDisplay = useCallback(
+    (currentPage, totalPages, pagesToShow) => {
+      const halfPagesToShow = Math.floor(pagesToShow / 2);
+      const startPage = Math.max(currentPage - halfPagesToShow, 1);
+      const endPage = Math.min(startPage + pagesToShow - 1, totalPages);
+      return Array.from(
+        { length: endPage - startPage + 1 },
+        (_, i) => startPage + i
+      );
+    },
+    []
+  );
+
+  const pagesToDisplay = calculatePagesToDisplay(
+    currentPage,
+    totalPages,
+    pagesToShow
+  );
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
     searchParams.set("page", pageNumber);
     setSearchParams(searchParams);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -167,7 +180,7 @@ const Products = () => {
         <NavLink to="/products">Список товарів</NavLink>
       </div>
 
-      <div className="products">
+      <div className="product-list">
         <div className="category">
           <h2>Категорії товарів:</h2>
 
@@ -259,7 +272,13 @@ const Products = () => {
 
           <div className="filter">
             <div className={`select-visible ${typeView === 2 && "right-view"}`}>
-              <button onClick={() => setTypeView(1)}>
+              <button
+                onClick={() => {
+                  setTypeView(1);
+                  searchParams.set("type", 1);
+                  setSearchParams(searchParams);
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -275,7 +294,13 @@ const Products = () => {
                 </svg>
               </button>
 
-              <button onClick={() => setTypeView(2)}>
+              <button
+                onClick={() => {
+                  setTypeView(2);
+                  searchParams.set("type", 2);
+                  setSearchParams(searchParams);
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -373,20 +398,60 @@ const Products = () => {
             </div>
           </div>
 
-          <div className="list">
-            <div className="product"></div>
+          <div
+            className={
+              parseInt(searchParams.get("type")) === 2
+                ? "list-type2"
+                : "list-type1"
+            }
+          >
             {currentItems.map((item, index) => (
-              <div key={index}>
-                <div>{item.image}</div>
-                <div>{item.name}</div>
-                <div>{item.description}</div>
-                <div>{item.price}</div>
-              </div>
+              <Link key={index} className="product" to={`/product/${index}`}>
+                <div className="product-image">
+                  <img src={imageTemp} alt={index} />
+                </div>
+                <div className="product-info">
+                  <h3>{item.name}</h3>
+                  <div>{item.description}</div>
+                  <div>
+                    &#x2022; {item.price}
+                    <span>&#8372;</span>
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
 
-          <div className="pages">
-            <div className="page">{"<"}</div>
+          <div className="select-pages">
+            {currentPage !== 1 && (
+              <div
+                className="page"
+                onClick={() => handlePageChange(currentPage - 1)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5.97"
+                  height="10"
+                  viewBox="0 0 5.97 10"
+                  style={{ rotate: "180deg" }}
+                >
+                  <path
+                    d="M1302.98,2891a0.972,0.972,0,0,1-.23.62c-0.02.03-.03,0.06-0.05,0.09h-0.01l-4.03,3.99a0.955,0.955,0,0,1-1.39,0,1.014,1.014,0,0,1,0-1.41l3.32-3.29-3.3-3.32a0.99,0.99,0,0,1,1.4-1.4l3.98,3.99a0.077,0.077,0,0,0,.03.02A1.031,1.031,0,0,1,1302.98,2891Z"
+                    transform="translate(-1297 -2886)"
+                  ></path>
+                </svg>
+              </div>
+            )}
+
+            {currentPage >= 4 && (
+              <>
+                <div onClick={() => handlePageChange(1)} className={"page"}>
+                  {1}
+                </div>
+                <div className="page-space">...</div>
+              </>
+            )}
+
             {pagesToDisplay.map((page) => (
               <div
                 key={page}
@@ -396,7 +461,37 @@ const Products = () => {
                 {page}
               </div>
             ))}
-            <div className="page">{">"}</div>
+
+            {totalPages - 3 >= currentPage && (
+              <>
+                <div className="page-space">...</div>
+                <div
+                  onClick={() => handlePageChange(totalPages)}
+                  className={"page"}
+                >
+                  {totalPages}
+                </div>
+              </>
+            )}
+
+            {totalPages !== currentPage && (
+              <div
+                className="page"
+                onClick={() => handlePageChange(currentPage + 1)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="5.97"
+                  height="10"
+                  viewBox="0 0 5.97 10"
+                >
+                  <path
+                    d="M1302.98,2891a0.972,0.972,0,0,1-.23.62c-0.02.03-.03,0.06-0.05,0.09h-0.01l-4.03,3.99a0.955,0.955,0,0,1-1.39,0,1.014,1.014,0,0,1,0-1.41l3.32-3.29-3.3-3.32a0.99,0.99,0,0,1,1.4-1.4l3.98,3.99a0.077,0.077,0,0,0,.03.02A1.031,1.031,0,0,1,1302.98,2891Z"
+                    transform="translate(-1297 -2886)"
+                  ></path>
+                </svg>
+              </div>
+            )}
           </div>
         </div>
       </div>
