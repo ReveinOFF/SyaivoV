@@ -19,6 +19,7 @@ const LazyContact = React.lazy(() => import("./pages/contact/contact"));
 const LazyComapny = React.lazy(() => import("./pages/company/company"));
 const LazyError = React.lazy(() => import("./pages/error/error"));
 const LazyProducts = React.lazy(() => import("./pages/products/products"));
+const LazyProduct = React.lazy(() => import("./pages/product/product"));
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="catalog/:name" element={<LazySubCatalog />} />
         <Route path="products" element={<LazyProducts />} />
         <Route path="products/:name" element={<LazyProducts />} />
+        <Route path="product/:id" element={<LazyProduct />} />
         <Route path="contact" element={<LazyContact />} />
         <Route path="company" element={<LazyComapny />} />
         <Route path="size" element={<LazySize />} />
