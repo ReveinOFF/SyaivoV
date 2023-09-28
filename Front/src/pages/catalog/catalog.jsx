@@ -22,7 +22,7 @@ const Catalog = () => {
       <div className="pages">
         <Link to="/">Головна</Link>
         <div>/</div>
-        <NavLink to="/size">Розміри</NavLink>
+        <NavLink to="/catalog">Каталог</NavLink>
       </div>
 
       <div className="catalogs">
@@ -57,7 +57,7 @@ const Catalog = () => {
             </div>
           </div>
 
-          <Link to="/products?selection=all">
+          <Link to="/products">
             <button className="hiddenBottom">
               <div>Переглянути всі товари</div>
             </button>

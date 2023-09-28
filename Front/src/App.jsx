@@ -4,6 +4,9 @@ import Layout from "./components/layout/layout";
 
 const LazyMain = React.lazy(() => import("./pages/main/main"));
 const LazyCatalog = React.lazy(() => import("./pages/catalog/catalog"));
+const LazySubCatalog = React.lazy(() =>
+  import("./pages/sub-catalog/sub-catalog")
+);
 const LazySize = React.lazy(() => import("./pages/size/size-main/size"));
 const LazySizeCloth = React.lazy(() =>
   import("./pages/size/size-clothing/size-clothing")
@@ -23,7 +26,9 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<LazyMain />} />
         <Route path="catalog" element={<LazyCatalog />} />
+        <Route path="catalog/:name" element={<LazySubCatalog />} />
         <Route path="products" element={<LazyProducts />} />
+        <Route path="products/:name" element={<LazyProducts />} />
         <Route path="contact" element={<LazyContact />} />
         <Route path="company" element={<LazyComapny />} />
         <Route path="size" element={<LazySize />} />
