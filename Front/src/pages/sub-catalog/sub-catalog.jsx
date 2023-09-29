@@ -1,6 +1,9 @@
 import { Link, NavLink, Navigate, useParams } from "react-router-dom";
 import "./sub-catalogStyle.scss";
 import { useCallback } from "react";
+import Clothing from "../../components/sub-catalogs/clothing/clothing";
+import Boots from "../../components/sub-catalogs/boots/boots";
+import Protected from "../../components/sub-catalogs/protected/protected";
 
 const SubCatalog = () => {
   const { name } = useParams();
@@ -13,8 +16,6 @@ const SubCatalog = () => {
         return "Взуття";
       case "protected":
         return "Засоби індивідуального захисту";
-      case "household":
-        return "Господарчі товари";
       default:
         return "Помилка";
     }
@@ -23,13 +24,11 @@ const SubCatalog = () => {
   const getSubCatalogComponent = useCallback(() => {
     switch (name) {
       case "clothing":
-        return <></>;
+        return <Clothing />;
       case "boots":
-        return <></>;
+        return <Boots />;
       case "protected":
-        return <></>;
-      case "household":
-        return <></>;
+        return <Protected />;
       default:
         return <Navigate to="/error" />;
     }

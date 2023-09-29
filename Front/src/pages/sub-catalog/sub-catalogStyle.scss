@@ -1,0 +1,76 @@
+.catalog-title {
+  display: flex;
+  align-items: center;
+
+  h1 {
+    margin-right: 20px;
+    font-family: TTHoves;
+    text-transform: uppercase;
+    color: rgb(78, 78, 78);
+    letter-spacing: 0.05em;
+    text-wrap: nowrap;
+  }
+
+  hr {
+    border-color: rgba(128, 128, 128, 0.377);
+    border-style: dashed;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.sub-catalog {
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  user-select: none;
+
+  .catalog-block {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.404);
+    border-right: 1px solid rgba(128, 128, 128, 0.404);
+    padding: 10px;
+    background-color: white;
+    transition: all 0.3s;
+
+    &:hover {
+      border-color: rgba(128, 128, 128, 0);
+      box-shadow: 5px 5px 10px 0 rgba(128, 128, 128, 0.404);
+
+      img {
+        scale: 1.1;
+      }
+
+      div:last-child {
+        color: rgb(80, 80, 80);
+      }
+    }
+
+    .image {
+      overflow: hidden;
+      margin-bottom: 20px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: scale 0.3s;
+      }
+    }
+
+    hr {
+      border-color: rgba(78, 78, 78, 0.315);
+    }
+
+    div:last-child {
+      text-align: center;
+      text-wrap: balance;
+      font-family: OpenSans;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      font-size: 20px;
+      color: gray;
+      transition: color 0.3s;
+    }
+  }
+}
