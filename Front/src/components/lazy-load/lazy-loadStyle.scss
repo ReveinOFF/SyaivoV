@@ -1,0 +1,49 @@
+.lazy-load {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f3f3f3d2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  .loader {
+    border-radius: 50%;
+    animation: right-rotate 0.9s linear infinite;
+    position: absolute;
+
+    &:nth-child(1) {
+      width: 150px;
+      height: 150px;
+      border-left: 5px solid gray;
+      animation: right-rotate 0.9s linear infinite;
+    }
+    &:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      border-left: 5px solid orange;
+      animation: left-rotate 0.9s linear infinite;
+    }
+    &:nth-child(3) {
+      width: 250px;
+      height: 250px;
+      border-left: 5px solid #57677c;
+      animation: right-rotate 1.2s linear infinite;
+    }
+  }
+}
+
+@keyframes right-rotate {
+  100% {
+    rotate: 360deg;
+  }
+}
+
+@keyframes left-rotate {
+  100% {
+    rotate: -360deg;
+  }
+}
