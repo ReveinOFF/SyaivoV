@@ -2,38 +2,21 @@ const express = require("express"),
   app = express(),
   jwt = require("jsonwebtoken"),
   cors = require("cors"),
-  nodemailer = require("nodemailer"),
-  Pool = require("pg").Pool,
+  transporter = require("./service/mailer"),
+  pool = require("./service/db"),
   fs = require("fs");
 
 require("dotenv").config();
 
-const emailStatic = process.env.EMAIL,
+app.use(cors());
+app.use(express.json());
+app.use("/static", express.static("public"));
+
+const emailStatic = process.env.EMAIL_TO,
   tokenKeyAuth = process.env.JWT_SECRET_AUTH,
   tokenKeyConf = process.env.JWT_SECRET_CONF,
   port = process.env.S_PORT,
   host = process.env.S_HOST;
-
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_TO,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
-const pool = new Pool({
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_NAME,
-});
-
-app.use(cors());
-app.use(express.json());
 
 function authenticateToken(req, res, next) {
   const authorizationHeader = req.headers.authorization;
@@ -106,9 +89,10 @@ app.post("/api/auth/send", async (req, res) => {
     });
 
     const html = await fs.readFile("./email-pages/auth.html", "utf8");
-    const updatedHtml = html
-      .replace("%token", token)
-      .replace("%link", "http://127.0.0.1:3000/auth");
+    const updatedHtml = html.replace(
+      "%link",
+      `http://127.0.0.1:3000/auth?token=${token}`
+    );
 
     await transporter.sendMail({
       from: emailStatic,
@@ -134,23 +118,27 @@ app.post("/api/auth/confirm", (req, res) => {
 });
 
 app.post("/api/message", async (req, res) => {
-  const { name, phone, subject, body } = req.body;
+  const { name, email, phone, subject, body } = req.body;
 
-  const html = await fs.readFile("./email-pages/auth.html", "utf8");
-  const updatedHtml = html
-    .replace("%name", name)
-    .replace("%phone", phone)
-    .replace("%subject", subject)
-    .replace("%body", body);
+  await fs.readFile("./email-pages/message.html", "utf8", async (err, data) => {
+    const updateBody = body.replace(/\n/g, "<br/>");
 
-  await transporter.sendMail({
-    from: emailStatic,
-    to: "ronnieplayyt@gmail.com",
-    subject: "Підтвердження авторизації",
-    html: updatedHtml,
+    const updatedHtml = data
+      .replace("%name", name)
+      .replace("%email", email)
+      .replace("%phone", phone)
+      .replace("%subject", subject)
+      .replace("%body", updateBody);
+
+    await transporter.sendMail({
+      from: emailStatic,
+      to: "ronnieplayyt@gmail.com",
+      subject: `СЯЙВО-В - ${subject}`,
+      html: updatedHtml,
+    });
+
+    res.status(200).json("Відправлено повідомлення!");
   });
-
-  res.status(200).json("Відправлено повідомлення на пошту для підтвердження");
 });
 
 app.listen(port, host, () =>
