@@ -66,7 +66,13 @@ const Size = () => {
             <div className="img">
               <img draggable="false" src={boots} loading="lazy" alt="boots" />
             </div>
-            <img draggable="false" src={wave} alt="wave" className="wave" />
+            <img
+              style={{ scale: "-1" }}
+              draggable="false"
+              src={wave}
+              alt="wave"
+              className="wave"
+            />
           </Link>
         </Intersection>
       </div>
