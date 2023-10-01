@@ -29,6 +29,7 @@ import homeImg from "../../assets/img/main/1cca2dce10a16c5ced916f02ff49d6c7.jpg"
 import glovesImg from "../../assets/img/main/6288d02f2725bb2092dc2387e02fa163d2fe538e.jpg";
 
 import Intersection from "../../components/intersection/intersection";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   const settings = useMemo(
@@ -222,7 +223,9 @@ const Main = () => {
               <div>
                 <h1>Рукавиці</h1>
                 <div>Знайдіть зручні і якісні рукавиці.</div>
-                <button>Переглянути</button>
+                <Link to="/products/gloves">
+                  <button>Переглянути</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -235,7 +238,9 @@ const Main = () => {
               <div>
                 <h1>Спецодяг</h1>
                 <div>Оберіть надійний спецодяг.</div>
-                <button>Переглянути</button>
+                <Link to="/catalog/clothing">
+                  <button>Переглянути</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -248,7 +253,9 @@ const Main = () => {
               <div>
                 <h1>Взуття</h1>
                 <div>Зручне взуття для всіх випадків.</div>
-                <button>Переглянути</button>
+                <Link to="/catalog/boots">
+                  <button>Переглянути</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -261,7 +268,9 @@ const Main = () => {
               <div>
                 <h1>Господарчі товари</h1>
                 <div>Забезпечте комфорт у домі.</div>
-                <button>Переглянути</button>
+                <Link to="/products/household">
+                  <button>Переглянути</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -274,7 +283,9 @@ const Main = () => {
               <div>
                 <h1>Засоби індивідуального захисту</h1>
                 <div>Дбайте про свою безпеку.</div>
-                <button>Переглянути</button>
+                <Link to="/catalog/protected">
+                  <button>Переглянути</button>
+                </Link>
               </div>
             </div>
           </div>

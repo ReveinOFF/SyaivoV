@@ -30,31 +30,41 @@ const Catalog = () => {
           <h1 className="hidden">Каталог</h1>
 
           <div className="categories">
-            <div className="category hiddenLeft">
-              <h2>Спецодяг</h2>
-              <img src={clothing} alt="Спецодяг" />
-              <img src={arrowWhite} alt="arrow" />
-            </div>
-            <div className="category hiddenRight">
-              <h2>Взуття</h2>
-              <img src={boots} alt="Взуття" />
-              <img src={arrowBlack} alt="arrow" />
-            </div>
-            <div className="category hiddenRight">
-              <h2>Рукавички</h2>
-              <img src={gloves} alt="Рукавички" />
-              <img src={arrowBlack} alt="arrow" />
-            </div>
-            <div className="category hiddenLeft">
-              <h2>Засоби індивідуального захисту</h2>
-              <img src={protect} alt="Засоби індивідуального захисту" />
-              <img src={arrowWhite} alt="arrow" />
-            </div>
-            <div className="category hiddenRight">
-              <h2>Господарські товари</h2>
-              <img src={hozTovari} alt="Господарські товари" />
-              <img src={arrowWhite} alt="arrow" />
-            </div>
+            <Link to="/catalog/clothing" className="category hiddenRight">
+              <div>
+                <h2>Спецодяг</h2>
+                <img src={clothing} alt="Спецодяг" />
+                <img src={arrowWhite} alt="arrow" />
+              </div>
+            </Link>
+            <Link to="/catalog/boots" className="category hiddenRight">
+              <div>
+                <h2>Взуття</h2>
+                <img src={boots} alt="Взуття" />
+                <img src={arrowBlack} alt="arrow" />
+              </div>
+            </Link>
+            <Link to="/products/gloves" className="category hiddenRight">
+              <div>
+                <h2>Рукавички</h2>
+                <img src={gloves} alt="Рукавички" />
+                <img src={arrowBlack} alt="arrow" />
+              </div>
+            </Link>
+            <Link to="/catalog/protected" className="category hiddenLeft">
+              <div>
+                <h2>Засоби індивідуального захисту</h2>
+                <img src={protect} alt="Засоби індивідуального захисту" />
+                <img src={arrowWhite} alt="arrow" />
+              </div>
+            </Link>
+            <Link to="/products/household" className="category hiddenRight">
+              <div>
+                <h2>Господарські товари</h2>
+                <img src={hozTovari} alt="Господарські товари" />
+                <img src={arrowWhite} alt="arrow" />
+              </div>
+            </Link>
           </div>
 
           <Link to="/products">

@@ -38,30 +38,30 @@ const Header = () => {
               <div>Каталог товарів</div>
             </button>
             <div className="h-catalog-modal">
-              <Link>
+              <NavLink to="/catalog/boots">
                 <img draggable="false" src={bootsIcon} alt="boots" />
                 <div>Взуття</div>
-              </Link>
+              </NavLink>
               <hr />
-              <Link>
+              <NavLink to="/products/gloves">
                 <img draggable="false" src={glovesIcon} alt="gloves" />
                 <div>Рукавиці</div>
-              </Link>
+              </NavLink>
               <hr />
-              <Link>
+              <NavLink to="/catalog/clothing">
                 <img draggable="false" src={jacketIcon} alt="jacket" />
                 <div>Спецодяг</div>
-              </Link>
+              </NavLink>
               <hr />
-              <Link>
+              <NavLink to="/products/household">
                 <img draggable="false" src={meansIcon} alt="means" />
                 <div>Господарчі товари</div>
-              </Link>
+              </NavLink>
               <hr />
-              <Link>
+              <NavLink to="/catalog/protected">
                 <img draggable="false" src={maskIcon} alt="mask" />
                 <div>Засоби індивідуального захисту</div>
-              </Link>
+              </NavLink>
             </div>
           </div>
           <div className="h-search">
