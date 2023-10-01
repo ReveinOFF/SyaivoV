@@ -47,18 +47,6 @@ const Contact = () => {
         <div className="contact">
           <div className="info hidden">
             <div>
-              <h2>Наш офіс тут:</h2>
-              <div>
-                <img draggable="false" src={officeIcon} alt="office" />
-                <div>
-                  м. Рівне, Рівненська обл.,
-                  <br />
-                  вул. Відінська, 39б.
-                </div>
-              </div>
-            </div>
-
-            <div>
               <h2>Контактна інформація:</h2>
               <div>
                 <img draggable="false" src={homePhoneIcon} alt="home phone" />
@@ -85,6 +73,18 @@ const Contact = () => {
                 <Link to="https://www.instagram.com/syaivo_v/" target="_blank">
                   syaivo_v
                 </Link>
+              </div>
+            </div>
+
+            <div>
+              <h2>Наш офіс тут:</h2>
+              <div>
+                <img draggable="false" src={officeIcon} alt="office" />
+                <div>
+                  м. Рівне, Рівненська обл.,
+                  <br />
+                  вул. Відінська, 39б.
+                </div>
               </div>
             </div>
 

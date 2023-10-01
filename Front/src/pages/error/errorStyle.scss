@@ -184,3 +184,271 @@
     transform: translateX(420px) rotate(29deg);
   }
 }
+
+@media only screen and (max-width: 1750px) {
+  .cross {
+    &-3 {
+      left: 650px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1587px) {
+  .cross {
+    &-1 {
+      left: 500px;
+    }
+
+    &-2 {
+      left: 400px;
+    }
+
+    &-3 {
+      left: 500px;
+    }
+
+    &-4 {
+      right: 600px;
+    }
+
+    &-5 {
+      right: 400px;
+    }
+
+    &-6 {
+      right: 500px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1290px) {
+  .cross {
+    &-1 {
+      left: 400px;
+    }
+
+    &-2 {
+      left: 300px;
+    }
+
+    &-3 {
+      left: 400px;
+    }
+
+    &-4 {
+      right: 400px;
+    }
+
+    &-5 {
+      right: 300px;
+    }
+
+    &-6 {
+      right: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1115px) {
+  .cross {
+    &-1 {
+      left: 300px;
+    }
+
+    &-2 {
+      left: 200px;
+      top: 400px;
+    }
+
+    &-3 {
+      left: 300px;
+    }
+
+    &-4 {
+      right: 300px;
+    }
+
+    &-5 {
+      right: 200px;
+    }
+
+    &-6 {
+      right: 200px;
+    }
+  }
+}
+
+@media only screen and (max-width: 920px) {
+  .cross {
+    &-1 {
+      left: 200px;
+    }
+
+    &-2 {
+      left: 100px;
+    }
+
+    &-3 {
+      left: 200px;
+    }
+
+    &-4 {
+      right: 200px;
+    }
+
+    &-5 {
+      right: 100px;
+    }
+
+    &-6 {
+      right: 100px;
+    }
+  }
+
+  .wave {
+    bottom: -50px;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .error {
+    & > div {
+      &:last-child {
+        text-align: center;
+        text-wrap: balance;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 695px) {
+  .error-back {
+    button {
+      padding: 15px 15px;
+    }
+  }
+
+  .cross {
+    &-1 {
+      left: 100px;
+    }
+
+    &-2 {
+      left: 50px;
+    }
+
+    &-3 {
+      left: 100px;
+      top: 550px;
+    }
+
+    &-4 {
+      right: 100px;
+    }
+
+    &-5 {
+      right: 50px;
+    }
+
+    &-6 {
+      right: 50px;
+      top: 500px;
+    }
+  }
+
+  .wave {
+    bottom: -20px;
+  }
+}
+
+@media only screen and (max-width: 510px) {
+  .cross {
+    &-1 {
+      left: 50px;
+    }
+
+    &-2 {
+      left: 10px;
+    }
+
+    &-3 {
+      left: 50px;
+      top: 500px;
+    }
+
+    &-4 {
+      right: 50px;
+    }
+
+    &-5 {
+      right: 10px;
+    }
+
+    &-6 {
+      right: 10px;
+      top: 500px;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .cross {
+    &-1 {
+      left: 10px;
+    }
+
+    &-2 {
+      left: 0px;
+    }
+
+    &-3 {
+      left: 80px;
+      top: 500px;
+    }
+
+    &-4 {
+      right: 10px;
+    }
+
+    &-5 {
+      right: 0px;
+    }
+
+    &-6 {
+      right: 80px;
+      top: 480px;
+    }
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .cross {
+    &-2 {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .cross {
+    &-1 {
+      display: none;
+    }
+
+    &-3 {
+      display: none;
+    }
+
+    &-4 {
+      display: none;
+    }
+
+    &-5 {
+      display: none;
+    }
+
+    &-6 {
+      display: none;
+    }
+  }
+}

@@ -39,7 +39,7 @@
         );
       }
 
-      &:first-child {
+      &:nth-child(2) {
         margin-bottom: 30px;
         display: grid;
 
@@ -67,8 +67,9 @@
         }
       }
 
-      &:nth-child(2) {
+      &:nth-child(1) {
         display: grid;
+        margin-bottom: 30px;
 
         & > div {
           display: flex;
@@ -129,7 +130,7 @@
         justify-content: space-between;
 
         input {
-          width: 18em;
+          width: 100%;
 
           &:first-child {
             margin-right: 5px;
@@ -232,5 +233,141 @@
   }
   to {
     transform: translateX(380px) rotate(29deg);
+  }
+}
+
+@media only screen and (max-width: 981px) {
+  .contact {
+    display: block;
+
+    .info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: 50% 50%;
+      margin-bottom: 30px;
+
+      & > div {
+        &:nth-child(1) {
+          grid-column: 1 / 2;
+          grid-row: span 2;
+          text-align: left;
+        }
+
+        &:nth-child(2) {
+          text-align: right;
+          margin-bottom: 0;
+
+          & > div {
+            img {
+              margin-right: 0;
+            }
+          }
+        }
+
+        &:nth-child(3) {
+          margin-top: 0;
+          text-align: right;
+
+          & > div {
+            img {
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+    }
+
+    .snd-msg {
+      margin-bottom: 30px;
+    }
+  }
+
+  .hr-block {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 755px) {
+  .contact {
+    .info {
+      display: block;
+      margin-bottom: 30px;
+
+      & > div {
+        &:nth-child(2) {
+          text-align: left;
+          margin-bottom: 30px;
+
+          & > div {
+            img {
+              margin-right: 20px;
+            }
+          }
+        }
+
+        &:nth-child(3) {
+          text-align: left;
+
+          & > div {
+            img {
+              margin-right: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .hr-block {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 515px) {
+  .contact {
+    .info {
+      border: 0;
+      margin-bottom: 0;
+      border-radius: 0;
+      border-bottom: 2px solid rgba(128, 128, 128, 0.11);
+    }
+
+    .snd-msg {
+      border: 0;
+      display: block;
+
+      & > div {
+        &:last-of-type {
+          display: block;
+
+          input {
+            &:first-child {
+              margin-right: 0;
+            }
+
+            &:last-child {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+      input {
+        width: 100%;
+      }
+      textarea {
+        width: 100%;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  .hr-block {
+    margin-top: 0;
+  }
+
+  .map {
+    height: 300px;
   }
 }
