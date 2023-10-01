@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import "./productStyle.scss";
 import image from "../../assets/img/temp/_________________64d0e4243704d.jpg";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Product = () => {
   const [showMagnifier, setShowMagnifier] = useState(false);
@@ -12,6 +12,10 @@ const Product = () => {
     "fghdfg hdfghdfghdh\ndgfhgfhfhdfghdf ghfhfdgdfhdf fghdfghdhdfgh dfhdfghdf hdfghdfh\n fgh dfghdfghdfg hdh dghf hdfghdfghdfghdfghdf\ndfghdfghdf dfgdhfthdfthd thtdhthdfth tfhdthdhfghtdrhbfcftb\ndfhgfhdfgdfgs";
   const characteristics =
     "fgh dfghdfj ftyhsd 5rgersdg rthfgbdfrtghtdr h\n drtyhdrtghthtdyrthgdrthfy hythdrft\n szd464565y 6y56645";
+
+  useEffect(() => {
+    document.title = "{name}";
+  }, []);
 
   return (
     <>

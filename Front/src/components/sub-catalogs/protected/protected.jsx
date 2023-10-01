@@ -1,6 +1,10 @@
 import image from "../../../assets/img/temp/_________________64d0e4243704d.jpg";
 
 const Protected = () => {
+  useEffect(() => {
+    document.title = "Каталог ЗІЗ";
+  }, []);
+
   return (
     <>
       <div className="catalog-title">

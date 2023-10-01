@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import image from "../../../assets/img/temp/_________________64d0e4243704d.jpg";
 
 const Clothing = () => {
+  useEffect(() => {
+    document.title = "Каталог одягу";
+  }, []);
+
   return (
     <>
       <div className="catalog-title">
