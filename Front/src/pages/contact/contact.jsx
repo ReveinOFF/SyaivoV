@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import "./contactStyle.scss";
 import officeIcon from "../../assets/img/contact/521658.png";
 import timeIcon from "../../assets/img/contact/time-icon-968-thumb.png";
@@ -8,14 +8,31 @@ import mobilePhoneIcon from "../../assets/img/contact/mobile-phone-icon-2636-thu
 import mailIcon from "../../assets/img/contact/546394.png";
 import instagram from "../../assets/img/contact/instagram-logo-icon-512x512-155lpz3w.png";
 import Intersection from "../../components/intersection/intersection";
+import axios from "axios";
+import { LazyContext } from "../../components/lazy-context/lazy-contex";
 
 const Contact = () => {
+  const setLoading = useContext(LazyContext);
+
   useEffect(() => {
     document.title = "Контакти";
   }, []);
 
-  const handleSubmite = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.target);
+
+    await axios
+      .post(`${process.env.REACT_APP_SERVER_API}/api/message`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .finally(() => setLoading(false));
+
+    e.target.reset();
   };
 
   return (
@@ -83,12 +100,17 @@ const Contact = () => {
             </div>
           </div>
 
-          <form className="snd-msg hidden" onSubmit={(e) => handleSubmite(e)}>
+          <form className="snd-msg hidden" onSubmit={handleSubmit}>
             <div>Ви також можете відправити лист з вашим зверненням.</div>
             <div>
               <input type="text" name="name" placeholder="Ім'я" />
               <input type="email" name="email" placeholder="E-mail" />
             </div>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Номер телефона (якщо ви бажаєте щоб вам подзвонили)"
+            />
             <input type="text" name="subject" placeholder="Тема повідомлення" />
             <textarea
               name="message"

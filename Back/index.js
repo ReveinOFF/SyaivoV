@@ -4,13 +4,17 @@ const express = require("express"),
   cors = require("cors"),
   transporter = require("./service/mailer"),
   pool = require("./service/db"),
-  fs = require("fs");
+  fs = require("fs"),
+  util = require("util");
 
 require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
 app.use("/static", express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+
+const readFileAsync = util.promisify(fs.readFile);
 
 const emailStatic = process.env.EMAIL_TO,
   tokenKeyAuth = process.env.JWT_SECRET_AUTH,
@@ -81,17 +85,15 @@ app.delete("/api/product/:id", async (req, res) => {
 });
 
 app.post("/api/auth/send", async (req, res) => {
-  const { email } = req.body;
-
-  if (email === emailStatic) {
+  try {
     const token = jwt.sign({ email: emailStatic }, tokenKeyConf, {
       expiresIn: 600,
     });
 
-    const html = await fs.readFile("./email-pages/auth.html", "utf8");
+    const html = await readFileAsync("./email-pages/auth.html", "utf8");
     const updatedHtml = html.replace(
       "%link",
-      `http://127.0.0.1:3000/auth?token=${token}`
+      `http://127.0.0.1:3000/admin/confirm?token=${token}`
     );
 
     await transporter.sendMail({
@@ -101,28 +103,57 @@ app.post("/api/auth/send", async (req, res) => {
       html: updatedHtml,
     });
 
-    res.status(200).json("Відправлено повідомлення на пошту для підтвердження");
-  } else res.status(404).json("Користувача не знайдено!");
+    res
+      .status(200)
+      .json("Відправлено повідомлення на пошту для підтвердження авторизації");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Виникла помилка при відправці повідомлення!");
+  }
 });
 
 app.post("/api/auth/confirm", (req, res) => {
+  if (!req.body || !Object.keys(req.body).length || !req.body.token)
+    res.status(404).json("Токен не знайдено!");
+
   const { token } = req.body;
 
-  jwt.verify(token, tokenKeyConf, (err, data) => {
+  jwt.verify(token, tokenKeyConf, async (err, data) => {
     if (err) return res.status(401).json("Токен не є дійсним!");
-    else if (data)
-      return res
-        .status(200)
-        .json(jwt.sign({ email: emailStatic }, tokenKeyAuth));
+    else if (data) {
+      try {
+        const html = await readFileAsync("./email-pages/confirm.html", "utf8");
+
+        await transporter.sendMail({
+          from: emailStatic,
+          to: "ronnieplayyt@gmail.com",
+          subject: "Підтвердження авторизації",
+          html: html,
+        });
+
+        return res
+          .status(200)
+          .json(jwt.sign({ email: emailStatic }, tokenKeyAuth));
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json("Помилка сервера");
+      }
+    }
   });
 });
 
 app.post("/api/message", async (req, res) => {
-  const { name, email, phone, subject, body } = req.body;
+  if (!req.body || !Object.keys(req.body).length)
+    res.status(404).json("Введіть данні!");
 
-  await fs.readFile("./email-pages/message.html", "utf8", async (err, data) => {
-    const updateBody = body.replace(/\n/g, "<br/>");
+  const { name, email, phone, subject, message } = req.body;
 
+  if ((!email || !phone) && (!name || !subject || !message))
+    res.status(404).json("Ви ввели не всі необхідні дані!");
+
+  try {
+    const data = await readFileAsync("./email-pages/message.html", "utf8");
+    const updateBody = message.replace(/\n/g, "<br/>");
     const updatedHtml = data
       .replace("%name", name)
       .replace("%email", email)
@@ -138,7 +169,10 @@ app.post("/api/message", async (req, res) => {
     });
 
     res.status(200).json("Відправлено повідомлення!");
-  });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Виникла помилка при відправці повідомлення!");
+  }
 });
 
 app.listen(port, host, () =>

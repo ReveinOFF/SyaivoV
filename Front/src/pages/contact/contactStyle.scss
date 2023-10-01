@@ -129,7 +129,15 @@
         justify-content: space-between;
 
         input {
-          width: 16em;
+          width: 18em;
+
+          &:first-child {
+            margin-right: 5px;
+          }
+
+          &:last-child {
+            margin-left: 5px;
+          }
         }
       }
     }

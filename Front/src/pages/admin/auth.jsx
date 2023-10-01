@@ -1,18 +1,30 @@
 import "./authStyle.scss";
 import arrowIcon from "../../assets/img/admin/89829-200.png";
 import closeIcon from "../../assets/img/admin/icon-close-512.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { LazyContext } from "../../components/lazy-context/lazy-contex";
+import axios from "axios";
 
 const Main = () => {
   const [showModal, setShowModal] = useState(false);
+  const setLoading = useContext(LazyContext);
 
   useEffect(() => {
     document.title = "Авторизація";
   }, []);
 
-  const handleClick = () => {
-    setShowModal(!showModal);
+  const handleClick = async () => {
+    setLoading(true);
+
+    await axios
+      .post(`${process.env.REACT_APP_SERVER_API}/api/auth/send`)
+      .then((res) => {
+        if (res.status === 200) setShowModal(!showModal);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
