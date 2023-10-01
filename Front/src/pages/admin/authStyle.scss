@@ -144,3 +144,23 @@
     transform: translateX(390px) rotate(29deg);
   }
 }
+
+@media only screen and (max-width: 1160px) {
+  .auth-block {
+    width: 100%;
+
+    div {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 515px) {
+  .auth-block {
+    margin: 100px 10px;
+
+    button {
+      width: 70%;
+    }
+  }
+}
