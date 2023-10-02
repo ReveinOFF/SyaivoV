@@ -150,3 +150,37 @@
     );
   }
 }
+
+@media only screen and (max-width: 740px) {
+  .table-container-cl {
+    & > div:nth-child(n + 4) {
+      padding-left: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 435px) {
+  .table-container-cl {
+    & > div:nth-child(n + 4) {
+      padding-left: 0px;
+    }
+  }
+}
+
+@media only screen and (max-width: 365px) {
+  .table-container-cl {
+    & > div:nth-child(n + 4) table thead th {
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    & > div:nth-child(n + 4) table tbody tr td {
+      font-size: 13px;
+    }
+  }
+
+  .table-container > div:last-of-type table thead tr th {
+    font-size: 15px;
+    letter-spacing: 0;
+  }
+}

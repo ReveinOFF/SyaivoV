@@ -111,3 +111,36 @@
     }
   }
 }
+
+@media only screen and (max-width: 740px) {
+  .table-container {
+    & > div {
+      &:last-of-type {
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 365px) {
+  .table-container {
+    & > div:last-of-type table thead tr th {
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    & > div:last-of-type table tbody tr td {
+      font-size: 13px;
+    }
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .table-container {
+    & > div {
+      &:last-of-type {
+        padding-left: 0px;
+      }
+    }
+  }
+}
