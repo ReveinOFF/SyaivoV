@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import React from "react";
 import Layout from "./components/layout/layout";
+import { IsNotAuth } from "./components/Auth/isAuth";
 
 const LazyMain = React.lazy(() => import("./pages/main/main"));
 const LazyCatalog = React.lazy(() => import("./pages/catalog/catalog"));
@@ -15,9 +16,6 @@ const LazySizeBoots = React.lazy(() =>
   import("./pages/size/size-boots/size-boots")
 );
 const LazyAdmin = React.lazy(() => import("./pages/admin/auth"));
-const LazyAdminConf = React.lazy(() =>
-  import("./components/admin-conf/admin-conf")
-);
 const LazyContact = React.lazy(() => import("./pages/contact/contact"));
 const LazyComapny = React.lazy(() => import("./pages/company/company"));
 const LazyError = React.lazy(() => import("./pages/error/error"));
@@ -39,8 +37,14 @@ const App = () => {
         <Route path="size" element={<LazySize />} />
         <Route path="size/clothing" element={<LazySizeCloth />} />
         <Route path="size/boots" element={<LazySizeBoots />} />
-        <Route path="admin" element={<LazyAdmin />} />
-        <Route path="admin/confirm" element={<LazyAdminConf />} />
+        <Route
+          path="admin"
+          element={
+            <IsNotAuth>
+              <LazyAdmin />
+            </IsNotAuth>
+          }
+        />
       </Route>
       <Route path="*" element={<LazyError />} />
     </Routes>

@@ -75,6 +75,19 @@
     margin: auto;
   }
 
+  input {
+    width: 60%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.308);
+    font-size: 15px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   button {
     width: 20em;
     height: 5em;
