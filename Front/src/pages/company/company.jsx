@@ -259,7 +259,6 @@ const Company = () => {
               src={video}
               loop
               ref={videoRef}
-              muted
               playsInline
               disablePictureInPicture
               onPlay={() => setIsPlaying(true)}

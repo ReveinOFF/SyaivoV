@@ -1,4 +1,5 @@
 import image from "../../../assets/img/temp/_________________64d0e4243704d.jpg";
+import { useEffect } from "react";
 
 const Protected = () => {
   useEffect(() => {
