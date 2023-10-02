@@ -17,8 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 const readFileAsync = util.promisify(fs.readFile);
 
 const emailStatic = process.env.EMAIL_TO,
-  tokenKeyAuth = process.env.JWT_SECRET_AUTH,
-  tokenKeyConf = process.env.JWT_SECRET_CONF,
+  tokenKeyAuth = process.env.JWT_SECRET,
   port = process.env.S_PORT,
   host = process.env.S_HOST;
 
@@ -38,108 +37,158 @@ function authenticateToken(req, res, next) {
   });
 }
 
-app.post("/api/product", async (req, res) => {
-  // if (!req.auth) return res.status(401).json("Ви не авторизовані");
+app.post("/api/product", authenticateToken, async (req, res) => {
+  if (!req.auth) return res.status(401).json("Ви не авторизовані");
 
-  const { image, name, description, catalog_id } = req.body;
+  if (!req.body) return res.status(404).json("Данні не були введені!");
 
-  await pool.query(
-    `INSERT INTO product (image, name, description, catalog_id) values ($1, $2, $3, $4) RETURNING *`,
-    [image, name, description, catalog_id]
-  );
+  const {
+    image,
+    name,
+    price,
+    description,
+    color,
+    fabric,
+    fabric_warehouse,
+    size,
+    catalog_id,
+    subcatalog_id,
+  } = req.body;
 
-  res.status(201).json("Продукт створено!");
+  try {
+    await pool.query(
+      `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+      [
+        image,
+        name,
+        price,
+        description,
+        color,
+        fabric,
+        fabric_warehouse,
+        size,
+        catalog_id,
+        subcatalog_id,
+      ]
+    );
+
+    res.status(201).json("Продукт створено!");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Помилка в створені продукта!");
+  }
 });
 
 app.get("/api/products", async (req, res) => {
-  const listProduct = await pool.query("SELECT * FROM product;");
+  const listProduct = await pool.query(
+    `SELECT p.*
+	FROM product as p
+	JOIN catalog as c ON p.catalog_id = c.id
+	LEFT JOIN subcatalog as sc ON p.subcatalog_id = sc.id
+	WHERE p.catalog_id = 1
+	ORDER BY p.name ASC
+	LIMIT 10 OFFSET 0;`
+  );
 
   return res.status(200).json(listProduct.rows);
 });
 
 app.get("/api/product/:id", async (req, res) => {
-  const listProduct = await pool.query(
-    `SELECT * FROM product WHERE id = ${req.params.id} LIMIT 1;`
-  );
-
-  return res.status(200).json(listProduct.rows);
-});
-
-app.put("/api/product/:id", async (req, res) => {
-  const { image, name, description } = req.body;
-  const productId = req.params.id;
-
-  const updateQuery =
-    "UPDATE product SET image = $1, name = $2, description = $3 WHERE id = $4";
-  await pool.query(updateQuery, [image, name, description, productId]);
-
-  return res.status(200).json("Товар обновлено!");
-});
-
-app.delete("/api/product/:id", async (req, res) => {
-  const productId = req.params.id;
-
-  await pool.query(`DELETE FROM product WHERE id = $1;`, [productId]);
-
-  return res.status(200).json("Товар видалено!");
-});
-
-app.post("/api/auth/send", async (req, res) => {
   try {
-    const token = jwt.sign({ email: emailStatic }, tokenKeyConf, {
-      expiresIn: 600,
-    });
-
-    const html = await readFileAsync("./email-pages/auth.html", "utf8");
-    const updatedHtml = html.replace(
-      "%link",
-      `http://127.0.0.1:3000/admin/confirm?token=${token}`
+    const listProduct = await pool.query(
+      `SELECT p.*, 
+	c.name as catalog_name, c.key_name as catalog_key_name,
+	sc.name as subcatalog_name, sc.key_name as subcatalog_key_name
+	FROM product as p
+	JOIN catalog as c ON p.catalog_id = c.id
+	LEFT JOIN subcatalog as sc ON p.subcatalog_id = sc.id
+	WHERE p.id = ${req.params.id}
+	LIMIT 1;`
     );
 
-    await transporter.sendMail({
-      from: emailStatic,
-      to: "ronnieplayyt@gmail.com",
-      subject: "Підтвердження авторизації",
-      html: updatedHtml,
-    });
-
-    res
-      .status(200)
-      .json("Відправлено повідомлення на пошту для підтвердження авторизації");
+    if (listProduct.rows.length > 0)
+      return res.status(200).json(listProduct.rows);
+    else return res.status(200).json("Товар не знайдено!");
   } catch (error) {
     console.log(error);
-    res.status(500).json("Виникла помилка при відправці повідомлення!");
+    return res.status(500).json("Помилка пошуку товара!");
   }
 });
 
-app.post("/api/auth/confirm", (req, res) => {
-  if (!req.body || !Object.keys(req.body).length || !req.body.token)
-    res.status(404).json("Токен не знайдено!");
+app.put("/api/product/:id", authenticateToken, async (req, res) => {
+  if (!req.auth) return res.status(401).json("Ви не авторизовані");
 
-  const { token } = req.body;
+  if (!req.body) return res.status(404).json("Данні не були введені!");
 
-  jwt.verify(token, tokenKeyConf, async (err, data) => {
-    if (err) return res.status(401).json("Токен не є дійсним!");
-    else if (data) {
-      try {
-        const html = await readFileAsync("./email-pages/confirm.html", "utf8");
+  const {
+    image,
+    name,
+    price,
+    description,
+    color,
+    fabric,
+    fabric_warehouse,
+    size,
+    catalog_id,
+    subcatalog_id,
+  } = req.body;
+  const productId = req.params.id;
 
-        await transporter.sendMail({
-          from: emailStatic,
-          to: "ronnieplayyt@gmail.com",
-          subject: "Підтвердження авторизації",
-          html: html,
-        });
+  try {
+    const updateQuery =
+      "UPDATE product SET image = $1, name = $2, price = $3, description = $4, color = $5, fabric = $6, fabric_warehouse = $7, size= $8, catalog_id = $9, subcatalog_id = $10 WHERE id = $11";
+    await pool.query(updateQuery, [
+      image,
+      name,
+      price,
+      description,
+      color,
+      fabric,
+      fabric_warehouse,
+      size,
+      catalog_id,
+      subcatalog_id,
+      productId,
+    ]);
 
-        return res
-          .status(200)
-          .json(jwt.sign({ email: emailStatic }, tokenKeyAuth));
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json("Помилка сервера");
-      }
-    }
-  });
+    return res.status(200).json("Товар обновлено!");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Помилка в створені продукта!");
+  }
+});
+
+app.delete("/api/product/:id", authenticateToken, async (req, res) => {
+  if (!req.auth) return res.status(401).json("Ви не авторизовані");
+
+  const productId = req.params.id;
+
+  try {
+    await pool.query(`DELETE FROM product WHERE id = $1;`, [productId]);
+
+    return res.status(200).json("Товар видалено!");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json("Помилка в створені продукта!");
+  }
+});
+
+app.post("/api/auth", (req, res) => {
+  if (!req.body || !req.body.login || !req.body.password)
+    res.status(404).json("Потрібно ввести дані!");
+
+  const { login, password } = req.body;
+
+  try {
+    if (login == process.env.ADMIN_LOGIN && password == process.env.ADMIN_PASS)
+      return res
+        .status(200)
+        .json(jwt.sign({ email: emailStatic, login: login }, tokenKeyAuth));
+    else return res.status(404).json("Ви ввели неправильні дані!");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("Помилка аторизації!");
+  }
 });
 
 app.post("/api/message", async (req, res) => {
@@ -168,7 +217,7 @@ app.post("/api/message", async (req, res) => {
       html: updatedHtml,
     });
 
-    res.status(200).json("Відправлено повідомлення!");
+    res.status(201).json("Відправлено повідомлення!");
   } catch (error) {
     console.log(error);
     res.status(500).json("Виникла помилка при відправці повідомлення!");
