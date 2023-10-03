@@ -6,6 +6,7 @@ import bootsIcon from "../../assets/img/header/11311695.png";
 import meansIcon from "../../assets/img/header/hoztovari.png";
 import glovesIcon from "../../assets/img/header/2209715.png";
 import jacketIcon from "../../assets/img/header/l_4405a1a75be769531c64c7c5e66c7735.png";
+import embroideryIcon from "../../assets/img/header/4851485709_w640_h2048_free_icon_embroidery_3461238.png";
 import avatarIcon from "../../assets/img/avatar.png";
 
 const Header = () => {
@@ -56,6 +57,11 @@ const Header = () => {
               <NavLink to="/products/household">
                 <img draggable="false" src={meansIcon} alt="means" />
                 <div>Господарчі товари</div>
+              </NavLink>
+              <hr />
+              <NavLink to="/products/embroidery">
+                <img draggable="false" src={embroideryIcon} alt="means" />
+                <div>Комп'ютерна вишивка</div>
               </NavLink>
               <hr />
               <NavLink to="/catalog/protected">
