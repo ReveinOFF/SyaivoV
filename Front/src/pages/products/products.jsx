@@ -138,6 +138,8 @@ const Products = () => {
         return "Рукавиці";
       case "household":
         return "Господарчі товари";
+      case "embroidery":
+        return "Комп'ютерна вишивка";
       default:
         return "Помилка";
     }
@@ -253,6 +255,7 @@ const Products = () => {
 
             <NavLink to="/products/gloves">Рукавиці</NavLink>
             <NavLink to="/products/household">Господарчі товари</NavLink>
+            <NavLink to="/products/embroidery">Комп'ютерна вишивка</NavLink>
 
             <div className="product-item">
               <NavLink to="/products/protected">

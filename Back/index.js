@@ -57,7 +57,7 @@ app.post("/api/product", authenticateToken, async (req, res) => {
 
   try {
     await pool.query(
-      `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+      `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, date_created, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
       [
         image,
         name,
@@ -67,6 +67,7 @@ app.post("/api/product", authenticateToken, async (req, res) => {
         fabric,
         fabric_warehouse,
         size,
+        new Date(),
         catalog_id,
         subcatalog_id,
       ]
@@ -81,13 +82,24 @@ app.post("/api/product", authenticateToken, async (req, res) => {
 
 app.get("/api/products", async (req, res) => {
   const listProduct = await pool.query(
-    `SELECT p.*
+    `SELECT p.id, p.name, p.description, p.price
 	FROM product as p
 	JOIN catalog as c ON p.catalog_id = c.id
 	LEFT JOIN subcatalog as sc ON p.subcatalog_id = sc.id
 	WHERE p.catalog_id = 1
 	ORDER BY p.name ASC
 	LIMIT 10 OFFSET 0;`
+  );
+
+  return res.status(200).json(listProduct.rows);
+});
+
+app.get("/api/newproducts", async (req, res) => {
+  const listProduct = await pool.query(
+    `SELECT id, image, name, price
+	FROM product
+	ORDER BY date_created DESC
+	LIMIT 5;`
   );
 
   return res.status(200).json(listProduct.rows);

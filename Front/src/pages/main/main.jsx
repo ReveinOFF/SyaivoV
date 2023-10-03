@@ -2,7 +2,7 @@ import "./mainStyle.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { useMemo } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import Slider from "react-slick";
 
 import img1 from "../../assets/img/main/1620288416_7-phonoteka_org-p-zavod-fon-7.jpg";
@@ -10,12 +10,14 @@ import img2 from "../../assets/img/main/1672119667_3-46.jpg";
 import img3 from "../../assets/img/main/575de2eecd54915546be74f9.jpg";
 import img4 from "../../assets/img/main/1672252521_kalix-club-p-dom-vnutri-fon-krasivo-2.jpg";
 import img5 from "../../assets/img/main/vknjojXiAHA4cCWtkf29BjUY8Vg8jQ16caysEP3K.png";
+import img6 from "../../assets/img/main/emb1.jpg";
 
 import imgPng1 from "../../assets/img/main/pngwing.com.png";
 import imgPng2 from "../../assets/img/main/pngwin454g.com.png";
 import imgPng3 from "../../assets/img/main/pngwing.com (1).png";
 import imgPng4 from "../../assets/img/main/Без имени-1.png";
 import imgPng5 from "../../assets/img/main/3747759848_w600_h600_3747759848.png";
+import imgPng6 from "../../assets/img/main/4444 (1).png";
 
 import protectIcon from "../../assets/img/main/3712265.svg";
 import priceIcon from "../../assets/img/main/price-icon-6.svg";
@@ -27,11 +29,16 @@ import bootsImg from "../../assets/img/main/57.jpg";
 import protectedImg from "../../assets/img/main/61а.jpg";
 import homeImg from "../../assets/img/main/1cca2dce10a16c5ced916f02ff49d6c7.jpg";
 import glovesImg from "../../assets/img/main/6288d02f2725bb2092dc2387e02fa163d2fe538e.jpg";
+import embroideryImg from "../../assets/img/main/o_1f5g8autk1ejf1nahqfv13dn1o6a35.jpg";
+import fonImg from "../../assets/img/main/pngw45ing.com.png";
 
 import Intersection from "../../components/intersection/intersection";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Main = () => {
+  const [products, setProducts] = useState([]);
+
   const settings = useMemo(
     () => ({
       autoplay: true,
@@ -42,6 +49,18 @@ const Main = () => {
     }),
     []
   );
+
+  useEffect(() => {
+    const GetProducts = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_API}/api/newproducts`
+      );
+
+      setProducts(res.data);
+    };
+
+    GetProducts();
+  }, []);
 
   return (
     <>
@@ -58,6 +77,13 @@ const Main = () => {
               src={imgPng1}
               className="image-slider img-p1"
               alt="protected"
+              onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+              onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+            />
+            <img
+              src={fonImg}
+              className="fon-img"
+              alt="gloves"
               onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
               onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
             />
@@ -84,6 +110,13 @@ const Main = () => {
               src={imgPng2}
               className="image-slider img-p2"
               alt="clothing"
+              onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+              onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+            />
+            <img
+              src={fonImg}
+              className="fon-img"
+              alt="gloves"
               onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
               onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
             />
@@ -114,6 +147,13 @@ const Main = () => {
               onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
               onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
             />
+            <img
+              src={fonImg}
+              className="fon-img"
+              alt="gloves"
+              onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+              onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+            />
             <div
               className="info-category"
               onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
@@ -138,6 +178,13 @@ const Main = () => {
               src={imgPng4}
               className="image-slider img-p4"
               alt="house product"
+              onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+              onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+            />
+            <img
+              src={fonImg}
+              className="fon-img"
+              alt="gloves"
               onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
               onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
             />
@@ -168,6 +215,13 @@ const Main = () => {
               onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
               onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
             />
+            <img
+              src={fonImg}
+              className="fon-img"
+              alt="gloves"
+              onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+              onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+            />
             <div
               className="info-category"
               onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
@@ -178,6 +232,39 @@ const Main = () => {
                 Наш асортимент рукавиць включає в себе якісні та зносостійкі
                 моделі для різних видів робіт і активностей. Забезпечте свої
                 руки надійним захистом і комфортом.
+              </div>
+            </div>
+          </div>
+          <div className="image-block">
+            <img
+              src={img6}
+              alt="working"
+              onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+              onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+            />
+            <img
+              src={imgPng6}
+              className="image-slider img-p6"
+              alt="gloves"
+              onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+              onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+            />
+            <img
+              src={fonImg}
+              className="fon-img"
+              alt="gloves"
+              onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+              onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+            />
+            <div
+              className="info-category"
+              onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
+              onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
+            >
+              <h1>Унікальна комп'ютерна вишивка</h1>
+              <div>
+                Ми допоможемо вам створити вишукані та персоналізовані вироби,
+                які стануть унікальним акцентом вашого стилю.
               </div>
             </div>
           </div>
@@ -289,58 +376,54 @@ const Main = () => {
               </div>
             </div>
           </div>
-        </div>
 
-        <hr />
-
-        <div className="several-products">
-          <h1 className="hidden">Новинки:</h1>
-          <div>
-            <div className="card hiddenAnimation">
-              <img src={bootsImg} alt="boots" />
-              <div>
-                <h1>Sagff dfgd dd</h1>
-                <h1>&#x2022; 16&#8372;</h1>
-                <button>Детальніше</button>
-              </div>
+          <div className="card hiddenBottom">
+            <div>
+              <img src={embroideryImg} alt="protect" />
             </div>
-            <div className="card card2 hiddenAnimation">
-              <img src={bootsImg} alt="boots" />
+            <div>
               <div>
-                <h1>Sagff dfgd dd</h1>
-                <h1>&#x2022; 16&#8372;</h1>
-                <button>Детальніше</button>
-              </div>
-            </div>
-            <div className="card card3 hiddenAnimation">
-              <img src={clothingImg} alt="clothing" />
-              <div>
-                <h1>Sagff dfgd dd</h1>
-                <h1>&#x2022; 16&#8372;</h1>
-                <button>Детальніше</button>
-              </div>
-            </div>
-            <div className="card card4 hiddenAnimation">
-              <img src={bootsImg} alt="boots" />
-              <div>
-                <h1>Sagff dfgd dd</h1>
-                <h1>&#x2022; 16&#8372;</h1>
-                <button>Детальніше</button>
-              </div>
-            </div>
-            <div className="card card5 hiddenAnimation">
-              <img src={bootsImg} alt="boots" />
-              <div>
-                <h1>Sagff dfgd dd</h1>
-                <h1>&#x2022; 16&#8372;</h1>
-                <button>Детальніше</button>
+                <h1>Унікальна комп'ютерна вишивка</h1>
+                <div>Ваш дизайн, наша витвір мистецтва.</div>
+                <Link to="/catalog/protected">
+                  <button>Переглянути</button>
+                </Link>
               </div>
             </div>
           </div>
-          <button className="hiddenBottom">Переглянути всі товари</button>
         </div>
 
         <hr />
+
+        {products && (
+          <>
+            <div className="several-products">
+              <h1 className="hidden">Новинки:</h1>
+              <div>
+                {products.map((item, index) => (
+                  <Fragment key={item.id}>
+                    <Intersection>
+                      <div
+                        className="card hiddenAnimation"
+                        style={{ animationDelay: `0.${index}s` }}
+                      >
+                        <img src={bootsImg} alt="boots" />
+                        <div>
+                          <h1>{item.name}</h1>
+                          <h1>&#x2022; {item.price}&#8372;</h1>
+                          <button>Детальніше</button>
+                        </div>
+                      </div>
+                    </Intersection>
+                  </Fragment>
+                ))}
+              </div>
+              <button className="hiddenBottom">Переглянути всі товари</button>
+            </div>
+
+            <hr />
+          </>
+        )}
 
         <div className="info-text">
           <div className="hidden">

@@ -41,8 +41,6 @@ footer {
           border-radius: 10px;
           text-decoration: none;
           user-select: none;
-          // background-color: white;
-          // box-shadow: inset 0 0 7px 0px rgba(0, 0, 0, 0.6);
 
           img {
             width: 100px;
@@ -194,7 +192,6 @@ footer {
               top: -10px;
               left: -10px;
               background-color: rgb(59, 53, 53);
-              padding: 10px;
               border-radius: 20px;
               height: 55px;
               opacity: 0;
@@ -202,11 +199,14 @@ footer {
               transition: all 0.3s 0.3s;
 
               &:hover {
-                height: 170px;
+                height: 169px;
                 opacity: 1;
               }
 
               a {
+                border-bottom: 1px solid white;
+                padding: 10px;
+
                 &:first-child {
                   display: flex;
 
@@ -217,10 +217,10 @@ footer {
                     color: white;
                   }
                 }
-              }
 
-              hr {
-                width: 100%;
+                &:last-child {
+                  border-bottom: 0;
+                }
               }
             }
           }
