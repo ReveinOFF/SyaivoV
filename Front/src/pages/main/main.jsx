@@ -51,6 +51,10 @@ const Main = () => {
   );
 
   useEffect(() => {
+    document.title = 'Фірма "Сяйво-В';
+  }, []);
+
+  useEffect(() => {
     const GetProducts = async () => {
       const res = await axios.get(
         `${process.env.REACT_APP_SERVER_API}/api/newproducts`
