@@ -411,7 +411,10 @@ const Main = () => {
                         <div>
                           <h1>{item.name}</h1>
                           <h1>&#x2022; {item.price}&#8372;</h1>
-                          <button>Детальніше</button>
+
+                          <Link to={`/product/${item.id}`}>
+                            <button>Детальніше</button>
+                          </Link>
                         </div>
                       </div>
                     </Intersection>

@@ -418,21 +418,32 @@ hr {
           white-space: nowrap;
         }
 
-        button {
-          display: block;
-          font-family: TTHoves;
-          font-weight: 600;
-          font-size: 15px;
-          color: orange;
-          border-radius: 10px;
+        a {
           border: 1px solid orange;
-          background-color: transparent;
-          padding: 10px;
+          border-radius: 10px;
+          text-decoration: none;
           transition: all 0.3s;
+
+          button {
+            display: block;
+            font-family: TTHoves;
+            font-weight: 600;
+            font-size: 15px;
+            color: orange;
+            border: 0;
+            border-radius: 10px;
+            background-color: transparent;
+            padding: 10px;
+            width: 100%;
+            transition: color 0.3s;
+          }
 
           &:hover {
             background-color: orange;
-            color: white;
+
+            button {
+              color: white;
+            }
           }
         }
       }
