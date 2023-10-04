@@ -15,8 +15,8 @@ const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   const openMenu = () => {
-    // if (window.innerWidth <= 844)
-    setIsOpenMenu(!isOpenMenu);
+    if (window.outerWidth <= 844 || window.innerWidth <= 844)
+      setIsOpenMenu(!isOpenMenu);
   };
 
   return (
