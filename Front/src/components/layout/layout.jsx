@@ -9,6 +9,10 @@ const Layout = () => {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
     const handleScrollButtonVisiblity = () => {
       window.pageYOffset > 150 ? setShowButton(true) : setShowButton(false);
     };
