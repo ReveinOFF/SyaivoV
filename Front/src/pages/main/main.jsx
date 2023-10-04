@@ -414,7 +414,7 @@ const Main = () => {
                         <img src={bootsImg} alt="boots" />
                         <div>
                           <h1>{item.name}</h1>
-                          <h1>&#x2022; {item.price}&#8372;</h1>
+                          <h1>&#x2022; {item.price}</h1>
 
                           <Link to={`/product/${item.id}`}>
                             <button>Детальніше</button>

@@ -15,7 +15,8 @@ const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
   const openMenu = () => {
-    if (window.innerWidth <= 844) setIsOpenMenu(!isOpenMenu);
+    // if (window.innerWidth <= 844)
+    setIsOpenMenu(!isOpenMenu);
   };
 
   return (
@@ -107,7 +108,7 @@ const Header = () => {
         </div>
       </header>
 
-      <div className={`burger-menu ${isOpenMenu && "open-menu"}`}>
+      <div className={`burger-menu ${isOpenMenu ? "open-menu" : ""}`}>
         <div className="cross-icon">
           <div onClick={openMenu}>
             <img src={crossIcon} alt="cross" />
@@ -156,7 +157,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`burger-bg ${isOpenMenu && "open-bg"}`}
+        className={`burger-bg ${isOpenMenu ? "open-bg" : ""}`}
         onClick={openMenu}
       ></div>
     </>

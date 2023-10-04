@@ -656,7 +656,7 @@ header {
   }
 }
 
-@media only screen and (max-width: 544px) {
+@media only screen and (max-width: 554px) {
   .burger-menu {
     .burger-top {
       a {
@@ -668,7 +668,7 @@ header {
   }
 }
 
-@media only screen and (max-width: 491px) {
+@media only screen and (max-width: 501px) {
   .burger-menu {
     .burger-top {
       a {
@@ -684,7 +684,7 @@ header {
   }
 }
 
-@media only screen and (max-width: 428px) {
+@media only screen and (max-width: 438px) {
   .burger-menu {
     .burger-top {
       a {
@@ -719,7 +719,7 @@ header {
   }
 }
 
-@media only screen and (max-width: 391px) {
+@media only screen and (max-width: 401px) {
   .burger-menu {
     .burger-top {
       a {
@@ -747,8 +747,22 @@ header {
   }
 }
 
-@media only screen and (max-width: 347px) {
+@media only screen and (max-width: 351px) {
   .burger-menu {
+    .burger-top {
+      a {
+        padding: 0 0;
+        img {
+          margin-right: 0;
+          width: 48px;
+        }
+
+        div {
+          font-size: 15px;
+        }
+      }
+    }
+
     .burger-bottom {
       & > div {
         img {
@@ -766,18 +780,22 @@ header {
   }
 }
 
-@media only screen and (max-width: 342px) {
+@media only screen and (max-width: 323px) {
   .burger-menu {
     .burger-top {
       a {
-        padding: 0 0;
         img {
-          margin-right: 0;
-          width: 48px;
+          width: 45px;
         }
+      }
+    }
 
-        div {
-          font-size: 15px;
+    .burger-bottom {
+      & > div {
+        & > div {
+          a {
+            font-size: 13px;
+          }
         }
       }
     }
