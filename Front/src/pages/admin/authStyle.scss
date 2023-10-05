@@ -10,7 +10,7 @@
   & > div {
     border: 1px solid gray;
     border-radius: 10px;
-    width: 50em;
+    width: 50%;
     height: 10em;
     margin: auto;
     background-color: #f3f3f3;
@@ -168,12 +168,28 @@
   }
 }
 
+@media only screen and (max-width: 593px) {
+  .auth-modal {
+    & > div {
+      width: 90%;
+    }
+  }
+}
+
 @media only screen and (max-width: 515px) {
   .auth-block {
-    margin: 100px 10px;
+    margin: 100px 0;
 
     button {
       width: 70%;
+    }
+  }
+}
+
+@media only screen and (max-width: 334px) {
+  .auth-modal {
+    & > div {
+      height: 20em;
     }
   }
 }

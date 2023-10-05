@@ -6,12 +6,18 @@ const Protected = () => {
     document.title = "Каталог ЗІЗ";
   }, []);
 
+  const handleClick = () => {};
+
   return (
     <>
       <div className="catalog-title">
         <h1>Засоби індивідуального захисту</h1>
         <hr />
       </div>
+
+      <button onClick={handleClick} className="add-sub-catalog">
+        Добавити
+      </button>
 
       <div className="sub-catalog">
         <div className="catalog-block">

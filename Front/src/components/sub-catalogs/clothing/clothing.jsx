@@ -6,12 +6,18 @@ const Clothing = () => {
     document.title = "Каталог одягу";
   }, []);
 
+  const handleClick = () => {};
+
   return (
     <>
       <div className="catalog-title">
         <h1>Спецодяг</h1>
         <hr />
       </div>
+
+      <button onClick={handleClick} className="add-sub-catalog">
+        Добавити
+      </button>
 
       <div className="sub-catalog">
         <div className="catalog-block">

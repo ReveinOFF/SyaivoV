@@ -19,6 +19,26 @@
   }
 }
 
+.add-sub-catalog {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  border: 1px solid orange;
+  background-color: transparent;
+  color: orange;
+  padding: 10px;
+  border-radius: 10px;
+  width: 20%;
+  font-family: TTHoves;
+  font-weight: 600;
+  font-size: 20px;
+  transition: all 0.3s;
+
+  &:hover {
+    color: white;
+    background-color: orange;
+  }
+}
+
 .sub-catalog {
   margin-bottom: 30px;
   display: grid;
@@ -87,6 +107,18 @@
   }
 }
 
+@media only screen and (max-width: 800px) {
+  .catalog-title {
+    h1 {
+      font-size: 20px;
+    }
+  }
+
+  .add-sub-catalog {
+    width: 40%;
+  }
+}
+
 @media only screen and (max-width: 700px) {
   .sub-catalog {
     .catalog-block {
@@ -105,6 +137,20 @@
         font-size: 15px;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .catalog-title {
+    h1 {
+      text-wrap: balance;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .add-sub-catalog {
+    width: 60%;
   }
 }
 

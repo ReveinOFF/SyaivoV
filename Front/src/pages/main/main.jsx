@@ -462,7 +462,10 @@ const Main = () => {
                       (e.currentTarget.style = "cursor: default")
                     }
                   >
-                    <img src={bootsImg} alt="product" />
+                    <img
+                      src={`${process.env.REACT_APP_SERVER_API}/static/${item.image}`}
+                      alt="product"
+                    />
                     <div>
                       <h2>{item.name}</h2>
                       <h2>&#x2022; {item.price}</h2>
