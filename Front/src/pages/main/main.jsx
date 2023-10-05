@@ -38,16 +38,41 @@ import axios from "axios";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const settings = useMemo(
     () => ({
-      autoplay: true,
-      arrows: true,
+      autoplay: false,
+      arrows: windowSize > 768 ? true : false,
       dots: true,
       focusOnSelect: true,
       autoplaySpeed: 7000,
     }),
-    []
+    [windowSize]
+  );
+
+  const settings2 = useMemo(
+    () => ({
+      autoplay: false,
+      arrows: windowSize > 515 ? true : false,
+      dots: false,
+      slidesToShow: windowSize > 550 ? 2 : 1,
+      slidesToScroll: 1,
+      infinite: true,
+    }),
+    [windowSize]
   );
 
   useEffect(() => {
@@ -403,7 +428,7 @@ const Main = () => {
           <>
             <div className="several-products">
               <h1 className="hidden">Новинки:</h1>
-              <div>
+              <div className="products-list-sev">
                 {products.map((item, index) => (
                   <Fragment key={item.id}>
                     <Intersection>
@@ -411,7 +436,7 @@ const Main = () => {
                         className="card hiddenAnimation"
                         style={{ animationDelay: `0.${index}s` }}
                       >
-                        <img src={bootsImg} alt="boots" />
+                        <img src={bootsImg} alt="product" />
                         <div>
                           <h1>{item.name}</h1>
                           <h1>&#x2022; {item.price}</h1>
@@ -425,7 +450,33 @@ const Main = () => {
                   </Fragment>
                 ))}
               </div>
-              <button className="hiddenBottom">Переглянути всі товари</button>
+              <Slider {...settings2} className="slider2 ">
+                {products.map((item) => (
+                  <div
+                    key={item.id}
+                    className="product-block"
+                    onMouseDown={(e) =>
+                      (e.currentTarget.style = "cursor: grabbing")
+                    }
+                    onMouseUp={(e) =>
+                      (e.currentTarget.style = "cursor: default")
+                    }
+                  >
+                    <img src={bootsImg} alt="product" />
+                    <div>
+                      <h2>{item.name}</h2>
+                      <h2>&#x2022; {item.price}</h2>
+
+                      <Link to={`/product/${item.id}`}>
+                        <button>Детальніше</button>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </Slider>
+              <Link to="/products" className="hiddenBottom">
+                <button>Переглянути всі товари</button>
+              </Link>
             </div>
 
             <hr />
