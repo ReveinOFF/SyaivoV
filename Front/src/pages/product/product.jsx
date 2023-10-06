@@ -1,21 +1,50 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import "./productStyle.scss";
 import image from "../../assets/img/temp/_________________64d0e4243704d.jpg";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { LazyContext } from "../../components/lazy-context/lazy-contex";
 
 const Product = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState();
   const [showMagnifier, setShowMagnifier] = useState(false);
   const [typeDescription, setTypeDescription] = useState(1);
   const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
   const [[x, y], setXY] = useState([0, 0]);
-  const description =
-    "fghdfg hdfghdfghdh\ndgfhgfhfhdfghdf ghfhfdgdfhdf fghdfghdhdfgh dfhdfghdf hdfghdfh\n fgh dfghdfghdfg hdh dghf hdfghdfghdfghdfghdf\ndfghdfghdf dfgdhfthdfthd thtdhthdfth tfhdthdhfghtdrhbfcftb\ndfhgfhdfgdfgs";
-  const characteristics =
-    "fgh dfghdfj ftyhsd 5rgersdg rthfgbdfrtghtdr h\n drtyhdrtghthtdyrthgdrthfy hythdrft\n szd464565y 6y56645";
+  const setLoading = useContext(LazyContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = "{name}";
-  }, []);
+    const GetProduct = async () => {
+      setLoading(true);
+
+      const res = await axios
+        .get(`${process.env.REACT_APP_SERVER_API}/api/product/${id}`)
+        .finally(() => {
+          setLoading(false);
+        });
+
+      setProduct(res.data);
+    };
+
+    GetProduct();
+  }, [id]);
+
+  useEffect(() => {
+    document.title = product ? product.name : "Продукт";
+  }, [product]);
+
+  const handleDelete = async () => {
+    setLoading(true);
+
+    await axios
+      .delete(`${process.env.REACT_APP_SERVER_API}/api/product/${id}`)
+      .then((res) => {
+        if (res.status === 200) navigate("/products");
+      })
+      .finally(() => setLoading(false));
+  };
 
   return (
     <>
@@ -23,41 +52,56 @@ const Product = () => {
         <Link to="/">Головна</Link>
         <div>/</div>
         <Link to="/products">Список товарів</Link>
-        <div>/</div>
-        <Link to="/products/"></Link>
-        <div>/</div>
-        <NavLink to=""></NavLink>
+        {product && (
+          <>
+            <div>/</div>
+            <Link to={`/products/${product.catalog_key_name}`}>
+              {product.catalog_name}
+            </Link>
+            {product.subcatalog_name && (
+              <>
+                <div>/</div>
+                <Link
+                  to={`/products/${product.catalog_key_name}?type=${product.subcatalog_id}`}
+                >
+                  {product.subcatalog_name}
+                </Link>
+              </>
+            )}
+          </>
+        )}
       </div>
 
       <div className="product-information">
         <div class="img-magnifier-container">
-          <img
-            id="myimage"
-            src={image}
-            width="600"
-            height="400"
-            alt="Girl"
-            onMouseEnter={(e) => {
-              setShowMagnifier(true);
+          {product && (
+            <img
+              id="myimage"
+              src={`${process.env.REACT_APP_SERVER_API}/static/${product.image}`}
+              width="600"
+              height="400"
+              alt="Girl"
+              onMouseEnter={(e) => {
+                setShowMagnifier(true);
 
-              const elem = e.currentTarget;
-              const { width, height } = elem.getBoundingClientRect();
-              setSize([width, height]);
-              setShowMagnifier(true);
-            }}
-            onMouseLeave={() => {
-              setShowMagnifier(false);
-            }}
-            onMouseMove={(e) => {
-              const elem = e.currentTarget;
-              const { top, left } = elem.getBoundingClientRect();
+                const elem = e.currentTarget;
+                const { width, height } = elem.getBoundingClientRect();
+                setSize([width, height]);
+                setShowMagnifier(true);
+              }}
+              onMouseLeave={() => {
+                setShowMagnifier(false);
+              }}
+              onMouseMove={(e) => {
+                const elem = e.currentTarget;
+                const { top, left } = elem.getBoundingClientRect();
 
-              const x = e.pageX - left - window.pageXOffset;
-              const y = e.pageY - top - window.pageYOffset;
-              setXY([x, y]);
-            }}
-          />
-
+                const x = e.pageX - left - window.pageXOffset;
+                const y = e.pageY - top - window.pageYOffset;
+                setXY([x, y]);
+              }}
+            />
+          )}
           <div
             className="img-magnifier-glass"
             style={{
@@ -73,16 +117,33 @@ const Product = () => {
         </div>
 
         <div className="info">
-          <h1>Кепка Lider, TM Floyd, чорна</h1>
-          <div>&#x2022; 66&#8372;</div>
+          <h1>{product ? product.name : "Загрузка..."}</h1>
+          <div>&#x2022; {product ? product.price : "Загрузка..."}</div>
           <button>Актуальну ціну, просимо уточнювати у менеджера</button>
           <hr />
           <div>
             <span>Категорії: </span>
-            <Link to="">Спецодяг</Link>
-            {" - "}
-            <Link to="">Головні убори</Link>
+            {product && (
+              <>
+                <Link to={`/products/${product.catalog_key_name}`}>
+                  {product.catalog_name}
+                </Link>
+                {product.subcatalog_name && (
+                  <>
+                    {" - "}
+                    <Link
+                      to={`/products/${product.catalog_key_name}?type=${product.subcatalog_id}`}
+                    >
+                      {product.subcatalog_name}
+                    </Link>
+                  </>
+                )}
+              </>
+            )}
           </div>
+          {localStorage.getItem("token") && (
+            <button onClick={handleDelete}>Видалити</button>
+          )}
         </div>
       </div>
 
@@ -104,25 +165,51 @@ const Product = () => {
         <hr />
         {typeDescription === 2 ? (
           <div>
-            {characteristics.split(/\n/g).map((item, idx) => {
-              return (
-                <React.Fragment key={idx}>
-                  {item}
-                  <br />
-                </React.Fragment>
-              );
-            })}
+            {product && (
+              <>
+                {product.size && (
+                  <h4>
+                    Розмір: <span>{product.size}</span>
+                  </h4>
+                )}
+
+                {product.color && (
+                  <h4>
+                    Колір: <span>{product.color}</span>
+                  </h4>
+                )}
+
+                {product.fabric && (
+                  <h4>
+                    Тканина: <span>{product.fabric}</span>
+                  </h4>
+                )}
+
+                {product.fabric_warehouse && (
+                  <h4>
+                    Склад тканин: <span>{product.fabric_warehouse}</span>
+                  </h4>
+                )}
+
+                {product.material && (
+                  <h4>
+                    Матеріал: <span>{product.material}</span>
+                  </h4>
+                )}
+              </>
+            )}
           </div>
         ) : (
           <div>
-            {description.split(/\n/g).map((item, idx) => {
-              return (
-                <React.Fragment key={idx}>
-                  {item}
-                  <br />
-                </React.Fragment>
-              );
-            })}
+            {product &&
+              product.description.split(/\n/g).map((item, idx) => {
+                return (
+                  <React.Fragment key={idx}>
+                    {item}
+                    <br />
+                  </React.Fragment>
+                );
+              })}
           </div>
         )}
       </div>

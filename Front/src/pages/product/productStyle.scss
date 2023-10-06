@@ -59,6 +59,11 @@
       font-weight: 600;
       cursor: default;
       margin-bottom: 10px;
+
+      &:last-child {
+        margin-top: 20px;
+        background-color: red;
+      }
     }
 
     hr {
@@ -118,8 +123,22 @@
     }
 
     &:last-child {
+      margin-left: 10px;
       font-family: OpenSans;
-      line-height: 25px;
+      font-size: 20px;
+
+      h4 {
+        font-family: TTHoves;
+        font-size: 20px;
+        color: rgb(83, 83, 83);
+
+        span {
+          font-family: OpenSans;
+          margin-left: 10px;
+          font-weight: 400;
+          color: rgb(112, 112, 112);
+        }
+      }
     }
   }
 

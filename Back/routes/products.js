@@ -60,17 +60,6 @@ router.get("/", async (req, res) => {
   return res.status(200).json(listProduct.rows);
 });
 
-// router.get("/api/newproducts", async (req, res) => {
-//   const listProduct = await pool.query(
-//     `SELECT id, image, name, price
-// 	FROM product
-// 	ORDER BY date_created DESC
-// 	LIMIT 5;`
-//   );
-
-//   return res.status(200).json(listProduct.rows);
-// });
-
 router.get("/:id", async (req, res) => {
   try {
     const listProduct = await pool.query(
@@ -85,54 +74,11 @@ router.get("/:id", async (req, res) => {
     );
 
     if (listProduct.rows.length > 0)
-      return res.status(200).json(listProduct.rows);
+      return res.status(200).json(listProduct.rows[0]);
     else return res.status(404).json("Товар не знайдено!");
   } catch (error) {
     console.log(error);
     return res.status(500).json("Помилка пошуку товара!");
-  }
-});
-
-router.put("/:id", authenticateToken, async (req, res) => {
-  if (!req.auth) return res.status(401).json("Ви не авторизовані");
-
-  if (!req.body) return res.status(404).json("Данні не були введені!");
-
-  const {
-    image,
-    name,
-    price,
-    description,
-    color,
-    fabric,
-    fabric_warehouse,
-    size,
-    catalog_id,
-    subcatalog_id,
-  } = req.body;
-  const productId = req.params.id;
-
-  try {
-    const updateQuery =
-      "UPDATE product SET image = $1, name = $2, price = $3, description = $4, color = $5, fabric = $6, fabric_warehouse = $7, size= $8, catalog_id = $9, subcatalog_id = $10 WHERE id = $11";
-    await pool.query(updateQuery, [
-      image,
-      name,
-      price,
-      description,
-      color,
-      fabric,
-      fabric_warehouse,
-      size,
-      catalog_id,
-      subcatalog_id,
-      productId,
-    ]);
-
-    return res.status(200).json("Товар обновлено!");
-  } catch (error) {
-    console.log(error);
-    res.status(500).json("Помилка в створені продукта!");
   }
 });
 

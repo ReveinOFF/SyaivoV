@@ -4,7 +4,8 @@ const express = require("express"),
 
 require("dotenv").config();
 
-const tokenKeyAuth = process.env.JWT_SECRET;
+const tokenKeyAuth = process.env.JWT_SECRET,
+  emailStatic = process.env.EMAIL_TO;
 
 router.post("/", (req, res) => {
   if (!req.body || !req.body.login || !req.body.password)

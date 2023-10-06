@@ -73,7 +73,7 @@ img {
   }
 
   a {
-    &:not(:last-child) {
+    &:not(.active) {
       transition: color 0.3s;
 
       &:hover {
