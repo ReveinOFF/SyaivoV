@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./productStyle.scss";
 import image from "../../assets/img/temp/_________________64d0e4243704d.jpg";
 import React, { useContext, useEffect, useState } from "react";

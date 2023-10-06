@@ -82,6 +82,23 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("/search/:name", async (req, res) => {
+  try {
+    const listProduct = await pool.query(
+      `SELECT id, image, name
+	FROM product
+	WHERE name ILIKE '%${req.params.name}%';`
+    );
+
+    if (listProduct.rows.length > 0)
+      return res.status(200).json(listProduct.rows);
+    else return res.status(404).json("Товар не знайдено!");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("Помилка пошуку товара!");
+  }
+});
+
 router.delete("/:id", authenticateToken, async (req, res) => {
   if (!req.auth) return res.status(401).json("Ви не авторизовані");
 

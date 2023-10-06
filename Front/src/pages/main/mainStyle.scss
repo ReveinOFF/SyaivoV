@@ -111,8 +111,8 @@
     }
 
     .img-p6 {
-      width: 55%;
-      right: 20px;
+      width: 30%;
+      right: 100px;
     }
 
     .fon-img {
@@ -696,18 +696,6 @@ hr {
   }
 }
 
-@media only screen and (max-width: 1765px) {
-  main {
-    .slider {
-      .image-block {
-        .img-p6 {
-          width: 50%;
-        }
-      }
-    }
-  }
-}
-
 @media only screen and (max-width: 1666px) {
   main {
     .slider {
@@ -728,7 +716,7 @@ hr {
     .slider {
       .image-block {
         .img-p6 {
-          width: 45%;
+          right: 70px;
         }
       }
     }
@@ -794,6 +782,20 @@ hr {
       .card {
         img {
           height: 30vh;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1270px) {
+  main {
+    .slider {
+      height: 25em;
+
+      .image-block {
+        .img-p5 {
+          right: 60px;
         }
       }
     }

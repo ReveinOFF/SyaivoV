@@ -54,7 +54,7 @@ const Main = () => {
 
   const settings = useMemo(
     () => ({
-      autoplay: true,
+      autoplay: false,
       arrows: windowSize > 768 ? true : false,
       dots: true,
       focusOnSelect: true,

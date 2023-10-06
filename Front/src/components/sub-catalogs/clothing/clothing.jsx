@@ -15,9 +15,11 @@ const Clothing = () => {
         <hr />
       </div>
 
-      <button onClick={handleClick} className="add-sub-catalog">
-        Добавити
-      </button>
+      {localStorage.getItem("token") && (
+        <button onClick={handleClick} className="add-sub-catalog">
+          Добавити
+        </button>
+      )}
 
       <div className="sub-catalog">
         <div className="catalog-block">
