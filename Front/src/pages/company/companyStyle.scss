@@ -56,40 +56,29 @@
   }
 
   .work {
-    & > div {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+    ol {
+      li {
+        font-family: OpenSans;
+        font-size: 16px;
+        font-weight: 600;
+        color: gray;
+        line-height: 30px;
+        margin-left: 20px;
 
-      & > div {
-        display: flex;
-
-        span {
-          &:first-child {
-            font-family: TTHoves;
-            font-size: 200px;
-            font-weight: 900;
-            line-height: 140px;
-            letter-spacing: 0em;
-            text-align: left;
-            color: #adadad;
-            user-select: none;
-            margin-right: 10px;
-          }
-
-          &:last-child {
-            font-family: OpenSans;
-            font-size: 20px;
-            font-weight: 400;
-            line-height: 30px;
-            letter-spacing: 0em;
-            text-align: left;
-            color: #4e4e4e;
-            max-width: 300px;
-          }
+        &:first-child {
+          margin-bottom: 10px;
         }
 
         &:last-child {
-          justify-content: end;
+          margin-top: 10px;
+        }
+
+        &::marker {
+          font-family: TTHoves;
+          font-size: 20px;
+          color: orange;
+          font-weight: 600;
+          line-height: 25px;
         }
       }
     }
@@ -228,20 +217,6 @@
 
 @media only screen and (max-width: 1005px) {
   .company {
-    .work {
-      & > div {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(2, auto);
-
-        & > div {
-          &:last-child {
-            margin-top: 30px;
-            justify-content: start;
-          }
-        }
-      }
-    }
-
     .video-company {
       & > div {
         width: 6%;

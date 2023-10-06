@@ -37,7 +37,8 @@ footer {
         a {
           display: flex;
           align-items: center;
-          border: 2px solid #ffa500;
+          background-color: #ffa500;
+          box-shadow: 0 0 10px 0 orange;
           border-radius: 10px;
           text-decoration: none;
           user-select: none;
@@ -46,6 +47,7 @@ footer {
             width: 100px;
             margin: 0 15px;
             scale: 1.2;
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.521));
           }
 
           div {
@@ -58,8 +60,9 @@ footer {
               start,
               none,
               uppercase,
-              #ffa500
+              white
             );
+            text-shadow: 0 0 3px white;
           }
         }
 

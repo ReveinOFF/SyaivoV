@@ -54,7 +54,7 @@ const Main = () => {
 
   const settings = useMemo(
     () => ({
-      autoplay: false,
+      autoplay: true,
       arrows: windowSize > 768 ? true : false,
       dots: true,
       focusOnSelect: true,
@@ -290,7 +290,7 @@ const Main = () => {
               onMouseDown={(e) => (e.currentTarget.style = "cursor: grabbing")}
               onMouseUp={(e) => (e.currentTarget.style = "cursor: default")}
             >
-              <h1>Унікальна комп'ютерна вишивка</h1>
+              <h1>Комп'ютерна вишивка</h1>
               <div>
                 Ми допоможемо вам створити вишукані та персоналізовані вироби,
                 які стануть унікальним акцентом вашого стилю.
@@ -412,7 +412,7 @@ const Main = () => {
             </div>
             <div>
               <div>
-                <h1>Унікальна комп'ютерна вишивка</h1>
+                <h1>Комп'ютерна вишивка</h1>
                 <div>Ваш дизайн, наша витвір мистецтва.</div>
                 <Link to="/catalog/protected">
                   <button>Переглянути</button>
@@ -436,7 +436,10 @@ const Main = () => {
                         className="card hiddenAnimation"
                         style={{ animationDelay: `0.${index}s` }}
                       >
-                        <img src={bootsImg} alt="product" />
+                        <img
+                          src={`${process.env.REACT_APP_SERVER_API}/static/${item.image}`}
+                          alt="product"
+                        />
                         <div>
                           <h1>{item.name}</h1>
                           <h1>&#x2022; {item.price}</h1>
