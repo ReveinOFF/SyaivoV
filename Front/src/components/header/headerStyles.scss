@@ -292,6 +292,8 @@ header {
 
       .h-search {
         display: flex;
+        position: relative;
+        z-index: 0;
 
         input {
           border: 2px solid rgba(128, 128, 128, 0.438);
@@ -301,6 +303,8 @@ header {
           border-bottom-left-radius: 10px;
           width: 30em;
           height: 100%;
+          transition: border-radius 0.3s;
+
           @include fonts(
             OpenSans,
             13px,
@@ -325,6 +329,7 @@ header {
           padding: 0 20px;
           border-top-right-radius: 10px;
           border-bottom-right-radius: 10px;
+          transition: border-radius 0.3s;
 
           svg {
             transform: scale(1);
@@ -334,6 +339,82 @@ header {
           &:hover {
             svg {
               transform: scale(1.5);
+            }
+          }
+        }
+
+        .btn-active {
+          border-bottom-right-radius: 0;
+        }
+
+        .search-res {
+          position: absolute;
+          top: 50px;
+          width: 100%;
+          max-height: 600px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          background-color: white;
+          border-bottom-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+          z-index: -1;
+          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.479);
+          padding: 20px;
+          transition: all 0.3s;
+
+          .find-block {
+            display: flex;
+            text-decoration: none;
+            align-items: center;
+            border: 1px solid rgba(128, 128, 128, 0.384);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+
+            &:hover {
+              scale: 1.05;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            img {
+              width: 100px;
+              margin-right: 20px;
+              border-radius: 10px;
+            }
+
+            & > div {
+              width: 100%;
+
+              hr {
+                border: 1px solid gray;
+                margin: 10px 0;
+              }
+
+              h4 {
+                font-family: TTHoves;
+                color: #2c2c2c;
+                margin: 0 5px;
+                line-height: 20px;
+                text-wrap: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 200px;
+              }
+
+              div {
+                font-family: OpenSans;
+                text-wrap: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                max-width: 200px;
+                margin: 0 5px;
+                line-height: 20px;
+                color: black;
+              }
             }
           }
         }
@@ -520,6 +601,26 @@ header {
           input {
             width: 15em;
           }
+
+          .search-res {
+            .find-block {
+              flex-direction: column;
+              align-items: center;
+
+              img {
+                margin-right: 0;
+                margin-bottom: 20px;
+                width: 10em;
+              }
+
+              & > div {
+                h4,
+                div {
+                  max-width: 150px;
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -631,9 +732,28 @@ header {
         .h-search {
           justify-content: end;
 
+          input:focus {
+            width: 20em;
+            visibility: visible;
+            opacity: 1;
+          }
+
+          input:focus + button {
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          }
+
+          input:focus + .btn-active {
+            border-bottom-right-radius: 0px;
+          }
+
+          input:focus ~ .search-res {
+            opacity: 1;
+          }
+
           &:hover {
             input {
-              width: 100%;
+              width: 20em;
               visibility: visible;
               opacity: 1;
             }
@@ -641,6 +761,14 @@ header {
             button {
               border-top-left-radius: 0px;
               border-bottom-left-radius: 0px;
+            }
+
+            .btn-active {
+              border-bottom-right-radius: 0px;
+            }
+
+            .search-res {
+              opacity: 1;
             }
           }
 
@@ -655,6 +783,14 @@ header {
             border-top-left-radius: 10px;
             border-bottom-left-radius: 10px;
             transition: border-radius 0.3s;
+          }
+
+          .btn-active {
+            border-bottom-right-radius: 10px;
+          }
+
+          .search-res {
+            opacity: 0;
           }
         }
       }
@@ -706,6 +842,22 @@ header {
   }
 }
 
+@media only screen and (max-width: 430px) {
+  header {
+    .h-bottom {
+      & > div {
+        .h-search {
+          &:hover {
+            input {
+              width: 15em;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 411px) {
   .burger-menu {
     .burger-bottom {
@@ -748,6 +900,30 @@ header {
 
       span {
         margin-right: 5px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 365px) {
+  header {
+    .h-bottom {
+      & > div {
+        .h-search {
+          &:hover {
+            input {
+              width: 11em;
+            }
+          }
+
+          .search-res {
+            .find-block {
+              img {
+                width: 8em;
+              }
+            }
+          }
+        }
       }
     }
   }

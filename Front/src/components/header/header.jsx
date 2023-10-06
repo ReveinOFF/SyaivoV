@@ -9,14 +9,47 @@ import jacketIcon from "../../assets/img/header/l_4405a1a75be769531c64c7c5e66c77
 import embroideryIcon from "../../assets/img/header/4851485709_w640_h2048_free_icon_embroidery_3461238.png";
 import avatarIcon from "../../assets/img/avatar.png";
 import crossIcon from "../../assets/img/header/1349512-200.png";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import axios from "axios";
 
 const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [searchRes, setSearchRes] = useState();
+  const [timer, setTimer] = useState(null);
+  const searchRef = useRef();
 
   const openMenu = () => {
     if (window.outerWidth <= 844 || window.innerWidth <= 844)
       setIsOpenMenu(!isOpenMenu);
+  };
+
+  const GetProducts = async (name) => {
+    if (timer) clearTimeout(timer);
+
+    if (name.length === 0) {
+      return;
+    }
+
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_API}/api/product/search/${name}`
+    );
+
+    setSearchRes(res.data);
+  };
+
+  const handleInputChange = (event) => {
+    if (timer) clearTimeout(timer);
+
+    if (event.target.value.length === 0) {
+      setSearchRes(null);
+      return;
+    }
+
+    const newTimer = setTimeout(() => {
+      GetProducts(event.target.value);
+    }, 1000);
+
+    setTimer(newTimer);
   };
 
   return (
@@ -82,8 +115,17 @@ const Header = () => {
               </div>
             </div>
             <div className="h-search">
-              <input type="text" placeholder="Пошук товара" />
-              <button>
+              <input
+                onChange={handleInputChange}
+                type="text"
+                placeholder="Пошук товара"
+                ref={searchRef}
+                style={{ borderBottomLeftRadius: searchRes ? "0" : "10px" }}
+              />
+              <button
+                onClick={() => GetProducts(searchRef.current.value)}
+                className={searchRes && "btn-active"}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -103,6 +145,28 @@ const Header = () => {
                   ></path>
                 </svg>
               </button>
+
+              {searchRes && (
+                <div className="search-res">
+                  {searchRes.map((item) => (
+                    <Link
+                      to={`/product/${item.id}`}
+                      key={item.id}
+                      className="find-block"
+                    >
+                      <img
+                        src={`${process.env.REACT_APP_SERVER_API}/static/${item.image}`}
+                        alt="product"
+                      />
+                      <div>
+                        <h4>{item.name}</h4>
+                        <hr />
+                        <div>{item.description}</div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>

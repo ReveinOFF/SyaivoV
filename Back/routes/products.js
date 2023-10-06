@@ -23,7 +23,7 @@ router.post("/", authenticateToken, async (req, res) => {
 
   try {
     await pool.query(
-      `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, date_created, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
+      `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, date_created, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`,
       [
         image,
         name,
@@ -85,7 +85,7 @@ router.get("/:id", async (req, res) => {
 router.get("/search/:name", async (req, res) => {
   try {
     const listProduct = await pool.query(
-      `SELECT id, image, name
+      `SELECT id, image, name, description
 	FROM product
 	WHERE name ILIKE '%${req.params.name}%';`
     );
