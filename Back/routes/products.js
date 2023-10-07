@@ -3,6 +3,54 @@ const express = require("express"),
   pool = require("../service/db"),
   authenticateToken = require("./authentication");
 
+const getTotalPage = async (type, catalog, sort) => {
+  try {
+    let countPage = `SELECT COUNT(p.id)
+	FROM product as p
+	JOIN catalog as c ON p.catalog_id = c.id
+	LEFT JOIN subcatalog as sc ON p.subcatalog_id = sc.id`;
+
+    if (catalog) countPage += `\nWHERE c.key_name = '${catalog}'`;
+    if (type) {
+      if (catalog) {
+        countPage += `\nAND p.subcatalog_id = ${type}`;
+      } else {
+        countPage += `\nWHERE p.subcatalog_id = ${type}`;
+      }
+    }
+
+    if (sort) {
+      switch (sort) {
+        case "name-a":
+          countPage += `\nORDER BY p.name ASC`;
+          break;
+        case "name-b":
+          countPage += `\nORDER BY p.name DESC`;
+          break;
+        case "price-a":
+          countPage += `\nORDER BY p.price ASC`;
+          break;
+        case "price-b":
+          countPage += `\nORDER BY p.price DESC`;
+          break;
+        default:
+          break;
+      }
+    }
+
+    countPage += `;`;
+
+    const result = await pool.query(countPage);
+
+    const totalPage = Math.ceil(parseInt(result.rows[0].count) / 20);
+
+    return totalPage;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Помилка під час отримання загальної кількості сторінок.");
+  }
+};
+
 router.post("/", authenticateToken, async (req, res) => {
   if (!req.auth) return res.status(401).json("Ви не авторизовані");
 
@@ -88,7 +136,12 @@ router.get("/", async (req, res) => {
 
     const result = await pool.query(listProduct);
 
-    return res.status(200).json(result.rows);
+    const totalPage = await getTotalPage(type, catalog, sort);
+
+    return res.status(200).json({
+      products: result.rows,
+      totalPage: totalPage,
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json("Ошибка виведення товарів!");
