@@ -1,69 +1,105 @@
-import image from "../../../assets/img/temp/_________________64d0e4243704d.jpg";
-import { useEffect } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { LazyContext } from "../../lazy-context/lazy-contex";
+import deleteImg from "../../../assets/img/subcatalog/1214594.png";
+import CatalogModal from "../../catalog-modal/catalog-modal";
 
 const Protected = () => {
+  const [subCatalog, setSubCatalog] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const location = useLocation();
+  const setLoading = useContext(LazyContext);
+  const navigate = useNavigate();
+
+  const pageUrl = useMemo(
+    () => location.pathname.split("/")[location.pathname.split("/").length - 1],
+    [location]
+  );
+
   useEffect(() => {
     document.title = "Каталог ЗІЗ";
   }, []);
 
-  const handleClick = () => {};
+  useEffect(() => {
+    const GetSubCatalogs = async () => {
+      setLoading(true);
+
+      await axios
+        .get(`${process.env.REACT_APP_SERVER_API}/api/subcatalog/${pageUrl}`)
+        .then((res) => {
+          if (res.status === 200) setSubCatalog(res.data);
+        })
+        .finally(() => setLoading(false));
+    };
+
+    GetSubCatalogs();
+  }, [pageUrl]);
+
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setLoading(true);
+
+    await axios
+      .delete(`${process.env.REACT_APP_SERVER_API}/api/subcatalog/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          window.location.reload();
+        } else navigate("/error");
+      })
+      .finally(() => setLoading(false));
+  };
 
   return (
     <>
+      <CatalogModal
+        catKey={pageUrl}
+        isShow={showModal}
+        setShow={() => setShowModal(false)}
+      />
+
       <div className="catalog-title">
         <h1>Засоби індивідуального захисту</h1>
         <hr />
       </div>
 
       {localStorage.getItem("token") && (
-        <button onClick={handleClick} className="add-sub-catalog">
+        <button onClick={() => setShowModal(true)} className="add-sub-catalog">
           Добавити
         </button>
       )}
 
       <div className="sub-catalog">
-        <div className="catalog-block">
-          <div className="image">
-            <img src={image} alt="sub-catalog" />
-          </div>
-          <hr />
-          <div>Захисні головні убори</div>
-        </div>
-        <div className="catalog-block">
-          <div className="image">
-            <img src={image} alt="sub-catalog" />
-          </div>
-          <hr />
-          <div>Захисні рукавиці</div>
-        </div>
-        <div className="catalog-block">
-          <div className="image">
-            <img src={image} alt="sub-catalog" />
-          </div>
-          <hr />
-          <div>Захисні наушники</div>
-        </div>
-        <div className="catalog-block">
-          <div className="image">
-            <img src={image} alt="sub-catalog" />
-          </div>
-          <hr />
-          <div>Захисні очки та стіклянні маски</div>
-        </div>
-        <div className="catalog-block">
-          <div className="image">
-            <img src={image} alt="sub-catalog" />
-          </div>
-          <hr />
-          <div>Захист від зімічних речовин</div>
-        </div>
-        <div className="catalog-block">
-          <div className="image">
-            <img src={image} alt="sub-catalog" />
-          </div>
-          <hr />
-          <div>Захист від падіння з висоти</div>
-        </div>
+        {subCatalog &&
+          subCatalog.map((item) => (
+            <Link
+              key={item.id}
+              to={`/products/${pageUrl}?type=${item.id}`}
+              className="catalog-block"
+            >
+              <div className="image">
+                <img
+                  src={
+                    item.image &&
+                    `${process.env.REACT_APP_SERVER_API}/static/${item.image}`
+                  }
+                  alt="sub-catalog"
+                />
+              </div>
+              <hr />
+              <div className="name-catalog">{item.name}</div>
+              {localStorage.getItem("token") && (
+                <div
+                  className="delete"
+                  onClick={(e) => handleDelete(e, item.id)}
+                >
+                  <img src={deleteImg} alt="delete" />
+                </div>
+              )}
+            </Link>
+          ))}
       </div>
     </>
   );
