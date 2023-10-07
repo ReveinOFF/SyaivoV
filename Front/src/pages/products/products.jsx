@@ -1,102 +1,42 @@
 import { Link, NavLink, useParams, useSearchParams } from "react-router-dom";
 import "./productsStyle.scss";
-import { useCallback, useEffect, useRef, useState } from "react";
-import imageTemp from "../../assets/img/temp/_________________64d0e4243704d.jpg";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { LazyContext } from "../../components/lazy-context/lazy-contex";
 
 const Products = () => {
   const { name } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [typeView, setTypeView] = useState(
     parseInt(searchParams.get("type")) || 1
   );
-  const [isOpen, setIsOpen] = useState(false);
-  const selectFilterRef = useRef();
-
   const [currentPage, setCurrentPage] = useState(
     parseInt(searchParams.get("page")) || 1
   );
-  const itemsPerPage = 18;
-  const totalPages = 6;
-  const pagesToShow = 5;
-  const data = [
-    {
-      image: "gdfgdfg",
-      name: "sdfdfg dfghdfh dfghdfgh dfghdf ghdfhdfh fdh",
-      description: "gyjfghfghdfghdhgfd",
-      price: "53",
-    },
-    {
-      image: "gdfgdfg",
-      name: "sdfdfg dfghdf ghdfghd tfhdtdh thd thth drththdfth dtfhdtfh thd fthdff dfgg dfh",
-      description:
-        "dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhf dfh fghdfg hdfghdfghdfh fhfdfh fghdfg hdfghdfghdfh fhf ",
-      price: "53",
-    },
-    {
-      image: "gdfgdfg",
-      name: "sdfdfg",
-      description: "dbvfgdh fhtdh fthdfthfd",
-      price: "53",
-    },
-    {
-      image: "gdfgdfg",
-      name: "sdfdfg",
-      description: "f dhfghdfg hdfghfdghdfgh dfghdfghdf",
-      price: "53",
-    },
-    {
-      image: "gdfgdfg",
-      name: "sdfdfg",
-      description: "fghdfhgdfgh fghdfgh fhfghdfghfdg",
-      price: "53",
-    },
-    {
-      image: "gdfgdfg",
-      name: "sdfdfg",
-      description: "dfh gfhdfgh dfghdfgh",
-      price: "53",
-    },
-    {
-      image: "gdfgdfg",
-      name: "sdfdfg",
-      description: "gfdh dfghgdfhdgh df",
-      price: "53",
-    },
-  ];
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-
-  const calculatePagesToDisplay = useCallback(
-    (currentPage, totalPages, pagesToShow) => {
-      const halfPagesToShow = Math.floor(pagesToShow / 2);
-      const startPage = Math.max(currentPage - halfPagesToShow, 1);
-      const endPage = Math.min(startPage + pagesToShow - 1, totalPages);
-      return Array.from(
-        { length: endPage - startPage + 1 },
-        (_, i) => startPage + i
-      );
-    },
-    []
-  );
-
-  const pagesToDisplay = calculatePagesToDisplay(
-    currentPage,
-    totalPages,
-    pagesToShow
-  );
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    searchParams.set("page", pageNumber);
-    setSearchParams(searchParams);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const [totalPages, setTotalPages] = useState(1);
+  const [products, setProducts] = useState();
+  const selectFilterRef = useRef();
+  const [isOpen, setIsOpen] = useState(false);
+  const setLoading = useContext(LazyContext);
 
   useEffect(() => {
     document.title = "Список товарів";
+  }, []);
+
+  useEffect(() => {
+    const GetProducts = async () => {
+      setLoading(true);
+
+      await axios
+        .get(`${process.env.REACT_APP_SERVER_API}/api/product`)
+        .then((res) => {
+          setProducts(res.data.products);
+          setTotalPages(res.data.totalPage);
+        })
+        .finally(() => setLoading(false));
+    };
+
+    GetProducts();
   }, []);
 
   useEffect(() => {
@@ -179,15 +119,11 @@ const Products = () => {
       <div className="pages">
         <Link to="/">Головна</Link>
         <div>/</div>
-        {name ? (
+        <Link to="/products">Список товарів</Link>
+        {name && (
           <>
-            <Link to="/products">Список товарів</Link>
             <div>/</div>
             <NavLink to={`/products/${name}`}>{getPageName()}</NavLink>
-          </>
-        ) : (
-          <>
-            <NavLink to="/products">Список товарів</NavLink>
           </>
         )}
       </div>
@@ -198,6 +134,7 @@ const Products = () => {
 
           <hr />
 
+          {/* Need change */}
           <div>
             <NavLink end to="/products">
               Весь список
@@ -418,24 +355,29 @@ const Products = () => {
                 : "list-type1"
             }
           >
-            {currentItems.map((item, index) => (
-              <Link key={index} className="product" to={`/product/${index}`}>
-                <div className="product-image">
-                  <img src={imageTemp} alt={index} />
-                </div>
-                <div className="product-info">
-                  <h3>{item.name}</h3>
-                  <div>{item.description}</div>
-                  <div>
-                    &#x2022; {item.price}
-                    <span>&#8372;</span>
+            {products &&
+              products.map((item) => (
+                <Link
+                  key={item.id}
+                  className="product"
+                  to={`/product/${item.id}`}
+                >
+                  <div className="product-image">
+                    <img
+                      src={`${process.env.REACT_APP_SERVER_API}/static/${item.image}`}
+                      alt={item.id}
+                    />
                   </div>
-                </div>
-              </Link>
-            ))}
+                  <div className="product-info">
+                    <h3>{item.name}</h3>
+                    <div>{item.description}</div>
+                    <div>&#x2022; {item.price}</div>
+                  </div>
+                </Link>
+              ))}
           </div>
 
-          <div className="select-pages">
+          {/* <div className="select-pages">
             {currentPage !== 1 && (
               <div
                 className="page"
@@ -505,7 +447,7 @@ const Products = () => {
                 </svg>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </>

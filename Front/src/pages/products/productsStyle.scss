@@ -291,8 +291,6 @@
           }
 
           & > div {
-            font-family: OpenSans;
-
             &:first-of-type {
               margin-bottom: 20px;
               max-width: 650px;
@@ -302,6 +300,7 @@
               -webkit-box-orient: vertical;
               overflow: hidden;
               text-overflow: ellipsis;
+              font-family: OpenSans;
             }
 
             &:last-of-type {
@@ -309,10 +308,7 @@
               margin-left: 10px;
               display: flex;
               align-items: center;
-
-              span {
-                font-size: 20px;
-              }
+              font-family: TTHoves;
             }
           }
         }

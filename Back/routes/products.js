@@ -99,7 +99,7 @@ router.get("/", async (req, res) => {
   const currPage = parseInt(page) || 0;
 
   try {
-    let listProduct = `SELECT p.id, p.name, p.description, p.price
+    let listProduct = `SELECT p.id, p.image, p.name, p.description, p.price
 	FROM product as p
 	JOIN catalog as c ON p.catalog_id = c.id
 	LEFT JOIN subcatalog as sc ON p.subcatalog_id = sc.id`;
