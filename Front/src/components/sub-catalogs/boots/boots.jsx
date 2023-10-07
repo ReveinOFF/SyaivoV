@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { LazyContext } from "../../lazy-context/lazy-contex";
 import deleteImg from "../../../assets/img/subcatalog/1214594.png";
@@ -7,8 +7,10 @@ import CatalogModal from "../../catalog-modal/catalog-modal";
 
 const Boots = () => {
   const [subCatalog, setSubCatalog] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const location = useLocation();
   const setLoading = useContext(LazyContext);
+  const navigate = useNavigate();
 
   const pageUrl = useMemo(
     () => location.pathname.split("/")[location.pathname.split("/").length - 1],
@@ -34,8 +36,6 @@ const Boots = () => {
     GetSubCatalogs();
   }, [pageUrl]);
 
-  const handleClick = () => {};
-
   const handleDelete = async (e, id) => {
     e.preventDefault();
     e.stopPropagation();
@@ -46,16 +46,19 @@ const Boots = () => {
       .delete(`${process.env.REACT_APP_SERVER_API}/api/subcatalog/${id}`)
       .then((res) => {
         if (res.status === 200) {
-          const cat = subCatalog.filter((i) => i.id !== id);
-          setSubCatalog(cat);
-        }
+          window.location.reload();
+        } else navigate("/error");
       })
       .finally(() => setLoading(false));
   };
 
   return (
     <>
-      <CatalogModal />
+      <CatalogModal
+        catKey={pageUrl}
+        isShow={showModal}
+        setShow={() => setShowModal(false)}
+      />
 
       <div className="catalog-title">
         <h1>Взуття</h1>
@@ -63,7 +66,7 @@ const Boots = () => {
       </div>
 
       {localStorage.getItem("token") && (
-        <button onClick={handleClick} className="add-sub-catalog">
+        <button onClick={() => setShowModal(true)} className="add-sub-catalog">
           Добавити
         </button>
       )}

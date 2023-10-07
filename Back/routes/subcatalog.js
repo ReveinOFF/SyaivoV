@@ -53,7 +53,8 @@ router.post(
       const idCatalog = await pool.query(
         `SELECT id
     FROM catalog
-    WHERE key_name = ${catalog_key};`
+    WHERE key_name = '${catalog_key}'
+    LIMIT 1;`
       );
 
       if (!idCatalog) return res.status(404).json("Каталог не знайдено!");
@@ -61,12 +62,12 @@ router.post(
       await pool.query(
         `INSERT INTO subcatalog(
     image, name, catalog_id)
-    VALUES (${req.file.filename}, ${name}, ${idCatalog});`
+    VALUES ('${req.file.filename}', '${name}', ${idCatalog.rows[0].id});`
       );
-      return res.status(200).json("Каталог створено!");
+      return res.status(201).json("Каталог створено!");
     } catch (error) {
       console.log(error);
-      return res.status(500).json("Помилка пошуку каталогів!");
+      return res.status(500).json("Помилка створення каталога!");
     }
   }
 );
@@ -79,20 +80,20 @@ router.delete("/:id", authenticateToken, async (req, res) => {
   if (!id) return res.status(404).json("Каталог не знайдено!");
 
   try {
-    const res = await pool.query(
+    const result = await pool.query(
       `SELECT * FROM subcatalog WHERE id = ${id} LIMIT 1;`
     );
 
     await pool.query(`DELETE FROM subcatalog WHERE id = ${id};`);
 
-    const filePath = `../public/${res.rows[0].image}`;
+    const filePath = `public/${result.rows[0].image}`;
 
     if (fs.existsSync(filePath)) await removeFileAsync(filePath);
 
     return res.status(200).json("Каталог видалено!");
   } catch (error) {
     console.log(error);
-    return res.status(500).json("Помилка пошуку каталога!");
+    return res.status(500).json("Помилка видалення каталога!");
   }
 });
 

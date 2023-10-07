@@ -87,3 +87,39 @@
     }
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .catalog-modal {
+    .catalog-block {
+      padding: 15%;
+
+      & > img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .img-catal {
+        width: 250px;
+        height: 250px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  .catalog-modal {
+    .catalog-block {
+      padding: 20% 10%;
+
+      & > img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .img-catal {
+        width: 250px;
+        height: 250px;
+      }
+    }
+  }
+}
