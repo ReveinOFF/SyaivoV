@@ -52,13 +52,18 @@
     padding: 10px;
     background-color: white;
     transition: all 0.3s;
+    text-decoration: none;
+    position: relative;
+    color: gray;
 
     &:hover {
       border-color: rgba(128, 128, 128, 0);
       box-shadow: 5px 5px 10px 0 rgba(128, 128, 128, 0.404);
 
-      img {
-        scale: 1.1;
+      .image {
+        img {
+          scale: 1.1;
+        }
       }
 
       div:last-child {
@@ -82,15 +87,34 @@
       border-color: rgba(78, 78, 78, 0.144);
     }
 
-    div:last-child {
+    .name-catalog {
       text-align: center;
       text-wrap: balance;
       font-family: OpenSans;
       font-weight: 600;
       letter-spacing: 0.1em;
       font-size: 20px;
-      color: gray;
       transition: color 0.3s;
+    }
+
+    .delete {
+      position: absolute;
+      border-radius: 50%;
+      background-color: orange;
+      padding: 10px;
+      top: -10px;
+      right: -10px;
+      display: flex;
+      transition: scale 0.3s;
+
+      &:hover {
+        scale: 1.1;
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 }

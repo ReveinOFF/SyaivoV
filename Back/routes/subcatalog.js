@@ -1,15 +1,35 @@
 const express = require("express"),
   router = express.Router(),
   pool = require("../service/db"),
-  authenticateToken = require("./authentication");
+  authenticateToken = require("./authentication"),
+  fs = require("fs"),
+  util = require("util"),
+  multer = require("multer"),
+  { randomUUID } = require("crypto");
+
+const removeFileAsync = util.promisify(fs.rm);
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public");
+  },
+  filename: (req, file, cb) => {
+    const newNameFile = randomUUID();
+    cb(null, newNameFile + ".jpg");
+  },
+});
+
+const upload = multer({ storage: storage });
 
 router.get("/:key", async (req, res) => {
+  const key = req.params.key;
+
   try {
     const listCatalog = await pool.query(
-      `SELECT sc.*, c.name as name_catalog
+      `SELECT sc.id, sc.image, sc.name
 	FROM subcatalog as sc
 	JOIN catalog as c ON c.id = sc.catalog_id
-	WHERE c.key_name = ${req.params.key};`
+	WHERE c.key_name = '${key}';`
     );
 
     if (listCatalog.rows.length > 0)
@@ -21,34 +41,35 @@ router.get("/:key", async (req, res) => {
   }
 });
 
-router.post("/", authenticateToken, async (req, res) => {
-  if (!req.auth) return res.status(401).json("Ви не авторизовані");
+router.post(
+  "/",
+  authenticateToken,
+  upload.single("image"),
+  async (req, res) => {
+    if (!req.auth) return res.status(401).json("Ви не авторизовані");
+    const { name, catalog_key } = req.body;
+    if (!req.body) return res.status(404).json("Данні не були введені!");
+    try {
+      const idCatalog = await pool.query(
+        `SELECT id
+    FROM catalog
+    WHERE key_name = ${catalog_key};`
+      );
 
-  const { image, name, catalog_key } = req.body;
+      if (!idCatalog) return res.status(404).json("Каталог не знайдено!");
 
-  if (!req.body) return res.status(404).json("Данні не були введені!");
-
-  try {
-    const idCatalog = await pool.query(
-      `SELECT id
-	FROM catalog
-	WHERE key_name = ${catalog_key};`
-    );
-
-    if (!idCatalog) return res.status(404).json("Каталог не знайдено!");
-
-    await pool.query(
-      `INSERT INTO subcatalog(
-	image, name, catalog_id)
-	VALUES (${image}, ${name}, ${idCatalog});`
-    );
-
-    return res.status(200).json("Каталог створено!");
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json("Помилка пошуку каталогів!");
+      await pool.query(
+        `INSERT INTO subcatalog(
+    image, name, catalog_id)
+    VALUES (${req.file.filename}, ${name}, ${idCatalog});`
+      );
+      return res.status(200).json("Каталог створено!");
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json("Помилка пошуку каталогів!");
+    }
   }
-});
+);
 
 router.delete("/:id", authenticateToken, async (req, res) => {
   if (!req.auth) return res.status(401).json("Ви не авторизовані");
@@ -58,7 +79,15 @@ router.delete("/:id", authenticateToken, async (req, res) => {
   if (!id) return res.status(404).json("Каталог не знайдено!");
 
   try {
+    const res = await pool.query(
+      `SELECT * FROM subcatalog WHERE id = ${id} LIMIT 1;`
+    );
+
     await pool.query(`DELETE FROM subcatalog WHERE id = ${id};`);
+
+    const filePath = `../public/${res.rows[0].image}`;
+
+    if (fs.existsSync(filePath)) await removeFileAsync(filePath);
 
     return res.status(200).json("Каталог видалено!");
   } catch (error) {

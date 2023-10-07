@@ -1,6 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./productStyle.scss";
-import image from "../../assets/img/temp/_________________64d0e4243704d.jpg";
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { LazyContext } from "../../components/lazy-context/lazy-contex";
@@ -19,13 +18,15 @@ const Product = () => {
     const GetProduct = async () => {
       setLoading(true);
 
-      const res = await axios
+      await axios
         .get(`${process.env.REACT_APP_SERVER_API}/api/product/${id}`)
+        .then((res) => {
+          if (res.status === 200) setProduct(res.data);
+          else navigate("/error");
+        })
         .finally(() => {
           setLoading(false);
         });
-
-      setProduct(res.data);
     };
 
     GetProduct();
@@ -75,45 +76,47 @@ const Product = () => {
       <div className="product-information">
         <div class="img-magnifier-container">
           {product && (
-            <img
-              id="myimage"
-              src={`${process.env.REACT_APP_SERVER_API}/static/${product.image}`}
-              width="600"
-              height="400"
-              alt="Girl"
-              onMouseEnter={(e) => {
-                setShowMagnifier(true);
+            <>
+              <img
+                id="myimage"
+                src={`${process.env.REACT_APP_SERVER_API}/static/${product.image}`}
+                width="600"
+                height="400"
+                alt="Girl"
+                onMouseEnter={(e) => {
+                  setShowMagnifier(true);
 
-                const elem = e.currentTarget;
-                const { width, height } = elem.getBoundingClientRect();
-                setSize([width, height]);
-                setShowMagnifier(true);
-              }}
-              onMouseLeave={() => {
-                setShowMagnifier(false);
-              }}
-              onMouseMove={(e) => {
-                const elem = e.currentTarget;
-                const { top, left } = elem.getBoundingClientRect();
+                  const elem = e.currentTarget;
+                  const { width, height } = elem.getBoundingClientRect();
+                  setSize([width, height]);
+                  setShowMagnifier(true);
+                }}
+                onMouseLeave={() => {
+                  setShowMagnifier(false);
+                }}
+                onMouseMove={(e) => {
+                  const elem = e.currentTarget;
+                  const { top, left } = elem.getBoundingClientRect();
 
-                const x = e.pageX - left - window.pageXOffset;
-                const y = e.pageY - top - window.pageYOffset;
-                setXY([x, y]);
-              }}
-            />
+                  const x = e.pageX - left - window.pageXOffset;
+                  const y = e.pageY - top - window.pageYOffset;
+                  setXY([x, y]);
+                }}
+              />
+              <div
+                className="img-magnifier-glass"
+                style={{
+                  display: showMagnifier ? "" : "none",
+                  top: `${y - 150 / 2}px`,
+                  left: `${x - 150 / 2}px`,
+                  backgroundImage: `url('${process.env.REACT_APP_SERVER_API}/static/${product.image}')`,
+                  backgroundSize: `${imgWidth * 1.5}px ${imgHeight * 1.5}px`,
+                  backgroundPositionX: `${-x * 1.5 + 200 / 2}px`,
+                  backgroundPositionY: `${-y * 1.5 + 150 / 2}px`,
+                }}
+              ></div>
+            </>
           )}
-          <div
-            className="img-magnifier-glass"
-            style={{
-              display: showMagnifier ? "" : "none",
-              top: `${y - 150 / 2}px`,
-              left: `${x - 150 / 2}px`,
-              backgroundImage: `url('${image}')`,
-              backgroundSize: `${imgWidth * 1.5}px ${imgHeight * 1.5}px`,
-              backgroundPositionX: `${-x * 1.5 + 200 / 2}px`,
-              backgroundPositionY: `${-y * 1.5 + 150 / 2}px`,
-            }}
-          ></div>
         </div>
 
         <div className="info">
