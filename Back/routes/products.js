@@ -47,17 +47,52 @@ router.post("/", authenticateToken, async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const listProduct = await pool.query(
-    `SELECT p.id, p.name, p.description, p.price
+  const { page, type, catalog, sort } = req.query;
+  const currPage = parseInt(page) || 0;
+
+  try {
+    let listProduct = `SELECT p.id, p.name, p.description, p.price
 	FROM product as p
 	JOIN catalog as c ON p.catalog_id = c.id
-	LEFT JOIN subcatalog as sc ON p.subcatalog_id = sc.id
-	WHERE p.catalog_id = 1
-	ORDER BY p.name ASC
-	LIMIT 10 OFFSET 0;`
-  );
+	LEFT JOIN subcatalog as sc ON p.subcatalog_id = sc.id`;
 
-  return res.status(200).json(listProduct.rows);
+    if (catalog) listProduct += `\nWHERE c.key_name = '${catalog}'`;
+    if (type) {
+      if (catalog) {
+        listProduct += `\nAND p.subcatalog_id = ${type}`;
+      } else {
+        listProduct += `\nWHERE p.subcatalog_id = ${type}`;
+      }
+    }
+
+    if (sort) {
+      switch (sort) {
+        case "name-a":
+          listProduct += `\nORDER BY p.name ASC`;
+          break;
+        case "name-b":
+          listProduct += `\nORDER BY p.name DESC`;
+          break;
+        case "price-a":
+          listProduct += `\nORDER BY p.price ASC`;
+          break;
+        case "price-b":
+          listProduct += `\nORDER BY p.price DESC`;
+          break;
+        default:
+          break;
+      }
+    }
+
+    listProduct += `\nLIMIT 20 OFFSET ${currPage * 20};`;
+
+    const result = await pool.query(listProduct);
+
+    return res.status(200).json(result.rows);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("Ошибка виведення товарів!");
+  }
 });
 
 router.get("/:id", async (req, res) => {
