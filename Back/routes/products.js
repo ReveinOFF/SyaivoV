@@ -3,7 +3,7 @@ const express = require("express"),
   pool = require("../service/db"),
   authenticateToken = require("./authentication");
 
-const getTotalPage = async (type, catalog, sort) => {
+const getTotalPage = async (type, catalog) => {
   try {
     let countPage = `SELECT COUNT(p.id)
 	FROM product as p
@@ -16,25 +16,6 @@ const getTotalPage = async (type, catalog, sort) => {
         countPage += `\nAND p.subcatalog_id = ${type}`;
       } else {
         countPage += `\nWHERE p.subcatalog_id = ${type}`;
-      }
-    }
-
-    if (sort) {
-      switch (sort) {
-        case "name-a":
-          countPage += `\nORDER BY p.name ASC`;
-          break;
-        case "name-b":
-          countPage += `\nORDER BY p.name DESC`;
-          break;
-        case "price-a":
-          countPage += `\nORDER BY p.price ASC`;
-          break;
-        case "price-b":
-          countPage += `\nORDER BY p.price DESC`;
-          break;
-        default:
-          break;
       }
     }
 
@@ -136,7 +117,7 @@ router.get("/", async (req, res) => {
 
     const result = await pool.query(listProduct);
 
-    const totalPage = await getTotalPage(type, catalog, sort);
+    const totalPage = await getTotalPage(type, catalog);
 
     return res.status(200).json({
       products: result.rows,

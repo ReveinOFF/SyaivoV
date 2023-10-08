@@ -70,6 +70,12 @@
           opacity: 1;
           transform: translateX(0);
         }
+
+        & > a {
+          span {
+            rotate: 0deg;
+          }
+        }
       }
 
       & > div {

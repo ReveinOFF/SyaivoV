@@ -8,10 +8,7 @@ const Products = () => {
   const { name } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [typeView, setTypeView] = useState(
-    parseInt(searchParams.get("type")) || 1
-  );
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(searchParams.get("page")) || 1
+    parseInt(searchParams.get("type-view")) || 1
   );
   const [totalPages, setTotalPages] = useState(1);
   const [products, setProducts] = useState();
@@ -27,8 +24,25 @@ const Products = () => {
     const GetProducts = async () => {
       setLoading(true);
 
+      const params = new URLSearchParams();
+
+      if (searchParams.get("type")) {
+        params.append("type", searchParams.get("type"));
+      }
+      if (searchParams.get("page")) {
+        params.append("page", searchParams.get("page"));
+      }
+      if (name) {
+        params.append("catalog", name);
+      }
+      if (searchParams.get("sort")) {
+        params.append("sort", searchParams.get("sort"));
+      }
+
       await axios
-        .get(`${process.env.REACT_APP_SERVER_API}/api/product`)
+        .get(
+          `${process.env.REACT_APP_SERVER_API}/api/product?${params.toString()}`
+        )
         .then((res) => {
           setProducts(res.data.products);
           setTotalPages(res.data.totalPage);
@@ -37,7 +51,7 @@ const Products = () => {
     };
 
     GetProducts();
-  }, []);
+  }, [searchParams, name]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -225,7 +239,7 @@ const Products = () => {
               <button
                 onClick={() => {
                   setTypeView(1);
-                  searchParams.set("type", 1);
+                  searchParams.set("type-view", 1);
                   setSearchParams(searchParams);
                 }}
               >
@@ -247,7 +261,7 @@ const Products = () => {
               <button
                 onClick={() => {
                   setTypeView(2);
-                  searchParams.set("type", 2);
+                  searchParams.set("type-view", 2);
                   setSearchParams(searchParams);
                 }}
               >
@@ -350,7 +364,7 @@ const Products = () => {
 
           <div
             className={
-              parseInt(searchParams.get("type")) === 2
+              parseInt(searchParams.get("type-view")) === 2
                 ? "list-type2"
                 : "list-type1"
             }
@@ -377,6 +391,7 @@ const Products = () => {
               ))}
           </div>
 
+          {/* Need change */}
           {/* <div className="select-pages">
             {currentPage !== 1 && (
               <div
