@@ -11,8 +11,6 @@ const CatalogModal = ({ catKey, isShow, setShow }) => {
   const navigate = useNavigate();
 
   const imageChange = (e) => {
-    const img = e.target.files[0];
-
     const createUrl = URL.createObjectURL(e.target.files[0]);
 
     setImage(URL.createObjectURL(e.target.files[0]));
@@ -30,8 +28,6 @@ const CatalogModal = ({ catKey, isShow, setShow }) => {
     formData.append("image", e.target[0].files[0]);
     formData.append("name", e.target[1].value);
     formData.append("catalog_key", catKey);
-
-    console.log(e.target[0].files[0]);
 
     await axios
       .post(`${process.env.REACT_APP_SERVER_API}/api/subcatalog`, formData)

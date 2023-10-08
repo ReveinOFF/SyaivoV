@@ -17,6 +17,7 @@ import {
 import axios from "axios";
 import { LazyContext } from "../../components/lazy-context/lazy-contex";
 import deleteIcon from "../../assets/img/products/1214594.png";
+import ProductsModal from "../../components/products-modal/products-modal";
 
 const Products = () => {
   const { name } = useParams();
@@ -30,6 +31,7 @@ const Products = () => {
   const [catalogs, setCatalogs] = useState();
   const selectFilterRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenCreate, setIsOpenCreate] = useState(false);
   const navigate = useNavigate();
   const setLoading = useContext(LazyContext);
 
@@ -282,6 +284,11 @@ const Products = () => {
 
   return (
     <>
+      <ProductsModal
+        isShow={isOpenCreate}
+        setShow={() => setIsOpenCreate(false)}
+      />
+
       <div className="pages">
         <Link to="/">Головна</Link>
         <div>/</div>
@@ -331,7 +338,11 @@ const Products = () => {
               })}
           </div>
 
-          {localStorage.getItem("token") && <button>Добавити товар</button>}
+          {localStorage.getItem("token") && (
+            <button onClick={() => setIsOpenCreate(true)}>
+              Добавити товар
+            </button>
+          )}
         </div>
 
         <div className="products-block">

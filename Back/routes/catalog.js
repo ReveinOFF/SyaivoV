@@ -24,4 +24,17 @@ GROUP BY c.id, c.name, c.key_name;`
   }
 });
 
+router.get("/only", async (req, res) => {
+  try {
+    const listCatalog = await pool.query(`SELECT * FROM catalog;`);
+
+    if (listCatalog.rows.length > 0)
+      return res.status(200).json(listCatalog.rows);
+    else return res.status(404).json("Каталогі не знайдено!");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("Помилка пошуку каталогів!");
+  }
+});
+
 module.exports = router;
