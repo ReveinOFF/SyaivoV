@@ -14,7 +14,7 @@
     background-color: white;
     border-radius: 10px;
     width: 1000px;
-    height: 900px;
+    height: auto;
     display: grid;
     position: relative;
     padding: 20px 15%;
@@ -99,6 +99,36 @@
         color: white;
         background-color: orange;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .products-modal {
+    .products-block {
+      padding-top: 60px;
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .products-modal {
+    .products-block {
+      padding-top: 60px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 330px) {
+  .products-modal {
+    .products-block {
+      padding-top: 60px;
+      padding-left: 5px;
+      padding-right: 5px;
     }
   }
 }
