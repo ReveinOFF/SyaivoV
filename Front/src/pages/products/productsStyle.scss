@@ -83,8 +83,9 @@
         position: absolute;
         background-color: white;
         padding: 20px;
-        top: 20px;
-        right: -95%;
+        top: 100%;
+        left: 100%;
+        min-width: 300px;
         box-shadow: 0 0 7px 0 black;
         visibility: hidden;
         opacity: 0;
@@ -118,7 +119,7 @@
       font-family: TTHoves;
       font-weight: 600;
       font-size: 20px;
-      box-shadow: inset 0 5px 5px 0 gray;
+      box-shadow: inset 0 5px 5px 0 rgba(128, 128, 128, 0.5);
       transition: all 0.3s;
 
       &:hover {
