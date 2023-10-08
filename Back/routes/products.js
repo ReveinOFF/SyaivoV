@@ -118,6 +118,9 @@ router.get("/", async (req, res) => {
 
     if (sort) {
       switch (sort) {
+        case "new":
+          listProduct += `\nORDER BY p.date_created DESC`;
+          break;
         case "name-a":
           listProduct += `\nORDER BY p.name ASC`;
           break;

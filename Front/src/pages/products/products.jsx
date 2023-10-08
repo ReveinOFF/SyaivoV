@@ -242,6 +242,8 @@ const Products = () => {
     switch (searchParams.get("sort")) {
       case undefined:
         return "За замовченням";
+      case "new":
+        return "Новинки";
       case "name-a":
         return "Назва (А - Я)";
       case "name-b":
@@ -427,6 +429,16 @@ const Products = () => {
                   onClick={() => handleSortParams()}
                 >
                   За замовченням
+                </li>
+                <hr />
+                <li
+                  style={{
+                    pointerEvents: searchParams.get("sort") === "new" && "none",
+                    color: searchParams.get("sort") === "new" && "orange",
+                  }}
+                  onClick={() => handleSortParams("new")}
+                >
+                  Новинки
                 </li>
                 <hr />
                 <li
