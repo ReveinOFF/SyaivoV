@@ -28,7 +28,7 @@ router.get("/:key", async (req, res) => {
     const listCatalog = await pool.query(
       `SELECT sc.id, sc.image, sc.name
 	FROM subcatalog as sc
-	JOIN catalog as c ON c.id = sc.catalog_id
+	JOIN catalog as c ON sc.catalog_id = c.id
 	WHERE c.key_name = '${key}';`
     );
 

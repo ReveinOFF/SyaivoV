@@ -1,6 +1,13 @@
 import { Link, NavLink, useParams, useSearchParams } from "react-router-dom";
 import "./productsStyle.scss";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import {
+  Fragment,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import axios from "axios";
 import { LazyContext } from "../../components/lazy-context/lazy-contex";
 
@@ -101,7 +108,7 @@ const Products = () => {
     if (currentPage > 1) {
       buttons.push(
         <div
-          key="prev"
+          key="button_prev"
           className="page"
           onClick={() => handlePageChange(parseInt(currentPage) - 1)}
         >
@@ -123,44 +130,46 @@ const Products = () => {
 
     if (currentPage >= 4) {
       buttons.push(
-        <>
+        <Fragment key="button_first">
           <div onClick={() => handlePageChange(1)} className={"page"}>
             1
           </div>
           <div className="page-space">...</div>
-        </>
+        </Fragment>
       );
     }
 
-    for (let i = start; i <= end; i++) {
-      buttons.push(
-        <div
-          key={i}
-          onClick={() => {
-            if (i !== currentPage) handlePageChange(i);
-          }}
-          className={`page ${i === currentPage ? "active" : ""}`}
-        >
-          {i}
-        </div>
-      );
+    if (totalPage > 1) {
+      for (let i = start; i <= end; i++) {
+        buttons.push(
+          <div
+            key={`button_${i}`}
+            onClick={() => {
+              if (i !== currentPage) handlePageChange(i);
+            }}
+            className={`page ${i === currentPage ? "active" : ""}`}
+          >
+            {i}
+          </div>
+        );
+      }
     }
 
     if (totalPage - 3 >= currentPage) {
       buttons.push(
-        <>
+        <Fragment key="button_last">
           <div className="page-space">...</div>
           <div onClick={() => handlePageChange(totalPage)} className={"page"}>
             {totalPage}
           </div>
-        </>
+        </Fragment>
       );
     }
 
     if (currentPage < totalPage) {
       buttons.push(
         <div
-          key="next"
+          key="button_next"
           className="page"
           onClick={() => handlePageChange(parseInt(currentPage) + 1)}
         >
