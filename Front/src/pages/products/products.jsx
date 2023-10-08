@@ -1,4 +1,10 @@
-import { Link, NavLink, useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import "./productsStyle.scss";
 import {
   Fragment,
@@ -10,6 +16,7 @@ import {
 } from "react";
 import axios from "axios";
 import { LazyContext } from "../../components/lazy-context/lazy-contex";
+import deleteIcon from "../../assets/img/products/1214594.png";
 
 const Products = () => {
   const { name } = useParams();
@@ -23,6 +30,7 @@ const Products = () => {
   const [catalogs, setCatalogs] = useState();
   const selectFilterRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const setLoading = useContext(LazyContext);
 
   useEffect(() => {
@@ -257,6 +265,21 @@ const Products = () => {
     window.location.reload();
   };
 
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setLoading(true);
+
+    await axios
+      .delete(`${process.env.REACT_APP_SERVER_API}/api/product/${id}`)
+      .then((res) => {
+        if (res.status === 200) window.location.reload();
+        else navigate("/error");
+      })
+      .finally(() => setLoading(false));
+  };
+
   return (
     <>
       <div className="pages">
@@ -277,7 +300,6 @@ const Products = () => {
 
           <hr />
 
-          {/* Need change */}
           <div>
             <NavLink end to="/products">
               Весь список
@@ -308,6 +330,8 @@ const Products = () => {
                 );
               })}
           </div>
+
+          {localStorage.getItem("token") && <button>Добавити товар</button>}
         </div>
 
         <div className="products-block">
@@ -461,11 +485,18 @@ const Products = () => {
                       alt={item.id}
                     />
                   </div>
+
                   <div className="product-info">
                     <h3>{item.name}</h3>
                     <div>{item.description}</div>
                     <div>&#x2022; {item.price}</div>
                   </div>
+
+                  {localStorage.getItem("token") && (
+                    <button onClick={(e) => handleDelete(e, item.id)}>
+                      <img src={deleteIcon} alt="delete" />
+                    </button>
+                  )}
                 </Link>
               ))}
           </div>

@@ -1,7 +1,25 @@
 const express = require("express"),
   router = express.Router(),
   pool = require("../service/db"),
-  authenticateToken = require("./authentication");
+  authenticateToken = require("./authentication"),
+  fs = require("fs"),
+  util = require("util"),
+  multer = require("multer"),
+  { randomUUID } = require("crypto");
+
+const removeFileAsync = util.promisify(fs.rm);
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public");
+  },
+  filename: (req, file, cb) => {
+    const newNameFile = randomUUID();
+    cb(null, newNameFile + ".jpg");
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const getTotalPage = async (type, catalog) => {
   try {
@@ -32,48 +50,52 @@ const getTotalPage = async (type, catalog) => {
   }
 };
 
-router.post("/", authenticateToken, async (req, res) => {
-  if (!req.auth) return res.status(401).json("Ви не авторизовані");
+router.post(
+  "/",
+  authenticateToken,
+  upload.single("image"),
+  async (req, res) => {
+    if (!req.auth) return res.status(401).json("Ви не авторизовані");
 
-  if (!req.body) return res.status(404).json("Данні не були введені!");
+    if (!req.body) return res.status(404).json("Данні не були введені!");
 
-  const {
-    image,
-    name,
-    price,
-    description,
-    color,
-    fabric,
-    fabric_warehouse,
-    size,
-    catalog_id,
-    subcatalog_id,
-  } = req.body;
+    const {
+      name,
+      price,
+      description,
+      color,
+      fabric,
+      fabric_warehouse,
+      size,
+      catalog_id,
+      subcatalog_id,
+    } = req.body;
 
-  try {
-    await pool.query(
-      `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, date_created, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`,
-      [
-        image,
-        name,
-        price,
-        description,
-        color,
-        fabric,
-        fabric_warehouse,
-        size,
-        new Date(),
-        catalog_id,
-        subcatalog_id,
-      ]
-    );
+    try {
+      await pool.query(
+        `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, date_created, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`,
+        [
+          req.file.filename,
+          name,
+          price,
+          description,
+          color,
+          fabric,
+          fabric_warehouse,
+          size,
+          new Date(),
+          catalog_id,
+          subcatalog_id,
+        ]
+      );
 
-    res.status(201).json("Продукт створено!");
-  } catch (error) {
-    console.log(error);
-    res.status(500).json("Помилка в створені продукта!");
+      res.status(201).json("Продукт створено!");
+    } catch (error) {
+      console.log(error);
+      res.status(500).json("Помилка в створені продукта!");
+    }
   }
-});
+);
 
 router.get("/", async (req, res) => {
   const { page, type, catalog, sort } = req.query;
@@ -171,10 +193,18 @@ router.get("/search/:name", async (req, res) => {
 router.delete("/:id", authenticateToken, async (req, res) => {
   if (!req.auth) return res.status(401).json("Ви не авторизовані");
 
-  const productId = req.params.id;
+  const productId = parseInt(req.params.id);
 
   try {
-    await pool.query(`DELETE FROM product WHERE id = $1;`, [productId]);
+    const result = await pool.query(
+      `SELECT * FROM product WHERE id = ${productId} LIMIT 1;`
+    );
+
+    await pool.query(`DELETE FROM product WHERE id = ${productId};`);
+
+    const filePath = `public/${result.rows[0].image}`;
+
+    if (fs.existsSync(filePath)) await removeFileAsync(filePath);
 
     return res.status(200).json("Товар видалено!");
   } catch (error) {
