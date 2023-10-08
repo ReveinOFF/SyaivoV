@@ -23,7 +23,7 @@ const getTotalPage = async (type, catalog) => {
 
     const result = await pool.query(countPage);
 
-    const totalPage = Math.ceil(parseInt(result.rows[0].count) / 20);
+    const totalPage = Math.ceil(parseInt(result.rows[0].count) / 10);
 
     return totalPage;
   } catch (error) {
@@ -77,7 +77,7 @@ router.post("/", authenticateToken, async (req, res) => {
 
 router.get("/", async (req, res) => {
   const { page, type, catalog, sort } = req.query;
-  const currPage = parseInt(page) || 0;
+  const currPage = parseInt(page) - 1 || 0;
 
   try {
     let listProduct = `SELECT p.id, p.image, p.name, p.description, p.price
@@ -113,7 +113,7 @@ router.get("/", async (req, res) => {
       }
     }
 
-    listProduct += `\nLIMIT 20 OFFSET ${currPage * 20};`;
+    listProduct += `\nLIMIT 10 OFFSET ${currPage * 10};`;
 
     const result = await pool.query(listProduct);
 

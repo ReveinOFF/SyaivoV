@@ -10,7 +10,8 @@ const Products = () => {
   const [typeView, setTypeView] = useState(
     parseInt(searchParams.get("type-view")) || 1
   );
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [currentPage] = useState(parseInt(searchParams.get("page")) || 1);
   const [products, setProducts] = useState();
   const selectFilterRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +46,7 @@ const Products = () => {
         )
         .then((res) => {
           setProducts(res.data.products);
-          setTotalPages(res.data.totalPage);
+          setTotalPage(res.data.totalPage);
         })
         .finally(() => setLoading(false));
     };
@@ -77,6 +78,109 @@ const Products = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handlePageChange = (pageNumber) => {
+    searchParams.set("page", pageNumber);
+    setSearchParams(searchParams);
+
+    window.location.reload();
+  };
+
+  const generateButtons = useCallback(() => {
+    const buttons = [];
+    let start = Math.max(
+      1,
+      Math.min(currentPage - Math.floor(5 / 2), totalPage - 4)
+    );
+    let end = Math.min(totalPage, start + 4);
+
+    if (end - start + 1 < 5) {
+      start = Math.max(1, end - 5 + 1);
+    }
+
+    if (currentPage > 1) {
+      buttons.push(
+        <div
+          key="prev"
+          className="page"
+          onClick={() => handlePageChange(parseInt(currentPage) - 1)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="5.97"
+            height="10"
+            viewBox="0 0 5.97 10"
+            style={{ rotate: "180deg" }}
+          >
+            <path
+              d="M1302.98,2891a0.972,0.972,0,0,1-.23.62c-0.02.03-.03,0.06-0.05,0.09h-0.01l-4.03,3.99a0.955,0.955,0,0,1-1.39,0,1.014,1.014,0,0,1,0-1.41l3.32-3.29-3.3-3.32a0.99,0.99,0,0,1,1.4-1.4l3.98,3.99a0.077,0.077,0,0,0,.03.02A1.031,1.031,0,0,1,1302.98,2891Z"
+              transform="translate(-1297 -2886)"
+            ></path>
+          </svg>
+        </div>
+      );
+    }
+
+    if (currentPage >= 4) {
+      buttons.push(
+        <>
+          <div onClick={() => handlePageChange(1)} className={"page"}>
+            1
+          </div>
+          <div className="page-space">...</div>
+        </>
+      );
+    }
+
+    for (let i = start; i <= end; i++) {
+      buttons.push(
+        <div
+          key={i}
+          onClick={() => {
+            if (i !== currentPage) handlePageChange(i);
+          }}
+          className={`page ${i === currentPage ? "active" : ""}`}
+        >
+          {i}
+        </div>
+      );
+    }
+
+    if (totalPage - 3 >= currentPage) {
+      buttons.push(
+        <>
+          <div className="page-space">...</div>
+          <div onClick={() => handlePageChange(totalPage)} className={"page"}>
+            {totalPage}
+          </div>
+        </>
+      );
+    }
+
+    if (currentPage < totalPage) {
+      buttons.push(
+        <div
+          key="next"
+          className="page"
+          onClick={() => handlePageChange(parseInt(currentPage) + 1)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="5.97"
+            height="10"
+            viewBox="0 0 5.97 10"
+          >
+            <path
+              d="M1302.98,2891a0.972,0.972,0,0,1-.23.62c-0.02.03-.03,0.06-0.05,0.09h-0.01l-4.03,3.99a0.955,0.955,0,0,1-1.39,0,1.014,1.014,0,0,1,0-1.41l3.32-3.29-3.3-3.32a0.99,0.99,0,0,1,1.4-1.4l3.98,3.99a0.077,0.077,0,0,0,.03.02A1.031,1.031,0,0,1,1302.98,2891Z"
+              transform="translate(-1297 -2886)"
+            ></path>
+          </svg>
+        </div>
+      );
+    }
+
+    return buttons;
+  }, [currentPage, totalPage]);
 
   const getPageName = useCallback(() => {
     switch (name) {
@@ -391,78 +495,7 @@ const Products = () => {
               ))}
           </div>
 
-          {/* Need change */}
-          {/* <div className="select-pages">
-            {currentPage !== 1 && (
-              <div
-                className="page"
-                onClick={() => handlePageChange(currentPage - 1)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="5.97"
-                  height="10"
-                  viewBox="0 0 5.97 10"
-                  style={{ rotate: "180deg" }}
-                >
-                  <path
-                    d="M1302.98,2891a0.972,0.972,0,0,1-.23.62c-0.02.03-.03,0.06-0.05,0.09h-0.01l-4.03,3.99a0.955,0.955,0,0,1-1.39,0,1.014,1.014,0,0,1,0-1.41l3.32-3.29-3.3-3.32a0.99,0.99,0,0,1,1.4-1.4l3.98,3.99a0.077,0.077,0,0,0,.03.02A1.031,1.031,0,0,1,1302.98,2891Z"
-                    transform="translate(-1297 -2886)"
-                  ></path>
-                </svg>
-              </div>
-            )}
-
-            {currentPage >= 4 && (
-              <>
-                <div onClick={() => handlePageChange(1)} className={"page"}>
-                  {1}
-                </div>
-                <div className="page-space">...</div>
-              </>
-            )}
-
-            {pagesToDisplay.map((page) => (
-              <div
-                key={page}
-                onClick={() => handlePageChange(page)}
-                className={`page ${currentPage === page ? "active" : ""}`}
-              >
-                {page}
-              </div>
-            ))}
-
-            {totalPages - 3 >= currentPage && (
-              <>
-                <div className="page-space">...</div>
-                <div
-                  onClick={() => handlePageChange(totalPages)}
-                  className={"page"}
-                >
-                  {totalPages}
-                </div>
-              </>
-            )}
-
-            {totalPages !== currentPage && (
-              <div
-                className="page"
-                onClick={() => handlePageChange(currentPage + 1)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="5.97"
-                  height="10"
-                  viewBox="0 0 5.97 10"
-                >
-                  <path
-                    d="M1302.98,2891a0.972,0.972,0,0,1-.23.62c-0.02.03-.03,0.06-0.05,0.09h-0.01l-4.03,3.99a0.955,0.955,0,0,1-1.39,0,1.014,1.014,0,0,1,0-1.41l3.32-3.29-3.3-3.32a0.99,0.99,0,0,1,1.4-1.4l3.98,3.99a0.077,0.077,0,0,0,.03.02A1.031,1.031,0,0,1,1302.98,2891Z"
-                    transform="translate(-1297 -2886)"
-                  ></path>
-                </svg>
-              </div>
-            )}
-          </div> */}
+          <div className="select-pages">{generateButtons()}</div>
         </div>
       </div>
     </>
