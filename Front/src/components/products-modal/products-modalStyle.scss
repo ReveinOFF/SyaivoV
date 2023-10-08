@@ -32,21 +32,17 @@
       }
     }
 
-    .img-catal {
+    .img-prod {
       display: flex;
       justify-self: center;
       padding: 10px;
-      padding-top: 30px;
       background-color: #f3f3f3;
       border-radius: 10px;
-      position: relative;
       width: 300px;
       height: 300px;
 
       input {
-        position: absolute;
-        top: 5px;
-        left: 10px;
+        display: none;
       }
 
       img {
@@ -54,6 +50,21 @@
         height: 100%;
         border-radius: 10px;
         object-fit: cover;
+      }
+
+      & > div {
+        display: grid;
+        grid-template-rows: auto, 1fr;
+
+        div {
+          font-family: TTHoves;
+          color: gray;
+        }
+
+        svg {
+          margin-right: auto;
+          align-self: flex-end;
+        }
       }
     }
 
@@ -94,6 +105,7 @@
       border-radius: 10px;
       margin-top: 30px;
       transition: all 0.3s;
+      padding: 10px 0;
 
       &:hover {
         color: white;
