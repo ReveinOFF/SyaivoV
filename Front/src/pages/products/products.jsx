@@ -489,7 +489,11 @@ const Products = () => {
                   <div className="product-info">
                     <h3>{item.name}</h3>
                     <div>{item.description}</div>
-                    <div>&#x2022; {item.price}</div>
+                    {parseInt(item.price) > 0 ? (
+                      <div>&#x2022; {item.price}</div>
+                    ) : (
+                      <div>Уточніть ціну у менеджера</div>
+                    )}
                   </div>
 
                   {localStorage.getItem("token") && (

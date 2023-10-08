@@ -74,7 +74,7 @@ const Product = () => {
       </div>
 
       <div className="product-information">
-        <div class="img-magnifier-container">
+        <div className="img-magnifier-container">
           {product && (
             <>
               <img
@@ -121,7 +121,14 @@ const Product = () => {
 
         <div className="info">
           <h1>{product ? product.name : "Загрузка..."}</h1>
-          <div>&#x2022; {product ? product.price : "Загрузка..."}</div>
+          <div>
+            &#x2022;{" "}
+            {product
+              ? parseInt(product.price) > 1
+                ? product.price
+                : "Уточніть ціну у менеджера"
+              : "Загрузка..."}
+          </div>
           <button>Актуальну ціну, просимо уточнювати у менеджера</button>
           <hr />
           <div>
@@ -153,13 +160,13 @@ const Product = () => {
       <div className="product-description">
         <div>
           <button
-            className={typeDescription === 1 && "active"}
+            className={typeDescription === 1 ? "active" : ""}
             onClick={() => setTypeDescription(1)}
           >
             Опис товару
           </button>
           <button
-            className={typeDescription === 2 && "active"}
+            className={typeDescription === 2 ? "active" : ""}
             onClick={() => setTypeDescription(2)}
           >
             Характеристики

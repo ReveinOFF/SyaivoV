@@ -75,7 +75,7 @@ router.post(
       await pool.query(
         `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, date_created, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`,
         [
-          req.file.filename,
+          req.file ? req.file.filename : null,
           name,
           price,
           description,

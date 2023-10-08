@@ -442,7 +442,11 @@ const Main = () => {
                         />
                         <div>
                           <h1>{item.name}</h1>
-                          <h1>&#x2022; {item.price}</h1>
+                          {parseInt(item.price) > 0 ? (
+                            <h1>&#x2022; {item.price}</h1>
+                          ) : (
+                            <h1>&#x2022; Уточніть ціну</h1>
+                          )}
 
                           <Link to={`/product/${item.id}`}>
                             <button>Детальніше</button>
@@ -471,7 +475,11 @@ const Main = () => {
                     />
                     <div>
                       <h2>{item.name}</h2>
-                      <h2>&#x2022; {item.price}</h2>
+                      {parseInt(item.price) > 0 ? (
+                        <h2>&#x2022; {item.price}</h2>
+                      ) : (
+                        <h2>&#x2022; Уточніть ціну</h2>
+                      )}
 
                       <Link to={`/product/${item.id}`}>
                         <button>Детальніше</button>
