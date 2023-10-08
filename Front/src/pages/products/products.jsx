@@ -20,6 +20,7 @@ const Products = () => {
   const [totalPage, setTotalPage] = useState(1);
   const [currentPage] = useState(parseInt(searchParams.get("page")) || 1);
   const [products, setProducts] = useState();
+  const [catalogs, setCatalogs] = useState();
   const selectFilterRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
   const setLoading = useContext(LazyContext);
@@ -60,6 +61,21 @@ const Products = () => {
 
     GetProducts();
   }, [searchParams, name]);
+
+  useEffect(() => {
+    const GetCatalogs = async () => {
+      setLoading(true);
+
+      await axios
+        .get(`${process.env.REACT_APP_SERVER_API}/api/catalog`)
+        .then((res) => {
+          setCatalogs(res.data);
+        })
+        .finally(() => setLoading(false));
+    };
+
+    GetCatalogs();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -267,80 +283,30 @@ const Products = () => {
               Весь список
             </NavLink>
 
-            <div className="product-item">
-              <NavLink to="/products/boots">
-                Взуття <span>&#8250;</span>
-              </NavLink>
-              <div>
-                <Link to="/products/boots?type=1">
-                  Черевики та чоботи робочі
-                </Link>
-                <Link to="/products/boots?type=2">
-                  Черевики та чоботи утеплені
-                </Link>
-                <Link to="/products/boots?type=3">
-                  Черевики для зварювальників
-                </Link>
-                <Link to="/products/boots?type=4">
-                  Туфлі, кросівки та сандалі
-                </Link>
-                <Link to="/products/boots?type=5">Чоботи гумові</Link>
-                <Link to="/products/boots?type=6">Сабо</Link>
-                <Link to="/products/boots?type=7">Утеплювачі та шкарпетки</Link>
-                <Link to="/products/boots?type=8">Взуття бортопрошивне</Link>
-              </div>
-            </div>
-
-            <div className="product-item">
-              <NavLink to="/products/clothing">
-                Спецодяг <span>&#8250;</span>
-              </NavLink>
-
-              <div>
-                <Link to="/products/boots?type=1">Головні убори</Link>
-                <Link to="/products/boots?type=2">
-                  Костюми та напівкомбінезони
-                </Link>
-                <Link to="/products/boots?type=3">Одяг утеплений</Link>
-                <Link to="/products/boots?type=4">Одяг для зварювальників</Link>
-                <Link to="/products/boots?type=5">Одяг сигнальний</Link>
-                <Link to="/products/boots?type=6">Одяг камуфльрваний</Link>
-                <Link to="/products/boots?type=7">
-                  Одяг обмеженого терміну користування
-                </Link>
-                <Link to="/products/boots?type=8">
-                  Одяг для захисту від вологи
-                </Link>
-                <Link to="/products/boots?type=9">
-                  Халати, медичні та кухарські костюми
-                </Link>
-              </div>
-            </div>
-
-            <NavLink to="/products/gloves">Рукавиці</NavLink>
-            <NavLink to="/products/household">Господарчі товари</NavLink>
-            <NavLink to="/products/embroidery">Комп'ютерна вишивка</NavLink>
-
-            <div className="product-item">
-              <NavLink to="/products/protected">
-                Засоби індивідуального захисту <span>&#8250;</span>
-              </NavLink>
-
-              <div>
-                <Link to="/products/boots?type=1">Захисні головні убори</Link>
-                <Link to="/products/boots?type=2">Захисні рукавиці</Link>
-                <Link to="/products/boots?type=3">Захисні наушники</Link>
-                <Link to="/products/boots?type=4">
-                  Захисні очки та стіклянні маски
-                </Link>
-                <Link to="/products/boots?type=5">
-                  Захист від зімічних речовин
-                </Link>
-                <Link to="/products/boots?type=6">
-                  Захист від падіння з висоти
-                </Link>
-              </div>
-            </div>
+            {catalogs &&
+              catalogs.map((item) => {
+                return item.has_subcatalog === 1 ? (
+                  <div key={item.id} className="product-item">
+                    <NavLink to={`/products/${item.key_name}`}>
+                      {item.name} <span>&#8250;</span>
+                    </NavLink>
+                    <div>
+                      {item.subcatalogs.map((sItem) => (
+                        <Link
+                          key={sItem.subcatalog_id}
+                          to={`/products/${item.key_name}?type=${sItem.subcatalog_id}`}
+                        >
+                          {sItem.subcatalog_name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <NavLink key={item.id} to={`/products/${item.key_name}`}>
+                    {item.name}
+                  </NavLink>
+                );
+              })}
           </div>
         </div>
 

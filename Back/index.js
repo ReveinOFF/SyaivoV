@@ -8,7 +8,8 @@ const productRoutes = require("./routes/products"),
   subcatalogRoutes = require("./routes/subcatalog"),
   emailRoutes = require("./routes/email"),
   authRoutes = require("./routes/auth"),
-  mainRoutes = require("./routes/main");
+  mainRoutes = require("./routes/main"),
+  catalogRoutes = require("./routes/catalog");
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +22,8 @@ const port = process.env.S_PORT,
 app.use("/api/product", productRoutes);
 
 app.use("/api/newproducts", mainRoutes);
+
+app.use("/api/catalog", catalogRoutes);
 
 app.use("/api/subcatalog", subcatalogRoutes);
 
