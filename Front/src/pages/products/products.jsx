@@ -488,6 +488,10 @@ const Products = () => {
             </div>
           </div>
 
+          <button className="show-category">
+            <span>›</span> <span>Категорії</span>
+          </button>
+
           <div
             className={
               parseInt(searchParams.get("type-view")) === 2
