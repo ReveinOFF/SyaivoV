@@ -115,7 +115,12 @@ const CatalogModal = ({ catKey, isShow, setShow }) => {
                   </svg>
                 </div>
               )}
-              <input type="file" name="image" onChange={imageChange} />
+              <input
+                type="file"
+                name="image"
+                onChange={imageChange}
+                ref={imageRef}
+              />
             </div>
             <input type="text" name="name" placeholder="Назва каталогу" />
             <button type="submit">Створити</button>
