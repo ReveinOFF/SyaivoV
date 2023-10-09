@@ -18,6 +18,7 @@ import axios from "axios";
 import { LazyContext } from "../../components/lazy-context/lazy-contex";
 import deleteIcon from "../../assets/img/products/1214594.png";
 import ProductsModal from "../../components/products-modal/products-modal";
+import crossIcon from "../../assets/img/products/icon-close-512.png";
 
 const Products = () => {
   const { name } = useParams();
@@ -32,6 +33,7 @@ const Products = () => {
   const selectFilterRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenCreate, setIsOpenCreate] = useState(false);
+  const [isOpenBurger, setIsOpenBurger] = useState(false);
   const navigate = useNavigate();
   const setLoading = useContext(LazyContext);
 
@@ -291,6 +293,55 @@ const Products = () => {
         setShow={() => setIsOpenCreate(false)}
       />
 
+      {isOpenBurger && (
+        <div className="burger-category">
+          <div onClick={() => setIsOpenBurger(false)}>
+            <img src={crossIcon} alt="cross" />
+          </div>
+
+          <h2>Категорії товарів:</h2>
+
+          <hr />
+
+          <div>
+            <NavLink end to="/products">
+              Весь список
+            </NavLink>
+
+            {catalogs &&
+              catalogs.map((item) => {
+                return item.has_subcatalog === 1 ? (
+                  <div key={item.id} className="product-item">
+                    <NavLink to={`/products/${item.key_name}`}>
+                      {item.name} <span>&#8250;</span>
+                    </NavLink>
+                    <div>
+                      {item.subcatalogs.map((sItem) => (
+                        <Link
+                          key={sItem.subcatalog_id}
+                          to={`/products/${item.key_name}?type=${sItem.subcatalog_id}`}
+                        >
+                          {sItem.subcatalog_name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <NavLink key={item.id} to={`/products/${item.key_name}`}>
+                    {item.name}
+                  </NavLink>
+                );
+              })}
+          </div>
+
+          {localStorage.getItem("token") && (
+            <button onClick={() => setIsOpenCreate(true)}>
+              Добавити товар
+            </button>
+          )}
+        </div>
+      )}
+
       <div className="pages">
         <Link to="/">Головна</Link>
         <div>/</div>
@@ -488,7 +539,10 @@ const Products = () => {
             </div>
           </div>
 
-          <button className="show-category">
+          <button
+            className="show-category"
+            onClick={() => setIsOpenBurger(true)}
+          >
             <span>›</span> <span>Категорії</span>
           </button>
 
