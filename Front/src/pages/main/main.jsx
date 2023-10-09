@@ -13,7 +13,7 @@ import img5 from "../../assets/img/main/vknjojXiAHA4cCWtkf29BjUY8Vg8jQ16caysEP3K
 import img6 from "../../assets/img/main/emb1.jpg";
 
 import imgPng1 from "../../assets/img/main/pngwing.com.png";
-import imgPng2 from "../../assets/img/main/pngwin454g.com.png";
+import imgPng2 from "../../assets/img/main/pngwin454g.com.webp";
 import imgPng3 from "../../assets/img/main/pngwing.com (1).png";
 import imgPng4 from "../../assets/img/main/Без имени-1.png";
 import imgPng5 from "../../assets/img/main/3747759848_w600_h600_3747759848.png";
