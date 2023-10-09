@@ -12,11 +12,13 @@ const CatalogModal = ({ catKey, isShow, setShow }) => {
   const imageRef = useRef();
 
   const imageChange = (e) => {
-    const createUrl = URL.createObjectURL(e.target.files[0]);
+    if (e.target.files[0]) {
+      const createUrl = URL.createObjectURL(e.target.files[0]);
 
-    setImage(URL.createObjectURL(e.target.files[0]));
+      setImage(URL.createObjectURL(e.target.files[0]));
 
-    URL.revokeObjectURL(createUrl);
+      URL.revokeObjectURL(createUrl);
+    } else setImage(null);
   };
 
   const handleSubmite = async (e) => {
