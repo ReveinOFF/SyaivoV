@@ -1,25 +1,46 @@
 const mysql = require("mysql2"),
-  fs = require("fs");
+  fs = require("fs"),
+  path = require("path");
 
 require("dotenv").config();
 
-const seedQuery = fs.readFileSync("./database.sql", {
+const filePath = path.join(__dirname, "database.sql");
+const seedQuery = fs.readFileSync(filePath, {
   encoding: "utf-8",
 });
 
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "usersdb2",
-  password: "123456",
-  multipleStatements: true,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
 });
 
 connection.connect();
 
-connection.query(seedQuery, (err) => {
-  if (err) throw err;
+const parseSqlFile = (sqlFile) => {
+  return sqlFile
+    .toString()
+    .replace(/(\r\n|\n|\r)/gm, " ")
+    .replace(/\s+/g, " ")
+    .split(";");
+};
 
-  console.log("SQL seed completed!");
-  connection.end();
+const seed = parseSqlFile(seedQuery);
+
+seed.forEach((element) => {
+  if (element) {
+    connection.query(element, (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      console.log("SQL seed completed!");
+    });
+  }
 });
+
+connection.end();
+
+return;
