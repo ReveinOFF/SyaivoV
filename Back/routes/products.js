@@ -167,7 +167,7 @@ router.get("/:id", async (req, res) => {
 	LIMIT 1;`
     );
 
-    if (rows) return res.status(200).json(rows[0]);
+    if (rows.length > 0) return res.status(200).json(rows[0]);
     else return res.status(404).json("Товар не знайдено!");
   } catch (error) {
     console.log(error);
@@ -183,7 +183,7 @@ router.get("/search/:name", async (req, res) => {
 	WHERE name ILIKE '%${req.params.name}%';`
     );
 
-    if (rows) return res.status(200).json(rows);
+    if (rows.length > 0) return res.status(200).json(rows);
     else return res.status(404).json("Товар не знайдено!");
   } catch (error) {
     console.log(error);

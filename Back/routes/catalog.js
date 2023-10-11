@@ -23,7 +23,7 @@ LEFT JOIN subcatalog s ON c.id = s.catalog_id
 GROUP BY c.id, c.name, c.key_name;`
     );
 
-    if (rows) return res.status(200).json(rows);
+    if (rows.length > 0) return res.status(200).json(rows);
     else return res.status(404).json("Каталогі не знайдено!");
   } catch (error) {
     console.log(error);
@@ -35,7 +35,7 @@ router.get("/only", async (req, res) => {
   try {
     const [rows, fields] = await pool.execute(`SELECT * FROM catalog;`);
 
-    if (rows) return res.status(200).json(rows);
+    if (rows.length > 0) return res.status(200).json(rows);
     else return res.status(404).json("Каталогі не знайдено!");
   } catch (error) {
     console.log(error);

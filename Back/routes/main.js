@@ -10,7 +10,8 @@ router.get("/", async (req, res) => {
 	LIMIT 5;`
   );
 
-  return res.status(200).json(rows);
+  if (rows.length > 0) return res.status(200).json(rows);
+  else return res.status(404).json("Товари не знайдено!");
 });
 
 module.exports = router;

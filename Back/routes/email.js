@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
 
     await transporter.sendMail({
       from: emailStatic,
-      to: "ronnieplayyt@gmail.com",
+      to: "ppsyaivo-v@ukr.net",
       subject: `СЯЙВО-В - ${subject}`,
       html: updatedHtml,
     });

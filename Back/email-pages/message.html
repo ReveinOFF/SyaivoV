@@ -25,8 +25,13 @@
         "
       >
         <img
-          style="display: inline-block; vertical-align: middle"
-          src="http://127.0.0.1:7000/static/avatar.svg"
+          style="
+            display: inline-block;
+            vertical-align: middle;
+            width: 200px;
+            height: 200px;
+          "
+          src="http://2770374.cv516169.web.hosting-test.net/static/avatar.png"
           alt="icon-company"
         />
         <h1
@@ -68,11 +73,20 @@
         color: #2f2f2f;
       "
     >
-      <div><span style="font-weight: 600">Ім'я:</span> %name</div>
-      <div><span style="font-weight: 600">Пошта:</span> %email</div>
-      <div><span style="font-weight: 600">Телефон:</span> %phone</div>
+      <div style="color: black">
+        <div style="font-weight: 600">Ім'я:</div>
+        %name
+      </div>
+      <div style="color: black">
+        <div style="font-weight: 600">Пошта:</div>
+        %email
+      </div>
+      <div style="color: black">
+        <div style="font-weight: 600">Телефон:</div>
+        %phone
+      </div>
       <div style="margin-top: 20px">
-        <span style="font-weight: 600">Повідомлення:</span>
+        <div style="font-weight: 600">Повідомлення:</div>
         <br />
         <div style="background-color: #f3f3f3">%body</div>
       </div>

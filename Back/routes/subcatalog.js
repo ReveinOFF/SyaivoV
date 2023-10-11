@@ -32,7 +32,7 @@ router.get("/:key", async (req, res) => {
 	WHERE c.key_name = '${key}';`
     );
 
-    if (rows) return res.status(200).json(rows);
+    if (rows.length > 0) return res.status(200).json(rows);
     else return res.status(404).json("Каталогі не знайдено!");
   } catch (error) {
     console.log(error);
@@ -59,7 +59,8 @@ router.post(
     LIMIT 1;`
       );
 
-      if (!rows) return res.status(404).json("Каталог не знайдено!");
+      if (rows.length === 0)
+        return res.status(404).json("Каталог не знайдено!");
 
       await pool.execute(
         `INSERT INTO subcatalog(
