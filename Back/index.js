@@ -16,8 +16,12 @@ app.use(express.json());
 app.use("/static", express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-const port = process.env.S_PORT,
-  host = process.env.S_HOST;
+const port = process.env.PORT,
+  host = process.env.HOSTNAME;
+
+app.get("/", function (request, response) {
+  response.end("Hello from Express!");
+});
 
 app.use("/api/product", productRoutes);
 
