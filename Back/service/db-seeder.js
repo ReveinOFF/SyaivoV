@@ -42,6 +42,7 @@ async function seedDatabase() {
     console.error("Помилка виконання SQL-запитів: ", err);
   } finally {
     connection.end();
+    console.error("Seeder закінчив свою роботу!");
   }
 }
 
