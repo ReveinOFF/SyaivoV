@@ -39,7 +39,7 @@ const getTotalPage = async (type, catalog) => {
 
     countPage += `;`;
 
-    const [rows, fields] = await pool.execute(countPage);
+    const { rows } = await pool.query(countPage);
 
     const totalPage = Math.ceil(parseInt(rows[0].count) / 10);
 
@@ -72,7 +72,7 @@ router.post(
     } = req.body;
 
     try {
-      await pool.execute(
+      await pool.query(
         `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, date_created, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`,
         [
           req.file ? req.file.filename : null,
@@ -140,7 +140,7 @@ router.get("/", async (req, res) => {
 
     listProduct += `\nLIMIT 10 OFFSET ${currPage * 10};`;
 
-    const [rows, fields] = await pool.execute(listProduct);
+    const { rows } = await pool.query(listProduct);
 
     const totalPage = await getTotalPage(type, catalog);
 
@@ -156,7 +156,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const [rows, fields] = await pool.execute(
+    const { rows } = await pool.query(
       `SELECT p.*, 
 	c.name as catalog_name, c.key_name as catalog_key_name,
 	sc.name as subcatalog_name, sc.key_name as subcatalog_key_name
@@ -177,7 +177,7 @@ router.get("/:id", async (req, res) => {
 
 router.get("/search/:name", async (req, res) => {
   try {
-    const [rows, fields] = await pool.execute(
+    const { rows } = await pool.query(
       `SELECT id, image, name, description
 	FROM product
 	WHERE name ILIKE '%${req.params.name}%';`
@@ -197,11 +197,11 @@ router.delete("/:id", authenticateToken, async (req, res) => {
   const productId = parseInt(req.params.id);
 
   try {
-    const [rows, fields] = await pool.execute(
+    const { rows } = await pool.query(
       `SELECT * FROM product WHERE id = ${productId} LIMIT 1;`
     );
 
-    await pool.execute(`DELETE FROM product WHERE id = ${productId};`);
+    await pool.query(`DELETE FROM product WHERE id = ${productId};`);
 
     const filePath = `public/${rows[0].image}`;
 

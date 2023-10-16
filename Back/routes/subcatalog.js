@@ -25,7 +25,7 @@ router.get("/:key", async (req, res) => {
   const key = req.params.key;
 
   try {
-    const [rows, fields] = await pool.execute(
+    const { rows } = await pool.query(
       `SELECT sc.id, sc.image, sc.name
 	FROM subcatalog as sc
 	JOIN catalog as c ON sc.catalog_id = c.id
@@ -52,7 +52,7 @@ router.post(
     if (!req.body) return res.status(404).json("Данні не були введені!");
 
     try {
-      const [rows, fields] = await pool.execute(
+      const { rows } = await pool.query(
         `SELECT id
     FROM catalog
     WHERE key_name = '${catalog_key}'
@@ -62,7 +62,7 @@ router.post(
       if (rows.length === 0)
         return res.status(404).json("Каталог не знайдено!");
 
-      await pool.execute(
+      await pool.query(
         `INSERT INTO subcatalog(
     image, name, catalog_id)
     VALUES ('${req.file.filename}', '${name}', ${rows[0].id});`
@@ -83,11 +83,11 @@ router.delete("/:id", authenticateToken, async (req, res) => {
   if (!id) return res.status(404).json("Каталог не знайдено!");
 
   try {
-    const [rows, fields] = await pool.execute(
+    const { rows } = await pool.query(
       `SELECT * FROM subcatalog WHERE id = ${id} LIMIT 1;`
     );
 
-    await pool.execute(`DELETE FROM subcatalog WHERE id = ${id};`);
+    await pool.query(`DELETE FROM subcatalog WHERE id = ${id};`);
 
     const filePath = `public/${rows[0].image}`;
 

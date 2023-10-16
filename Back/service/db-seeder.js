@@ -1,4 +1,4 @@
-const mysql = require("mysql2"),
+const pg = require("pg"),
   fs = require("fs"),
   path = require("path");
 
@@ -9,14 +9,12 @@ const seedQuery = fs.readFileSync(filePath, {
   encoding: "utf-8",
 });
 
-const connection = mysql.createConnection({
+const connection = new pg.Client({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   database: process.env.DB_NAME,
   password: process.env.DB_PASS,
 });
-
-connection.connect();
 
 const parseSqlFile = (sqlFile) => {
   return sqlFile
@@ -26,21 +24,25 @@ const parseSqlFile = (sqlFile) => {
     .split(";");
 };
 
-const seed = parseSqlFile(seedQuery);
+async function seedDatabase() {
+  try {
+    await connection.connect();
+    console.log("Успішне підключення до бази даних!");
 
-seed.forEach((element) => {
-  if (element) {
-    connection.query(element, (err) => {
-      if (err) {
-        console.log(err);
-        return;
+    const seedQueries = parseSqlFile(seedQuery);
+
+    for (const query of seedQueries) {
+      if (query) {
+        console.log("Виконується запит: ", query);
+        await connection.query(query);
       }
-
-      console.log("SQL seed completed!");
-    });
+    }
+    connection.end();
+  } catch (error) {
+    console.error("Помилка виконання SQL-запитів: ", err);
+  } finally {
+    connection.end();
   }
-});
+}
 
-connection.end();
-
-return;
+seedDatabase();

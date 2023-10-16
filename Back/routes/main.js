@@ -3,7 +3,7 @@ const express = require("express"),
   pool = require("../service/db");
 
 router.get("/", async (req, res) => {
-  const [rows, fields] = await pool.execute(
+  const { rows } = await pool.query(
     `SELECT id, image, name, price
 	FROM product
 	ORDER BY date_created DESC

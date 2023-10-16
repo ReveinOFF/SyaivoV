@@ -17,7 +17,7 @@ app.use("/static", express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 const port = process.env.PORT,
-  host = process.env.HOSTNAME;
+  host = process.env.HOST;
 
 app.get("/", function (request, response) {
   response.end("Hello from Express!");
