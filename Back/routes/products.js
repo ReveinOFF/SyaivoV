@@ -214,4 +214,62 @@ router.delete("/:id", authenticateToken, async (req, res) => {
   }
 });
 
+router.put(
+  "/:id",
+  upload.single("image"),
+  authenticateToken,
+  async (req, res) => {
+    if (!req.auth) return res.status(401).json("Ви не авторизовані");
+
+    if (!req.body) return res.status(404).json("Данні не були введені!");
+
+    const {
+      name,
+      price,
+      description,
+      color,
+      fabric,
+      fabric_warehouse,
+      size,
+      catalog_id,
+      subcatalog_id,
+    } = req.body;
+
+    try {
+      let updateQuery = `UPDATE product
+        SET name = ${name},
+        SET price = ${price},
+        SET description = ${description},
+        SET color = ${color},
+        SET fabric = ${fabric},
+        SET fabric_warehouse = ${fabric_warehouse},
+        SET size = ${size},
+        SET catalog_id = ${catalog_id},
+        SET subcatalog_id = ${subcatalog_id}`;
+
+      if (req.file) {
+        const { rows } = await pool.query(
+          `SELECT image FROM product WHERE id = ${req.params.id};`
+        );
+        if (rows.length > 0) {
+          const filePath = `public/${rows[0].image}`;
+
+          if (fs.existsSync(filePath)) await removeFileAsync(filePath);
+
+          updateQuery += `\nSET image = ${req.file.filename}`;
+        }
+      }
+
+      updateQuery += `\nWHERE id = ${req.params.id};`;
+
+      await pool.query(updateQuery);
+
+      return res.status(201).json("Товар обновленно!");
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json("Помилка зміни товара!");
+    }
+  }
+);
+
 module.exports = router;
