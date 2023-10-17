@@ -4,10 +4,12 @@ import axios from "axios";
 import { LazyContext } from "../../lazy-context/lazy-contex";
 import deleteImg from "../../../assets/img/subcatalog/1214594.png";
 import CatalogModal from "../../catalog-modal/catalog-modal";
+import updateImg from "../../../assets/img/subcatalog/data-update-icon.webp";
 
 const Protected = () => {
   const [subCatalog, setSubCatalog] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [idCatalog, setIdCatalog] = useState(false);
   const location = useLocation();
   const setLoading = useContext(LazyContext);
   const navigate = useNavigate();
@@ -54,11 +56,16 @@ const Protected = () => {
 
   return (
     <>
-      <CatalogModal
-        catKey={pageUrl}
-        isShow={showModal}
-        setShow={() => setShowModal(false)}
-      />
+      {showModal && (
+        <CatalogModal
+          catKey={pageUrl}
+          id={idCatalog}
+          setShow={() => {
+            setShowModal(false);
+            setIdCatalog(null);
+          }}
+        />
+      )}
 
       <div className="catalog-title">
         <h1>Засоби індивідуального захисту</h1>
@@ -91,12 +98,25 @@ const Protected = () => {
               <hr />
               <div className="name-catalog">{item.name}</div>
               {localStorage.getItem("token") && (
-                <div
-                  className="delete"
-                  onClick={(e) => handleDelete(e, item.id)}
-                >
-                  <img src={deleteImg} alt="delete" />
-                </div>
+                <>
+                  <div
+                    className="update"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setIdCatalog(item.id);
+                      setShowModal(true);
+                    }}
+                  >
+                    <img src={updateImg} alt="update" />
+                  </div>
+                  <div
+                    className="delete"
+                    onClick={(e) => handleDelete(e, item.id)}
+                  >
+                    <img src={deleteImg} alt="delete" />
+                  </div>
+                </>
               )}
             </Link>
           ))}

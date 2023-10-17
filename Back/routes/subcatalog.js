@@ -40,6 +40,22 @@ router.get("/:key", async (req, res) => {
   }
 });
 
+router.get("/only/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const { rows } = await pool.query(
+      `SELECT * FROM subcatalog WHERE id = ${id} LIMIT 1;`
+    );
+
+    if (rows.length > 0) return res.status(200).json(rows[0]);
+    else return res.status(404).json("Каталогі не знайдено!");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("Помилка пошуку каталогів!");
+  }
+});
+
 router.post(
   "/",
   authenticateToken,
@@ -116,8 +132,8 @@ router.put(
     const { name } = req.body;
 
     try {
-      let updateQuery = `UPDATE product
-        SET name = ${name}`;
+      let updateQuery = `UPDATE subcatalog SET 
+      name = ${name ? `'${name}'` : null}`;
 
       if (req.file) {
         const { rows } = await pool.query(
@@ -128,7 +144,7 @@ router.put(
 
           if (fs.existsSync(filePath)) await removeFileAsync(filePath);
 
-          updateQuery += `,\nSET image = ${req.file.filename}`;
+          updateQuery += `,\nimage = '${req.file.filename}'`;
         }
       }
 
@@ -136,7 +152,7 @@ router.put(
 
       await pool.query(updateQuery);
 
-      return res.status(200).json("Каталог обновлено!");
+      return res.status(201).json("Каталог обновлено!");
     } catch (error) {
       console.log(error);
       return res.status(500).json("Помилка обновлення каталога!");
