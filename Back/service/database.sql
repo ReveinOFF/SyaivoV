@@ -16,7 +16,7 @@ create TABLE product(
     id SERIAL PRIMARY KEY,
     image VARCHAR(50),
     name VARCHAR(50),
-    price DECIMAL,
+    price MONEY,
     description TEXT,
     color VARCHAR(50),
     fabric VARCHAR(50),

@@ -3,10 +3,12 @@ import "./productStyle.scss";
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { LazyContext } from "../../components/lazy-context/lazy-contex";
+import ProductsModal from "../../components/products-modal/products-modal";
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState();
+  const [isOpen, setIsOpen] = useState();
   const [showMagnifier, setShowMagnifier] = useState(false);
   const [typeDescription, setTypeDescription] = useState(1);
   const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
@@ -49,6 +51,8 @@ const Product = () => {
 
   return (
     <>
+      {isOpen && <ProductsModal id={id} setShow={() => setIsOpen(false)} />}
+
       <div className="pages">
         <Link to="/">Головна</Link>
         <div>/</div>
@@ -152,7 +156,10 @@ const Product = () => {
             )}
           </div>
           {localStorage.getItem("token") && (
-            <button onClick={handleDelete}>Видалити</button>
+            <>
+              <button onClick={() => setIsOpen(true)}>Оновити</button>
+              <button onClick={handleDelete}>Видалити</button>
+            </>
           )}
         </div>
       </div>

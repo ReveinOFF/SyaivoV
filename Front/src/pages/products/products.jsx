@@ -19,6 +19,7 @@ import { LazyContext } from "../../components/lazy-context/lazy-contex";
 import deleteIcon from "../../assets/img/products/1214594.png";
 import ProductsModal from "../../components/products-modal/products-modal";
 import crossIcon from "../../assets/img/products/icon-close-512.png";
+import updateIcon from "../../assets/img/products/data-update-icon.webp";
 
 const Products = () => {
   const { name } = useParams();
@@ -34,6 +35,7 @@ const Products = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenCreate, setIsOpenCreate] = useState(false);
   const [isOpenBurger, setIsOpenBurger] = useState(false);
+  const [idProduct, setIdProduct] = useState();
   const navigate = useNavigate();
   const setLoading = useContext(LazyContext);
 
@@ -271,6 +273,14 @@ const Products = () => {
     window.location.reload();
   };
 
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setIdProduct(id);
+    setIsOpenCreate(true);
+  };
+
   const handleDelete = async (e, id) => {
     e.preventDefault();
     e.stopPropagation();
@@ -288,10 +298,15 @@ const Products = () => {
 
   return (
     <>
-      <ProductsModal
-        isShow={isOpenCreate}
-        setShow={() => setIsOpenCreate(false)}
-      />
+      {isOpenCreate && (
+        <ProductsModal
+          id={idProduct || null}
+          setShow={() => {
+            setIsOpenCreate(false);
+            setIdProduct(null);
+          }}
+        />
+      )}
 
       {isOpenBurger && (
         <div className="burger-category">
@@ -335,7 +350,12 @@ const Products = () => {
           </div>
 
           {localStorage.getItem("token") && (
-            <button onClick={() => setIsOpenCreate(true)}>
+            <button
+              onClick={() => {
+                setIdProduct(null);
+                setIsOpenCreate(true);
+              }}
+            >
               Добавити товар
             </button>
           )}
@@ -578,9 +598,14 @@ const Products = () => {
                   </div>
 
                   {localStorage.getItem("token") && (
-                    <button onClick={(e) => handleDelete(e, item.id)}>
-                      <img src={deleteIcon} alt="delete" />
-                    </button>
+                    <div className="admin-block">
+                      <button onClick={(e) => handleUpdate(e, item.id)}>
+                        <img src={updateIcon} alt="update" />
+                      </button>
+                      <button onClick={(e) => handleDelete(e, item.id)}>
+                        <img src={deleteIcon} alt="delete" />
+                      </button>
+                    </div>
                   )}
                 </Link>
               ))}

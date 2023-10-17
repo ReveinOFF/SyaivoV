@@ -100,4 +100,48 @@ router.delete("/:id", authenticateToken, async (req, res) => {
   }
 });
 
+router.put(
+  "/:id",
+  authenticateToken,
+  upload.single("image"),
+  async (req, res) => {
+    if (!req.auth) return res.status(401).json("Ви не авторизовані");
+
+    const id = req.params.id;
+
+    if (!id) return res.status(404).json("Каталог не знайдено!");
+
+    if (!req.body) return res.status(404).json("Данні не були введені!");
+
+    const { name } = req.body;
+
+    try {
+      let updateQuery = `UPDATE product
+        SET name = ${name}`;
+
+      if (req.file) {
+        const { rows } = await pool.query(
+          `SELECT image FROM subcatalog WHERE id = ${id};`
+        );
+        if (rows.length > 0) {
+          const filePath = `public/${rows[0].image}`;
+
+          if (fs.existsSync(filePath)) await removeFileAsync(filePath);
+
+          updateQuery += `,\nSET image = ${req.file.filename}`;
+        }
+      }
+
+      updateQuery += `\nWHERE id = ${id};`;
+
+      await pool.query(updateQuery);
+
+      return res.status(200).json("Каталог обновлено!");
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json("Помилка обновлення каталога!");
+    }
+  }
+);
+
 module.exports = router;

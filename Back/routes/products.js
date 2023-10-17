@@ -67,24 +67,33 @@ router.post(
       fabric,
       fabric_warehouse,
       size,
-      catalog_id,
+      material,
+      catalog_key,
       subcatalog_id,
     } = req.body;
 
     try {
+      const { rows } = await pool.query(
+        `SELECT id
+    FROM catalog
+    WHERE key_name = '${catalog_key}'
+    LIMIT 1;`
+      );
+
       await pool.query(
-        `INSERT INTO product (image, name, price, description, color, fabric, fabric_warehouse, size, date_created, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`,
+        `INSERT INTO product (image, name, price, description, material, color, fabric, fabric_warehouse, size, date_created, catalog_id, subcatalog_id) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12);`,
         [
           req.file ? req.file.filename : null,
           name,
           price,
           description,
+          material,
           color,
           fabric,
           fabric_warehouse,
           size,
           new Date(),
-          catalog_id,
+          rows[0].id,
           subcatalog_id,
         ]
       );
@@ -159,7 +168,7 @@ router.get("/:id", async (req, res) => {
     const { rows } = await pool.query(
       `SELECT p.*, 
 	c.name as catalog_name, c.key_name as catalog_key_name,
-	sc.name as subcatalog_name, sc.key_name as subcatalog_key_name
+	sc.name as subcatalog_name
 	FROM product as p
 	JOIN catalog as c ON p.catalog_id = c.id
 	LEFT JOIN subcatalog as sc ON p.subcatalog_id = sc.id
@@ -230,22 +239,31 @@ router.put(
       color,
       fabric,
       fabric_warehouse,
+      material,
       size,
-      catalog_id,
+      catalog_key,
       subcatalog_id,
     } = req.body;
 
     try {
-      let updateQuery = `UPDATE product
-        SET name = ${name},
-        SET price = ${price},
-        SET description = ${description},
-        SET color = ${color},
-        SET fabric = ${fabric},
-        SET fabric_warehouse = ${fabric_warehouse},
-        SET size = ${size},
-        SET catalog_id = ${catalog_id},
-        SET subcatalog_id = ${subcatalog_id}`;
+      const { rows: catalog } = await pool.query(
+        `SELECT id
+    FROM catalog
+    WHERE key_name = '${catalog_key}'
+    LIMIT 1;`
+      );
+
+      let updateQuery = `UPDATE product SET
+        name = ${name ? `'${name}'` : null},
+        price = ${price ? `'${price}'` : 0},
+        description = ${description ? `'${description}'` : null},
+        color = ${color ? `'${color}'` : null},
+        material = ${material ? `'${material}'` : null},
+        fabric = ${fabric ? `'${fabric}'` : null},
+        fabric_warehouse = ${fabric_warehouse ? `'${fabric_warehouse}'` : null},
+        size = ${size ? `'${size}'` : null},
+        catalog_id = ${catalog[0].id ? `'${catalog[0].id}'` : null},
+        subcatalog_id = ${subcatalog_id ? `'${subcatalog_id}'` : null}`;
 
       if (req.file) {
         const { rows } = await pool.query(
@@ -256,7 +274,7 @@ router.put(
 
           if (fs.existsSync(filePath)) await removeFileAsync(filePath);
 
-          updateQuery += `\nSET image = ${req.file.filename}`;
+          updateQuery += `,\nimage = '${req.file.filename}'`;
         }
       }
 
