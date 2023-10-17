@@ -89,16 +89,36 @@ const Main = () => {
         </div>
       )}
 
-      <div className="auth-block">
-        <div>
-          Якщо ви бажаєте увійти на сайт як адміністратор, то вам потрібно
-          ввести дані та натиснути кнопку "Увійти".
+      {localStorage.getItem("token") ? (
+        <div className="auth-block">
+          <div>
+            Якщо ви бажаєте вийти або змінити пароль, нажміть на одну із кнопок.
+          </div>
+          <img draggable="false" src={arrowIcon} alt="arrow" />
+          <button onClick={() => navigate("change-pass")}>
+            Змінити пароль
+          </button>
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              navigate("/");
+            }}
+          >
+            Вийти
+          </button>
         </div>
-        <img draggable="false" src={arrowIcon} alt="arrow" />
-        <input ref={loginRef} type="text" placeholder="Логін" />
-        <input ref={passRef} type="password" placeholder="Пароль" />
-        <button onClick={handleClick}>Увійти</button>
-      </div>
+      ) : (
+        <div className="auth-block">
+          <div>
+            Якщо ви бажаєте увійти на сайт як адміністратор, то вам потрібно
+            ввести дані та натиснути кнопку "Увійти".
+          </div>
+          <img draggable="false" src={arrowIcon} alt="arrow" />
+          <input ref={loginRef} type="text" placeholder="Логін" />
+          <input ref={passRef} type="password" placeholder="Пароль" />
+          <button onClick={handleClick}>Увійти</button>
+        </div>
+      )}
     </>
   );
 };

@@ -1,5 +1,6 @@
 const express = require("express"),
   router = express.Router(),
+  authenticateToken = require("./authentication"),
   jwt = require("jsonwebtoken"),
   fs = require("fs"),
   bcrypt = require("bcrypt");
@@ -41,7 +42,7 @@ router.post("/", (req, res) => {
   }
 });
 
-router.post("/change-password", (req, res) => {
+router.post("/change-password", authenticateToken, (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
   try {
