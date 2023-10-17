@@ -3,11 +3,11 @@ const express = require("express"),
   pool = require("../service/db"),
   authenticateToken = require("./authentication"),
   fs = require("fs"),
-  util = require("util"),
+  { promisify } = require("util"),
   multer = require("multer"),
   { randomUUID } = require("crypto");
 
-const removeFileAsync = util.promisify(fs.rm);
+const removeFileAsync = promisify(fs.unlink);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

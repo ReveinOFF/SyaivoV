@@ -2,12 +2,12 @@ const express = require("express"),
   router = express.Router(),
   transporter = require("../service/mailer"),
   fs = require("fs"),
-  util = require("util");
+  { promisify } = require("util");
 
 require("dotenv").config();
 
 const emailStatic = process.env.EMAIL_TO;
-const readFileAsync = util.promisify(fs.readFile);
+const readFileAsync = promisify(fs.readFile);
 
 router.post("/", async (req, res) => {
   if (!req.body || !Object.keys(req.body).length)

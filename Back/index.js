@@ -11,17 +11,19 @@ const productRoutes = require("./routes/products"),
   mainRoutes = require("./routes/main"),
   catalogRoutes = require("./routes/catalog");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://92.119.231.38", "http://92.119.231.38"],
+    optionsSuccessStatus: 200,
+    methods: ["GET", "POST", "DELETE", "PUT"],
+  })
+);
 app.use(express.json());
 app.use("/static", express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 const port = process.env.PORT,
   host = process.env.HOST;
-
-app.get("/", function (request, response) {
-  response.end("Hello from Express!");
-});
 
 app.use("/api/product", productRoutes);
 
