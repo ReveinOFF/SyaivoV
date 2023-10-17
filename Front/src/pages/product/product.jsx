@@ -111,12 +111,12 @@ const Product = () => {
                 className="img-magnifier-glass"
                 style={{
                   display: showMagnifier ? "" : "none",
-                  top: `${y - 150 / 2}px`,
-                  left: `${x - 150 / 2}px`,
+                  top: `${y - 200 / 2}px`,
+                  left: `${x - 200 / 2}px`,
                   backgroundImage: `url('${process.env.REACT_APP_SERVER_API}/static/${product.image}')`,
-                  backgroundSize: `${imgWidth * 1.5}px ${imgHeight * 1.5}px`,
-                  backgroundPositionX: `${-x * 1.5 + 200 / 2}px`,
-                  backgroundPositionY: `${-y * 1.5 + 150 / 2}px`,
+                  backgroundSize: `${imgWidth * 2}px`,
+                  backgroundPositionX: `${-x * 2 + 200 / 2}px`,
+                  backgroundPositionY: `${-y * 2 + 150 / 2}px`,
                 }}
               ></div>
             </>
@@ -172,12 +172,14 @@ const Product = () => {
           >
             Опис товару
           </button>
-          <button
-            className={typeDescription === 2 ? "active" : ""}
-            onClick={() => setTypeDescription(2)}
-          >
-            Характеристики
-          </button>
+          {product?.catalog_id !== 6 && (
+            <button
+              className={typeDescription === 2 ? "active" : ""}
+              onClick={() => setTypeDescription(2)}
+            >
+              Характеристики
+            </button>
+          )}
         </div>
         <hr />
         {typeDescription === 2 ? (
@@ -185,33 +187,53 @@ const Product = () => {
             {product && (
               <>
                 {product.size && (
-                  <h4>
-                    Розмір: <span>{product.size}</span>
-                  </h4>
+                  <>
+                    <h4>
+                      Розмір: <span>{product.size}</span>
+                    </h4>
+
+                    <hr />
+                  </>
                 )}
 
                 {product.color && (
-                  <h4>
-                    Колір: <span>{product.color}</span>
-                  </h4>
+                  <>
+                    <h4>
+                      Колір: <span>{product.color}</span>
+                    </h4>
+
+                    <hr />
+                  </>
                 )}
 
                 {product.fabric && (
-                  <h4>
-                    Тканина: <span>{product.fabric}</span>
-                  </h4>
+                  <>
+                    <h4>
+                      Тканина: <span>{product.fabric}</span>
+                    </h4>
+
+                    <hr />
+                  </>
                 )}
 
                 {product.fabric_warehouse && (
-                  <h4>
-                    Склад тканин: <span>{product.fabric_warehouse}</span>
-                  </h4>
+                  <>
+                    <h4>
+                      Склад тканин: <span>{product.fabric_warehouse}</span>
+                    </h4>
+
+                    <hr />
+                  </>
                 )}
 
                 {product.material && (
-                  <h4>
-                    Матеріал: <span>{product.material}</span>
-                  </h4>
+                  <>
+                    <h4>
+                      Матеріал: <span>{product.material}</span>
+                    </h4>
+
+                    <hr />
+                  </>
                 )}
               </>
             )}

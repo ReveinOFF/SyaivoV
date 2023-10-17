@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import arrowIcon from "../../assets/img/admin/89829-200.png";
 import closeIcon from "../../assets/img/admin/icon-close-512.png";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { LazyContext } from "../../components/lazy-context/lazy-contex";
 
@@ -13,6 +13,10 @@ const ChangePass = () => {
   const passOldRef = useRef();
   const passNewRef = useRef();
   const passConfRef = useRef();
+
+  useEffect(() => {
+    document.title = "Зміна пароля";
+  }, []);
 
   const handleClick = () => {
     if (passNewRef.current?.value === passConfRef.current?.value) {

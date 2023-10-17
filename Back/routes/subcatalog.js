@@ -5,7 +5,7 @@ const express = require("express"),
   fs = require("fs"),
   { promisify } = require("util"),
   multer = require("multer"),
-  { randomUUID } = require("crypto");
+  { v4 } = require("uuid");
 
 const removeFileAsync = promisify(fs.unlink);
 
@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     cb(null, "public");
   },
   filename: (req, file, cb) => {
-    const newNameFile = randomUUID();
+    const newNameFile = v4();
     cb(null, newNameFile + ".jpg");
   },
 });
