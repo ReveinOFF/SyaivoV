@@ -15,7 +15,6 @@
     border-radius: 10px;
     width: 1000px;
     height: auto;
-    display: grid;
     position: relative;
     padding: 20px 15%;
 
@@ -32,106 +31,183 @@
       }
     }
 
-    .img-prod {
-      display: flex;
-      justify-self: center;
-      padding: 10px;
-      background-color: #f3f3f3;
-      border-radius: 10px;
-      width: 300px;
-      height: 300px;
-      overflow: hidden;
-      cursor: pointer;
+    form {
+      display: grid;
 
-      &:hover {
-        img {
-          scale: 1.05;
-        }
-      }
-
-      input {
-        display: none;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
+      .img-prod {
+        display: flex;
+        justify-self: center;
+        padding: 10px;
+        background-color: #f3f3f3;
         border-radius: 10px;
-        object-fit: cover;
-        transition: scale 0.3s;
-      }
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+        cursor: pointer;
 
-      & > div {
-        display: grid;
-        grid-template-rows: auto, 1fr;
-
-        div {
-          font-family: TTHoves;
-          color: gray;
+        &:hover {
+          img {
+            scale: 1.05;
+          }
         }
 
-        svg {
-          margin-right: auto;
-          align-self: flex-end;
+        input {
+          display: none;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+          object-fit: cover;
+          transition: scale 0.3s;
+        }
+
+        & > div {
+          display: grid;
+          grid-template-rows: auto, 1fr;
+
+          div {
+            font-family: TTHoves;
+            color: gray;
+          }
+
+          svg {
+            margin-right: auto;
+            align-self: flex-end;
+          }
         }
       }
-    }
 
-    & > select,
-    & > textarea,
-    & > input {
-      border: 1px solid rgba(128, 128, 128, 0.384);
-      padding: 5px 10px;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      font-family: OpenSans;
-      color: gray;
+      & > select,
+      & > textarea,
+      & > input {
+        border: 1px solid rgba(128, 128, 128, 0.384);
+        padding: 5px 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-family: OpenSans;
+        color: gray;
 
-      &:focus {
-        outline: none;
-        border-color: orange;
+        &:focus {
+          outline: none;
+          border-color: orange;
+        }
       }
-    }
 
-    & > input {
-      &:first-of-type {
+      & > input {
+        &:first-of-type {
+          margin-top: 30px;
+        }
+      }
+
+      & > textarea {
+        resize: none;
+        min-height: 50px;
+
+        &::-webkit-scrollbar {
+          width: 7px;
+        }
+
+        &::-webkit-scrollbar-track {
+          border-radius: 0 10px 10px 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: 0 10px 10px 0;
+        }
+      }
+
+      button {
+        border: 1px solid orange;
+        color: orange;
+        font-family: TTHoves;
+        font-size: 20px;
+        text-transform: uppercase;
+        background-color: transparent;
+        border-radius: 10px;
         margin-top: 30px;
+        transition: all 0.3s;
+        padding: 10px 0;
+
+        &:hover {
+          color: white;
+          background-color: orange;
+        }
       }
     }
+  }
+}
 
-    & > textarea {
-      resize: none;
-      min-height: 50px;
+@media only screen and (max-height: 840px) {
+  .products-modal {
+    .products-block {
+      form {
+        overflow-y: scroll;
+        height: 500px;
+        padding-right: 10px;
 
-      &::-webkit-scrollbar {
-        width: 7px;
-      }
+        .img-prod {
+          width: 200px;
+          height: 200px;
 
-      &::-webkit-scrollbar-track {
-        border-radius: 0 10px 10px 0;
-      }
+          & > div {
+            svg {
+              width: 180px;
+            }
+          }
+        }
 
-      &::-webkit-scrollbar-thumb {
-        border-radius: 0 10px 10px 0;
+        button {
+          padding: 5px 0;
+        }
       }
     }
+  }
+}
 
-    button {
-      border: 1px solid orange;
-      color: orange;
-      font-family: TTHoves;
-      font-size: 20px;
-      text-transform: uppercase;
-      background-color: transparent;
-      border-radius: 10px;
-      margin-top: 30px;
-      transition: all 0.3s;
-      padding: 10px 0;
-
-      &:hover {
-        color: white;
-        background-color: orange;
+@media only screen and (max-height: 550px) {
+  .products-modal {
+    .products-block {
+      form {
+        height: 400px;
       }
+    }
+  }
+}
+
+@media only screen and (max-height: 450px) {
+  .products-modal {
+    .products-block {
+      form {
+        height: 300px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-height: 350px) {
+  .products-modal {
+    .products-block {
+      form {
+        height: 250px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .products-modal {
+    .products-block {
+      width: 800px;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .products-modal {
+    .products-block {
+      width: 600px;
     }
   }
 }

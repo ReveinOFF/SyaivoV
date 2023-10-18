@@ -108,6 +108,68 @@
   }
 }
 
+@media only screen and (max-height: 700px) {
+  .catalog-modal {
+    .catalog-block {
+      height: 500px;
+      padding: 1% 15%;
+    }
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  .catalog-modal {
+    .catalog-block {
+      height: 400px;
+      padding: 10px 15%;
+
+      .img-catal {
+        width: 200px;
+        height: 200px;
+
+        & > div {
+          svg {
+            width: 180px;
+          }
+        }
+      }
+
+      input[type="text"] {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  .catalog-modal {
+    .catalog-block {
+      height: 320px;
+      padding: 5px 15%;
+
+      input[type="text"] {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .catalog-modal {
+    .catalog-block {
+      width: 800px;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .catalog-modal {
+    .catalog-block {
+      width: 600px;
+    }
+  }
+}
+
 @media only screen and (max-width: 500px) {
   .catalog-modal {
     .catalog-block {

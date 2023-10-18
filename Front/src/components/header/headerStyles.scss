@@ -439,6 +439,25 @@ header {
     visibility: visible;
   }
 
+  .footer-bg,
+  .header-bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: #414852;
+    z-index: -1;
+  }
+
+  .header-bg {
+    top: 0;
+    height: 155px;
+  }
+
+  .footer-bg {
+    bottom: 0;
+    height: 120px;
+  }
+
   .cross-icon {
     display: flex;
     justify-content: flex-end;
@@ -542,7 +561,7 @@ header {
       & > div {
         a {
           display: block;
-          color: black;
+          color: white;
           font-weight: 600;
           font-family: TTHoves;
           font-size: 20px;

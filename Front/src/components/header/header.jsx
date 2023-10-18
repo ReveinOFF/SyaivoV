@@ -173,6 +173,7 @@ const Header = () => {
       </header>
 
       <div className={`burger-menu ${isOpenMenu ? "open-menu" : ""}`}>
+        <div className="header-bg"></div>
         <div className="cross-icon">
           <div onClick={openMenu}>
             <img src={crossIcon} alt="cross" />
@@ -218,6 +219,7 @@ const Header = () => {
             </div>
           </div>
         </div>
+        <div className="footer-bg"></div>
       </div>
 
       <div

@@ -13,7 +13,7 @@ const productRoutes = require("./routes/products"),
 
 app.use(
   cors({
-    origin: ["https://92.119.231.38", "http://92.119.231.38"],
+    origin: ["https://syaivo.rivne.ua", "http://syaivo.rivne.ua"],
     optionsSuccessStatus: 200,
     methods: ["GET", "POST", "DELETE", "PUT"],
   })
