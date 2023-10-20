@@ -142,7 +142,7 @@
 @media only screen and (max-height: 840px) {
   .products-modal {
     .products-block {
-      form {
+      .from-scroll {
         overflow-y: scroll;
         height: 500px;
         padding-right: 10px;
@@ -169,7 +169,7 @@
 @media only screen and (max-height: 550px) {
   .products-modal {
     .products-block {
-      form {
+      .from-scroll {
         height: 400px;
       }
     }
