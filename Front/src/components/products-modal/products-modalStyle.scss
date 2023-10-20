@@ -31,7 +31,7 @@
       }
     }
 
-    form {
+    .from-scroll {
       display: grid;
 
       .img-prod {
@@ -179,7 +179,7 @@
 @media only screen and (max-height: 450px) {
   .products-modal {
     .products-block {
-      form {
+      .from-scroll {
         height: 300px;
       }
     }
@@ -189,7 +189,7 @@
 @media only screen and (max-height: 350px) {
   .products-modal {
     .products-block {
-      form {
+      .from-scroll {
         height: 250px;
       }
     }
