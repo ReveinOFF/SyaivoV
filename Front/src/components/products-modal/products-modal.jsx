@@ -103,7 +103,7 @@ const ProductsModal = ({ setShow, id }) => {
       <div className="products-modal">
         <form onSubmit={handleSubmite} className="products-block">
           <img src={cross} alt="close" onClick={setShow} />
-          <form>
+          <form onSubmit={(e) => e.preventDefault()}
             <div className="img-prod" onClick={() => imageRef.current.click()}>
               {!image && (
                 <div>
