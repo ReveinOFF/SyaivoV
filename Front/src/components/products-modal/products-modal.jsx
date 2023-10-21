@@ -103,7 +103,7 @@ const ProductsModal = ({ setShow, id }) => {
       <div className="products-modal">
         <form onSubmit={handleSubmite} className="products-block">
           <img src={cross} alt="close" onClick={setShow} />
-          <form>
+          <div className="from-scroll">
             <div className="img-prod" onClick={() => imageRef.current.click()}>
               {!image && (
                 <div>
@@ -274,7 +274,7 @@ const ProductsModal = ({ setShow, id }) => {
             <button name="btm_submite" type="submit">
               {id ? "Змінити" : "Створити"}
             </button>
-          </form>
+          </div>
         </form>
       </div>
     </>
