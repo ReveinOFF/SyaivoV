@@ -176,6 +176,13 @@ const Header = () => {
         </div>
       </header>
 
+      {searchRes && (
+        <div
+          className="search-burger-bg"
+          onClick={() => setSearchRes(null)}
+        ></div>
+      )}
+
       <div className={`burger-menu ${isOpenMenu ? "open-menu" : ""}`}>
         <div className="header-bg"></div>
         <div className="cross-icon">

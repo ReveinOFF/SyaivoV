@@ -1,13 +1,14 @@
 .product-information {
   display: flex;
   margin-bottom: 30px;
+  justify-content: space-evenly;
 
   .img-magnifier-container {
     position: relative;
     margin-top: 20px;
     margin-right: 40px;
     border: 1px solid rgba(128, 128, 128, 0.192);
-    width: 500px;
+    width: auto;
     height: 500px;
     padding: 10px;
     display: flex;
@@ -19,7 +20,7 @@
       height: 100%;
       margin-left: auto;
       margin-right: auto;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     .img-magnifier-glass {
@@ -105,6 +106,7 @@
   margin-bottom: 30px;
   background-color: #f3f3f3;
   padding: 20px;
+  max-width: 800px;
 
   div {
     &:first-child {
@@ -132,6 +134,7 @@
       margin-left: 10px;
       font-family: OpenSans;
       font-size: 20px;
+      max-width: 600px;
 
       h4 {
         font-family: TTHoves;

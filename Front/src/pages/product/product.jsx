@@ -125,18 +125,15 @@ const Product = () => {
 
         <div className="info">
           <h1>{product ? product.name : "Загрузка..."}</h1>
-          <div>
-            &#x2022;{" "}
-            {product
-              ? parseInt(product.price) > 1
-                ? product.price
-                : "Уточніть ціну у менеджера"
-              : "Загрузка..."}
-          </div>
+          {product ? (
+            <div>&#x2022; {parseInt(product.price) >= 1 && product.price}</div>
+          ) : (
+            <div>Загрузка...</div>
+          )}
           <button>Актуальну ціну, просимо уточнювати у менеджера</button>
           <hr />
           <div>
-            <span>Категорії: </span>
+            <span>Категорія: </span>
             {product && (
               <>
                 <Link to={`/products/${product.catalog_key_name}`}>

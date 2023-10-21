@@ -308,58 +308,67 @@ const Products = () => {
         />
       )}
 
-      {isOpenBurger && (
-        <div className="burger-category">
-          <div onClick={() => setIsOpenBurger(false)}>
-            <img src={crossIcon} alt="cross" />
-          </div>
-
-          <h2>Категорії товарів:</h2>
-
-          <hr />
-
-          <div>
-            <NavLink end to="/products">
-              Весь список
-            </NavLink>
-
-            {catalogs &&
-              catalogs.map((item) => {
-                return item.has_subcatalog === 1 ? (
-                  <div key={item.id} className="product-item">
-                    <NavLink to={`/products/${item.key_name}`}>
-                      {item.name} <span>&#8250;</span>
-                    </NavLink>
-                    <div>
-                      {item.subcatalogs.map((sItem) => (
-                        <Link
-                          key={sItem.subcatalog_id}
-                          to={`/products/${item.key_name}?type=${sItem.subcatalog_id}`}
-                        >
-                          {sItem.subcatalog_name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <NavLink key={item.id} to={`/products/${item.key_name}`}>
-                    {item.name}
-                  </NavLink>
-                );
-              })}
-          </div>
-
-          {localStorage.getItem("token") && (
-            <button
-              onClick={() => {
-                setIdProduct(null);
-                setIsOpenCreate(true);
-              }}
-            >
-              Добавити товар
-            </button>
-          )}
+      <div
+        className={`burger-category ${
+          isOpenBurger ? "show-burger" : "hidden-burger"
+        }`}
+      >
+        <div onClick={() => setIsOpenBurger(false)}>
+          <img src={crossIcon} alt="cross" />
         </div>
+
+        <h2>Категорії товарів:</h2>
+
+        <hr />
+
+        <div>
+          <NavLink end to="/products">
+            Весь список
+          </NavLink>
+
+          {catalogs &&
+            catalogs.map((item) => {
+              return item.has_subcatalog === 1 ? (
+                <div key={item.id} className="product-item">
+                  <NavLink to={`/products/${item.key_name}`}>
+                    {item.name} <span>&#8250;</span>
+                  </NavLink>
+                  <div>
+                    {item.subcatalogs.map((sItem) => (
+                      <Link
+                        key={sItem.subcatalog_id}
+                        to={`/products/${item.key_name}?type=${sItem.subcatalog_id}`}
+                      >
+                        {sItem.subcatalog_name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <NavLink key={item.id} to={`/products/${item.key_name}`}>
+                  {item.name}
+                </NavLink>
+              );
+            })}
+        </div>
+
+        {localStorage.getItem("token") && (
+          <button
+            onClick={() => {
+              setIdProduct(null);
+              setIsOpenCreate(true);
+            }}
+          >
+            Добавити товар
+          </button>
+        )}
+      </div>
+
+      {isOpenBurger && (
+        <div
+          className="cat-burger-bg"
+          onClick={() => setIsOpenBurger(false)}
+        ></div>
       )}
 
       <div className="pages">
