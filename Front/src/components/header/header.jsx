@@ -150,6 +150,10 @@ const Header = () => {
                 <div className="search-res">
                   {searchRes.map((item) => (
                     <Link
+                      onClick={() => {
+                        searchRef.current.value = "";
+                        setSearchRes(null);
+                      }}
                       to={`/product/${item.id}`}
                       key={item.id}
                       className="find-block"

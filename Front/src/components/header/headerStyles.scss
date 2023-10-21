@@ -354,14 +354,15 @@ header {
           background-color: white;
           border-bottom-left-radius: 10px;
           border-bottom-right-radius: 10px;
-          z-index: 1;
+          z-index: 2;
           border-top: 2px solid rgba(128, 128, 128, 0.438);
           box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.479);
           padding: 20px;
           transition: all 0.3s;
 
           .find-block {
-            display: flex;
+            display: grid;
+            grid-template-columns: 0.3fr 1fr;
             text-decoration: none;
             align-items: center;
             border: 1px solid rgba(128, 128, 128, 0.384);
@@ -379,8 +380,10 @@ header {
             }
 
             img {
-              width: 100px;
-              margin-right: 20px;
+              width: auto;
+              margin: 0 auto;
+              object-fit: contain;
+              height: 110px;
               border-radius: 10px;
             }
 

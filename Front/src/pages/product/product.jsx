@@ -172,14 +172,18 @@ const Product = () => {
           >
             Опис товару
           </button>
-          {product?.catalog_id !== 6 && (
-            <button
-              className={typeDescription === 2 ? "active" : ""}
-              onClick={() => setTypeDescription(2)}
-            >
-              Характеристики
-            </button>
-          )}
+          {product?.color ||
+            product?.fabric ||
+            product?.fabric_warehouse ||
+            product?.material ||
+            (product?.size && (
+              <button
+                className={typeDescription === 2 ? "active" : ""}
+                onClick={() => setTypeDescription(2)}
+              >
+                Характеристики
+              </button>
+            ))}
         </div>
         <hr />
         {typeDescription === 2 ? (
