@@ -262,6 +262,7 @@ router.put(
         fabric = ${fabric ? `'${fabric}'` : null},
         fabric_warehouse = ${fabric_warehouse ? `'${fabric_warehouse}'` : null},
         size = ${size ? `'${size}'` : null},
+        date_created = ${new Date()},
         catalog_id = ${catalog[0].id ? `'${catalog[0].id}'` : null},
         subcatalog_id = ${subcatalog_id ? `'${subcatalog_id}'` : null}`;
 
