@@ -24,6 +24,12 @@ const ProductsModal = ({ setShow, id }) => {
 
         dispatch({ type: "SET", payload: res.data });
 
+        const res2 = await axios.get(
+          `${process.env.REACT_APP_SERVER_API}/api/subcatalog/${res.data.catalog_key_name}`
+        );
+
+        setSubcatalog(res2.data);
+
         if (res.data.image)
           setImage(
             `${process.env.REACT_APP_SERVER_API}/static/${res.data.image}`
