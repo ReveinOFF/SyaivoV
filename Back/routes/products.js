@@ -253,6 +253,8 @@ router.put(
     LIMIT 1;`
       );
 
+      const data = new Date();
+
       let updateQuery = `UPDATE product SET
         name = ${name ? `'${name}'` : null},
         price = ${price ? `'${price}'` : 0},
@@ -262,7 +264,7 @@ router.put(
         fabric = ${fabric ? `'${fabric}'` : null},
         fabric_warehouse = ${fabric_warehouse ? `'${fabric_warehouse}'` : null},
         size = ${size ? `'${size}'` : null},
-        date_created = ${new Date()},
+        date_created = $1,
         catalog_id = ${catalog[0].id ? `'${catalog[0].id}'` : null},
         subcatalog_id = ${subcatalog_id ? `'${subcatalog_id}'` : null}`;
 
@@ -281,7 +283,7 @@ router.put(
 
       updateQuery += `\nWHERE id = ${req.params.id};`;
 
-      await pool.query(updateQuery);
+      await pool.query(updateQuery, [data]);
 
       return res.status(201).json("Товар обновленно!");
     } catch (error) {
