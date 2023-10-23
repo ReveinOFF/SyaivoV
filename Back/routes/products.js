@@ -184,6 +184,26 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.get("similar/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const { rows } = await pool.query(
+      `SELECT * FROM product
+WHERE catalog_id = (SELECT catalog_id FROM product WHERE id = ${id})
+AND subcatalog_id = (SELECT subcatalog_id FROM product WHERE id = ${id})
+AND id != ${id}
+LIMIT 5;`
+    );
+
+    if (rows.length > 0) return res.status(200).json(rows[0]);
+    else return res.status(404).json("Товари не знайдено!");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("Помилка пошуку товарів!");
+  }
+});
+
 router.get("/search/:name", async (req, res) => {
   try {
     const { rows } = await pool.query(
