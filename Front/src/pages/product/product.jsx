@@ -328,7 +328,7 @@ const Product = () => {
       {productS && (
         <>
           <h1>Схожі товари</h1>
-          <Slider {...settings} className="slider">
+          <Slider {...settings} className="slider-s">
             {productS.map((item) => (
               <Link
                 to={`/product/${item.id}`}
