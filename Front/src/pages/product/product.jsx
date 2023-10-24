@@ -325,31 +325,34 @@ const Product = () => {
         )}
       </div>
 
-      <h1>Схожі товари</h1>
-      <Slider {...settings} className="slider">
-        {productS &&
-          productS.map((item) => (
-            <Link
-              to={`/product/${item.id}`}
-              key={item.id}
-              className="product-block"
-            >
-              <img
-                src={`${process.env.REACT_APP_SERVER_API}/static/${item.image}`}
-                alt="product"
-              />
-              <div>
-                <h2>{item.name}</h2>
-                {parseInt(item.price) > 0 ? (
-                  <h2>&#x2022; {item.price}</h2>
-                ) : (
-                  <h2>&#x2022; Уточніть ціну</h2>
-                )}
-                <div>{item.description}</div>
-              </div>
-            </Link>
-          ))}
-      </Slider>
+      {productS && (
+        <>
+          <h1>Схожі товари</h1>
+          <Slider {...settings} className="slider">
+            {productS.map((item) => (
+              <Link
+                to={`/product/${item.id}`}
+                key={item.id}
+                className="product-block"
+              >
+                <img
+                  src={`${process.env.REACT_APP_SERVER_API}/static/${item.image}`}
+                  alt="product"
+                />
+                <div>
+                  <h2>{item.name}</h2>
+                  {parseInt(item.price) > 0 ? (
+                    <h2>&#x2022; {item.price}</h2>
+                  ) : (
+                    <h2>&#x2022; Уточніть ціну</h2>
+                  )}
+                  <div>{item.description}</div>
+                </div>
+              </Link>
+            ))}
+          </Slider>
+        </>
+      )}
     </>
   );
 };
