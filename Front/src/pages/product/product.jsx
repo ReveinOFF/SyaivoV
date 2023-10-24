@@ -1,22 +1,32 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./productStyle.scss";
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import axios from "axios";
 import { LazyContext } from "../../components/lazy-context/lazy-contex";
 import ProductsModal from "../../components/products-modal/products-modal";
+import Slider from "react-slick";
+import arrow from "../../assets/img/products/271220.svg";
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState();
+  const [productS, setProductS] = useState();
   const [isOpen, setIsOpen] = useState();
   const [showMagnifier, setShowMagnifier] = useState(false);
   const [typeDescription, setTypeDescription] = useState(1);
   const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
   const [[x, y], setXY] = useState([0, 0]);
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
   const setLoading = useContext(LazyContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const GetProduct = async () => {
       setLoading(true);
 
@@ -35,6 +45,22 @@ const Product = () => {
   }, [id]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [id]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     document.title = product ? product.name : "Продукт";
   }, [product]);
 
@@ -48,6 +74,51 @@ const Product = () => {
       })
       .finally(() => setLoading(false));
   };
+
+  useEffect(() => {
+    const GetSimilarProduct = async () => {
+      setLoading(true);
+
+      await axios
+        .get(`${process.env.REACT_APP_SERVER_API}/api/product/similar/${id}`)
+        .then((res) => {
+          if (res.status === 200) setProductS(res.data);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    };
+
+    GetSimilarProduct();
+  }, [id]);
+
+  const settings = useMemo(
+    () => ({
+      autoplay: false,
+      arrows: windowSize > 768 ? true : false,
+      dots: false,
+      slidesToShow:
+        windowSize >= 1510
+          ? 5
+          : windowSize >= 1205
+          ? 4
+          : windowSize >= 820
+          ? 3
+          : 2,
+      infinite: false,
+      prevArrow: (
+        <button>
+          <img src={arrow} alt="arrow" />
+        </button>
+      ),
+      nextArrow: (
+        <button>
+          <img src={arrow} alt="arrow" />
+        </button>
+      ),
+    }),
+    [windowSize]
+  );
 
   return (
     <>
@@ -253,6 +324,32 @@ const Product = () => {
           </div>
         )}
       </div>
+
+      <h1>Схожі товари</h1>
+      <Slider {...settings} className="slider">
+        {productS &&
+          productS.map((item) => (
+            <Link
+              to={`/product/${item.id}`}
+              key={item.id}
+              className="product-block"
+            >
+              <img
+                src={`${process.env.REACT_APP_SERVER_API}/static/${item.image}`}
+                alt="product"
+              />
+              <div>
+                <h2>{item.name}</h2>
+                {parseInt(item.price) > 0 ? (
+                  <h2>&#x2022; {item.price}</h2>
+                ) : (
+                  <h2>&#x2022; Уточніть ціну</h2>
+                )}
+                <div>{item.description}</div>
+              </div>
+            </Link>
+          ))}
+      </Slider>
     </>
   );
 };

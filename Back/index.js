@@ -11,13 +11,14 @@ const productRoutes = require("./routes/products"),
   mainRoutes = require("./routes/main"),
   catalogRoutes = require("./routes/catalog");
 
-app.use(
-  cors({
-    origin: ["https://syaivo.rivne.ua", "http://syaivo.rivne.ua"],
-    optionsSuccessStatus: 200,
-    methods: ["GET", "POST", "DELETE", "PUT"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["https://syaivo.rivne.ua", "http://syaivo.rivne.ua"],
+//     optionsSuccessStatus: 200,
+//     methods: ["GET", "POST", "DELETE", "PUT"],
+//   })
+// );
+app.use(cors());
 app.use(express.json());
 app.use("/static", express.static("public"));
 app.use(express.urlencoded({ extended: true }));
