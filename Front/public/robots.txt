@@ -2,4 +2,4 @@
 User-agent: *
 Disallow: /admin
 Disallow: /admin/change-pass
-Sitemap: http://syaivo.rivne.ua/sitemap.xml
+Sitemap: https://syaivo.rivne.ua/sitemap.xml

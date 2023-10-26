@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const baseUrl = "http://syaivo.rivne.ua";
+const baseUrl = "https://syaivo.rivne.ua";
 
 const paths = [
   { path: "/", changefreq: "weekly", priority: 1 },
