@@ -76,7 +76,7 @@ const Main = () => {
   );
 
   useEffect(() => {
-    document.title = 'Фірма "Сяйво-В';
+    document.title = 'Фірма "Сяйво-В"';
   }, []);
 
   useEffect(() => {
