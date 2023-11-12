@@ -196,10 +196,8 @@ const Product = () => {
 
         <div className="info">
           <h1>{product ? product.name : "Загрузка..."}</h1>
-          {product ? (
-            <div>&#x2022; {parseInt(product.price) >= 1 && product.price}</div>
-          ) : (
-            <div>Загрузка...</div>
+          {product && parseInt(product.price) >= 1 && (
+            <div>&#x2022; {product.price}</div>
           )}
           <button>Актуальну ціну, просимо уточнювати у менеджера</button>
           <hr />

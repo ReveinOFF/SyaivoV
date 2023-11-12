@@ -70,6 +70,7 @@ img {
   div,
   a {
     @include fonts(OpenSans, 15px, 400, 20px, 0, none, none, none, #333333);
+    text-wrap: nowrap;
   }
 
   a {

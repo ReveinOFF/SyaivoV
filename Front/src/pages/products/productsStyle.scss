@@ -101,7 +101,7 @@
       position: absolute;
       background-color: white;
       padding: 20px;
-      top: 100%;
+      top: 0;
       left: 100%;
       min-width: 300px;
       box-shadow: 0 0 7px 0 black;
@@ -726,6 +726,13 @@
       }
     }
   }
+}
+
+.not_found_product {
+  font-family: TTHoves;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 500px;
 }
 
 @media only screen and (max-width: 1805px) {

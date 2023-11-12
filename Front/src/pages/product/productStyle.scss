@@ -22,6 +22,7 @@
       margin-left: auto;
       margin-right: auto;
       object-fit: contain;
+      background: white;
     }
 
     .img-magnifier-glass {
@@ -81,6 +82,7 @@
     div:last-of-type {
       margin-top: 15px;
       user-select: none;
+      font-size: 15px;
 
       span {
         font-family: TTHoves;
@@ -235,6 +237,7 @@ h1 {
             width: 100%;
             height: 10em;
             object-fit: contain;
+            background: white;
           }
 
           & > div {
@@ -272,7 +275,12 @@ h1 {
     align-items: flex-start;
 
     .img-magnifier-container {
-      margin-right: 0;
+      margin-right: auto;
+      margin-left: auto;
+
+      .img-magnifier-glass {
+        display: none;
+      }
     }
 
     .info {

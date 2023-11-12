@@ -20,7 +20,7 @@ const Boots = () => {
   );
 
   useEffect(() => {
-    document.title = "Каталог взуття";
+    document.title = "Каталог 'Взуття'";
   }, []);
 
   useEffect(() => {

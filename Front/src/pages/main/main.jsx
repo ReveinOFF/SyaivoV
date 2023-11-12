@@ -339,7 +339,7 @@ const Main = () => {
               <div>
                 <h1>Рукавиці</h1>
                 <div>Знайдіть зручні і якісні рукавиці.</div>
-                <Link to="/products/gloves">
+                <Link to="/catalog/gloves">
                   <button>Переглянути</button>
                 </Link>
               </div>
@@ -384,7 +384,7 @@ const Main = () => {
               <div>
                 <h1>Господарчі товари</h1>
                 <div>Забезпечте комфорт у домі.</div>
-                <Link to="/products/household">
+                <Link to="/catalog/household">
                   <button>Переглянути</button>
                 </Link>
               </div>
@@ -414,7 +414,7 @@ const Main = () => {
               <div>
                 <h1>Комп'ютерна вишивка</h1>
                 <div>Ваш дизайн, наша витвір мистецтва.</div>
-                <Link to="/catalog/protected">
+                <Link to="/products/embroidery">
                   <button>Переглянути</button>
                 </Link>
               </div>

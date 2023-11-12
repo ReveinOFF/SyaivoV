@@ -45,7 +45,7 @@ const Catalog = () => {
                 <img src={arrowBlack} alt="arrow" />
               </div>
             </Link>
-            <Link to="/products/gloves" className="category hiddenRight">
+            <Link to="/catalog/gloves" className="category hiddenRight">
               <div>
                 <h2>Рукавички</h2>
                 <img src={gloves} alt="Рукавички" />
@@ -66,7 +66,7 @@ const Catalog = () => {
                 <img src={arrowWhite} alt="arrow" />
               </div>
             </Link>
-            <Link to="/products/household" className="category hiddenRight">
+            <Link to="/catalog/household" className="category hiddenRight">
               <div>
                 <h2>Господарські товари</h2>
                 <img src={hozTovari} alt="Господарські товари" />

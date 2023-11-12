@@ -6,7 +6,7 @@ import deleteImg from "../../../assets/img/subcatalog/1214594.png";
 import CatalogModal from "../../catalog-modal/catalog-modal";
 import updateImg from "../../../assets/img/subcatalog/data-update-icon.webp";
 
-const Clothing = () => {
+const Gloves = () => {
   const [subCatalog, setSubCatalog] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [idCatalog, setIdCatalog] = useState(false);
@@ -20,7 +20,7 @@ const Clothing = () => {
   );
 
   useEffect(() => {
-    document.title = "Каталог 'Спецодяг'";
+    document.title = "Каталог 'Рукавиці'";
   }, []);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const Clothing = () => {
       )}
 
       <div className="catalog-title">
-        <h1>Спецодяг</h1>
+        <h1>Рукавиці</h1>
         <hr />
       </div>
 
@@ -125,4 +125,4 @@ const Clothing = () => {
   );
 };
 
-export default Clothing;
+export default Gloves;

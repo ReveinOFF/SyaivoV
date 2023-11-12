@@ -20,7 +20,7 @@ const Protected = () => {
   );
 
   useEffect(() => {
-    document.title = "Каталог ЗІЗ";
+    document.title = "Каталог 'ЗІЗ'";
   }, []);
 
   useEffect(() => {

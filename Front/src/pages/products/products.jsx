@@ -618,6 +618,9 @@ const Products = () => {
                   )}
                 </Link>
               ))}
+            {!products && (
+              <div className="not_found_product">Товари не знайдено</div>
+            )}
           </div>
 
           <div className="select-pages">{generateButtons()}</div>

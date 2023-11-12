@@ -88,7 +88,7 @@ const Header = () => {
                   <div>Взуття</div>
                 </NavLink>
                 <hr />
-                <NavLink to="/products/gloves">
+                <NavLink to="/catalog/gloves">
                   <img draggable="false" src={glovesIcon} alt="gloves" />
                   <div>Рукавиці</div>
                 </NavLink>
@@ -98,7 +98,7 @@ const Header = () => {
                   <div>Спецодяг</div>
                 </NavLink>
                 <hr />
-                <NavLink to="/products/household">
+                <NavLink to="/catalog/household">
                   <img draggable="false" src={meansIcon} alt="means" />
                   <div>Господарчі товари</div>
                 </NavLink>

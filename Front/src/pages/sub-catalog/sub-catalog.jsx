@@ -4,6 +4,8 @@ import { useCallback } from "react";
 import Clothing from "../../components/sub-catalogs/clothing/clothing";
 import Boots from "../../components/sub-catalogs/boots/boots";
 import Protected from "../../components/sub-catalogs/protected/protected";
+import Gloves from "../../components/sub-catalogs/gloves/gloves";
+import Household from "../../components/sub-catalogs/gloves/gloves";
 
 const SubCatalog = () => {
   const { name } = useParams();
@@ -16,6 +18,10 @@ const SubCatalog = () => {
         return "Взуття";
       case "protected":
         return "Засоби індивідуального захисту";
+      case "gloves":
+        return "Рукавиці";
+      case "household":
+        return "Господарчі товари";
       default:
         return "Помилка";
     }
@@ -29,6 +35,10 @@ const SubCatalog = () => {
         return <Boots />;
       case "protected":
         return <Protected />;
+      case "gloves":
+        return <Gloves />;
+      case "household":
+        return <Household />;
       default:
         return <Navigate to="/error" />;
     }
