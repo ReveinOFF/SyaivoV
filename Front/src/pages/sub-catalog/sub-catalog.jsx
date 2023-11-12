@@ -5,7 +5,7 @@ import Clothing from "../../components/sub-catalogs/clothing/clothing";
 import Boots from "../../components/sub-catalogs/boots/boots";
 import Protected from "../../components/sub-catalogs/protected/protected";
 import Gloves from "../../components/sub-catalogs/gloves/gloves";
-import Household from "../../components/sub-catalogs/gloves/gloves";
+import Household from "../../components/sub-catalogs/household/household";
 
 const SubCatalog = () => {
   const { name } = useParams();
