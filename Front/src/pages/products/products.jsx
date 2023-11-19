@@ -28,6 +28,7 @@ const Products = () => {
     parseInt(searchParams.get("type-view")) || 1
   );
   const [totalPage, setTotalPage] = useState(1);
+  const [subCatalog, setSubCatalog] = useState();
   const [currentPage] = useState(parseInt(searchParams.get("page")) || 1);
   const [products, setProducts] = useState();
   const [catalogs, setCatalogs] = useState();
@@ -111,6 +112,22 @@ const Products = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    const GetSubCatalog = async () => {
+      await axios
+        .get(
+          `${
+            process.env.REACT_APP_SERVER_API
+          }/api/subcatalog/name/${name}?id=${searchParams.get("type")}`
+        )
+        .then((res) => {
+          setSubCatalog(res.data);
+        });
+    };
+
+    if (name && searchParams.get("type")) GetSubCatalog();
+  }, [name, searchParams]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -378,7 +395,17 @@ const Products = () => {
         {name && (
           <>
             <div>/</div>
-            <NavLink to={`/products/${name}`}>{getPageName()}</NavLink>
+            {subCatalog ? (
+              <>
+                <Link to={`/products/${name}`}>{getPageName()}</Link>
+                <div>/</div>
+                <NavLink to={`/products/${name}?type=${subCatalog.id}`}>
+                  {subCatalog.name}
+                </NavLink>
+              </>
+            ) : (
+              <NavLink to={`/products/${name}`}>{getPageName()}</NavLink>
+            )}
           </>
         )}
       </div>
@@ -428,7 +455,7 @@ const Products = () => {
         </div>
 
         <div className="products-block">
-          <h1>{getPageName()}</h1>
+          <h1>{subCatalog ? subCatalog.name : getPageName()}</h1>
 
           <div className="filter">
             <div className={`select-visible ${typeView === 2 && "right-view"}`}>

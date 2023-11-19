@@ -40,6 +40,27 @@ router.get("/:key", async (req, res) => {
   }
 });
 
+router.get("/name/:key", async (req, res) => {
+  const key = req.params.key;
+  const id = req.query.id;
+
+  try {
+    const { rows } = await pool.query(
+      `SELECT sc.id, sc.name
+	FROM subcatalog as sc
+	JOIN catalog as c ON sc.catalog_id = c.id
+	WHERE c.key_name = '${key}' AND sc.id = ${id}
+  LIMIT 1;`
+    );
+
+    if (rows.length > 0) return res.status(200).json(rows[0]);
+    else return res.status(404).json("Каталогі не знайдено!");
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("Помилка пошуку каталогів!");
+  }
+});
+
 router.get("/only/:id", async (req, res) => {
   const id = req.params.id;
 
