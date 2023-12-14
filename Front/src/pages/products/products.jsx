@@ -127,6 +127,7 @@ const Products = () => {
     };
 
     if (name && searchParams.get("type")) GetSubCatalog();
+    else setSubCatalog(null);
   }, [name, searchParams]);
 
   const toggleMenu = () => {
